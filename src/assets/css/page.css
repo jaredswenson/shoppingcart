@@ -1,0 +1,1453 @@
+/*
+main.css
+*/
+html, body
+{
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	height: 100%;
+}
+body, table
+{
+	font-family: verdana;
+	font-size: 10px;
+}
+table#wrapper td{
+	vertical-align: top;
+}
+table
+{
+	border-collapse: collapse;
+	border: none;
+}
+td
+{
+	padding: 0;
+}
+.fullWidth
+{
+	width: 100%;
+}
+.fullHeight
+{
+	height: 100%;
+}
+img
+{
+	border: none;
+}
+.logoBar
+{
+	width: 100%;
+	height: 26px;
+	background-image: url(../images/all/logoBar_BG.jpg);
+}
+#logo
+{
+	background-image: url(../images/all/logoBar_logo.jpg);
+	background-repeat: no-repeat;
+}
+.welcomeMessage
+{
+	text-align: right;
+	padding: 0 12px 0 0;
+	color: #666666;
+	font-size: 10px;
+}
+.menuBarContainer
+{
+	width: 100%;
+	height: 30px;
+	line-height: 22px;
+	BACKGROUND-IMAGE: url(../images/all/menuBar_BG.jpg);
+}
+.menuBarItem
+{
+	PADDING: 2px 8px 2px 8px;
+}
+.menuBarItem A
+{
+	COLOR: #333333;
+	FONT-SIZE: 90%;
+	TEXT-DECORATION: none;
+}
+.menuBarItem A:hover
+{
+	COLOR: #FFFFFF;
+	PADDING: 2px 0 2px 0;
+	BACKGROUND-COLOR: #C8BEB4;
+}
+
+
+/* FOOTER */
+#footerBarLogo {
+	background-image: url(../images/all/footerBar_logo.jpg);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+.footerBar
+{
+	width: 100%;
+	background-image: url(../images/all/footerbar_bg.jpg);
+	padding: 0 12px 0 12px;
+	margin: 0px;
+	height: 22px;
+}
+.copyRight
+{
+	color: #666666;
+	font-size: 90%;
+}
+/* footer */
+
+
+/* SUB NAV */
+.subNavContainer
+{
+	width: 180px;
+	background-image: url(../images/all/subNav_BG1.jpg);
+}
+.subNav
+{
+	FONT-SIZE: 100%;
+	WIDTH: 100%;
+	BACKGROUND-IMAGE: url(../images/all/subNav_BG1.jpg);
+}
+.subNavTitle, .subNavTop, .subNavArrow, .subNavArrowTop
+{
+	HEIGHT: 24px;
+	PADDING: 0 0 0 8px;
+	COLOR: #FFFFFF;
+	FONT-WEIGHT: bold;
+	BORDER-TOP: 1px solid #8BA1B2;
+	BORDER-BOTTOM: 1px solid #152638;	
+}
+.subNavArrow, .subNavArrowTop
+{
+	WIDTH: 20px;
+	TEXT-ALIGN: center;
+	cursor: pointer;
+}
+.subNavTitle A, .subNavTop A
+{
+	COLOR: #FFFFFF;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: none;
+}
+.subNavTitle A:hover, .subNavTop A:hover
+{
+	COLOR: #FFFFFF;
+	TEXT-DECORATION: underline;
+}
+.subNavItem
+{
+	HEIGHT: 20px;
+	PADDING: 0 0 0 16px;
+	COLOR: #FFFFFF;
+	BACKGROUND-IMAGE: url(../images/all/subNav_BG2.jpg);
+}
+.subNavItem A
+{
+	COLOR: #FFFFFF;
+	TEXT-DECORATION: none;
+}
+.subNavItem A:hover
+{
+	COLOR: #CCCCCC;
+}
+.subNavEnd
+{
+	HEIGHT: 20px;
+	BORDER-TOP: 1px solid #8BA1B2;
+}
+.subNavTop, .subNavArrowTop
+{
+	BORDER-TOP: none;
+}
+/* end SUB NAV */
+
+/* Nav Highlight */
+.selectedNavItem a { color:#F47E24 ! important;}
+.currentTab { color:#F47E24 ! important; }
+
+.hide {display:none;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+page.css
+*/
+html, body
+{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+body {
+}
+#contentWin, #paymentMethods {
+	padding: 20px;
+}
+body, table {
+	font-size: 11px;
+	font-family: arial;
+	color: #003366;
+}
+
+a 
+{
+	/*color: #f47e24;*/
+	color: #003366;
+}
+
+
+
+img {
+	border: none;
+}
+img.click {
+	cursor: pointer;
+}
+form {
+	padding: 0px;
+	margin: 0px;
+}
+input,select,textarea {
+	font-size: 11px;
+	font-family: tahoma;
+	border: 1px solid #84B0C7;
+}
+select {
+	font-size: 11px;
+	padding: 0px;
+	margin: 0px;
+}
+.noborder, #noborder {
+	border: none;
+}
+.readonly {
+	border-left: 1px solid #eaeaea;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #aeaeae;
+	border-right: 1px solid #cccccc;
+	color: #696969;
+}
+.readonlytext {
+	color: #696969;
+}	
+input,textarea {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+/*copeid from page2.css so that buttons in WV have style.*/
+INPUT, SELECT, TEXTAREA {
+   color            : #115E94;
+   font-family      : Tahoma;
+   font-size        : 11px;
+   border           : 1px solid #7EB0C9;
+   margin			: 1px 0px 1px 0px;
+   *margin			: 0px;
+   font-weight: normal;
+}
+INPUT.button, button, input[type=submit], input[type=reset], input[type=button]
+{
+    border:0px;
+    background-color: #EE934D;
+    color: #000000;
+    -webkit-box-shadow: 0 1px 0 0 #D26827;
+    box-shadow: 0 1px 0 0 #D26827;
+    font-family: Verdana;
+    font-size: 10px;
+    padding: 4px;
+    margin: 1px 0px 1px 0px;
+    cursor:pointer;
+}
+SELECT {
+	*margin-bottom: 2px;
+}
+INPUT.readonly, TEXTAREA.readonly {
+	color: #000000;
+/*	background-color: #EBEBE4;*/
+	border: 1px solid #7F9DB9;
+	/*padding: 1px;*/
+}	
+
+INPUT.checkbox, INPUT.radio, INPUT.image {
+  border-style     : none;
+  margin:2px;
+  padding: 0px;
+  margin:0px;
+}
+button.disabled {
+	color: #cccccc;
+}
+input[type="submit"]:disabled , input[type=reset]:disabled, button:disabled{
+    background: #cccccc;
+	cursor:default;
+	box-shadow: none;
+} 
+/*END BUTTON FROM PAGE2.css*/
+
+
+
+table {
+	border-collapse: collapse;
+	border: none;
+}
+button, input[type=submit] {
+	cursor: pointer;
+	font-size: 10px;
+}
+
+td {
+	padding: 0px;
+    margin: 0px;
+}
+
+#pageTitle {
+	font-family: arial;
+	color: #f47e24;
+	font-size: 18px;
+	font-weight: bold;
+	border-bottom: 1px dotted #666666;
+	margin-bottom: 20px;
+}
+.pageTitleIcons {
+	float: right;
+	padding-left: 10px;
+	margin: 0px;
+	cursor: pointer;
+}
+/* The page description goes directly beneath the pageTitle.  It contains a summary description of what is shown on the page. */	
+#pageDescription {
+	color: #666666;
+	font-size: 10pt;
+	font-style: italic;
+	margin: -20px 0px 20px 0px;
+}
+/* The page warning under the description. */	
+#pageWarning {
+	color: red;
+	font-size: 10pt;
+	font-style: italic;
+	margin: -20px 0px 20px 0px;
+}
+label {
+	padding-left: 4px;
+	line-height: 18px;
+	font-weight: bold;
+}
+label.plain {
+	padding-left: 4px;
+	line-height: 12px;
+	font-weight: 100;
+}
+label.inputsel {
+	padding-left: 4px;
+	font-weight: normal;
+	line-height: 20px;
+	cursor: pointer;
+}
+.label1 {
+	padding-right: 5px;
+	text-align: right;
+	font-weight: bold;
+	vertical-align: top;
+	line-height: 18px;
+	padding-bottom: 2px;
+}
+.label1bg {
+	font-family: arial;
+	padding-right: 5px;
+	text-align: right;
+	font-weight: bold;
+	vertical-align: top;
+	line-height: 18px;
+	background-color: #E2DBD5;
+	border: 1px solid #EAE2DF;
+}
+.label2 {
+	text-align: left;
+	font-weight: bold;
+	vertical-align: top;
+}
+.label3 {
+	padding-left: 5px;
+}
+.label4 {
+	text-align: left;
+	font-weight: bold;
+	vertical-align: top;
+	font-size: 12px;
+}
+.label5 {
+	padding-right: 5px;
+	text-align: right;
+	font-weight: bold;
+}
+.middle {
+	vertical-align: middle;
+}
+.left {
+	float: left;
+	text-align: left
+}
+
+.fullWidth {
+	width: 100%;
+}
+.fullHeight {
+	height: 100%;
+}
+.error 
+{
+  	border: 1px solid #CB2026;
+ 	color:#CB2026;
+ 	background-color: #F6D6D9;
+    margin: 10px;
+    margin: 1.0rem;
+    padding: 0px 10px;
+    padding: 0rem 1rem;
+}
+
+.success {
+    background-color: #DEE9C4;
+    border: 1px solid #7EA83F;
+    color: #4A6B27;
+    margin: 10px;
+    margin: 1.0rem;
+    padding: 0px 10px;
+    padding: 0rem 1rem;
+}
+td#cellright {
+	text-align: right;
+	padding-right: 5px;
+}
+.cell {
+	padding-left: 0px;
+}
+legend {
+	color: #175274;
+	padding-bottom: 6px;
+	padding-top: 0px;
+}
+
+table.form1 {
+	border-collapse: collapse;
+}
+table.form1 td {
+	padding: 1px;
+}
+.req {
+	color: #E21000;
+}
+.button
+{
+	border: default;	
+}
+.columnHeader {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000080;
+}
+.pageHeader {
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 10px;
+}
+.right 
+{	
+	float: right;
+	text-align: right;
+}
+
+.dialog {
+	background: transparent;
+}
+
+.dialogTitle {
+	font-family: verdana;
+	font-size: 12px;
+	font-weight: bold;
+	color: white; 
+	text-align: left; 
+	border: 0px solid black;
+	border-bottom: none; 
+	padding: 2px 2px 2px 10px; 
+	/*background-color: #506A81;*/
+	background-color: #000080;
+}
+
+
+/* ------------------------------------------------------------------------------------------ */
+/* BOX -------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------ */
+.box1 {
+	border: 1px solid #C9BFB5;
+	vertical-align: top;
+	margin-bottom: 10px;
+	margin-right: 20px;
+	border-radius:5px;
+}
+
+h2
+{
+	padding: 1px 9px 2px;
+	font:	bold 12px arial;
+	color: #666666;
+	margin: 0px;
+}
+.box1 h2 {
+	background: #DFD8D0;
+	padding: 1px 9px 2px;
+	font:	bold 12px arial;
+	color: #666666;
+	margin: 0px;
+}
+
+.box1 .search table td {
+	padding: 5px;
+}
+
+.box1 .outer
+{
+	padding: 10px;		
+}
+
+.paybox {
+	background: #DFD8D0;
+	/*float: right;*/
+	font: bold 12px arial;
+	border:1px solid #C9BFB5;
+	color: #666666;
+	padding: 10px;
+	width:300px;
+}
+
+.paybox h2 {
+	font: bold 12px Arial;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+}
+
+
+
+/* ------------------------------------------------------------------------------------------ */
+/* CONTROL FRMAME------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------ */
+#WinControlContainer {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 10000;
+	width: 100%;
+	height: 100%;
+	border: none;
+  filter: alpha(opacity=80); 
+  *filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+  -moz-opacity: 0.80;
+}
+#WinControl {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 10001;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.Transparent {
+	position: absolute;
+	z-index: 10000;
+	border: none;
+	background-color: #999999;
+  filter: alpha(opacity=50); 
+  *filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+  -moz-opacity: 0.50;
+}
+
+#calendar td {
+	padding: 3px;
+}
+
+/* ------------------------------------------------------------------------------------------ */
+/* Cancel out bad styles from anyware.css */
+/* ------------------------------------------------------------------------------------------ */
+.WindowSectionBackground {
+	background: none;
+	padding: 0px;
+}
+.WindowSectionHeader {
+	padding-left: 0px;
+}
+.headerBar {
+	border-right: 1px solid #DFD8D0; /* This is so it will match up with the #TableList-style tables. */
+	width: 100%;
+}
+#headerBar {
+	border-right: 1px solid #DFD8D0; /* This is so it will match up with the #TableList-style tables. */
+	width: 100%;
+}
+.HeaderBar td
+{	
+	background: #DFD8D0;
+	color: #666666;
+	font-family: Arial;
+	font-size: 12px;
+	padding: 1px 9px 2px;
+}
+#HeaderBar td
+{	
+	background: #DFD8D0;
+	color: #666666;
+	font-family: Arial;
+	font-size: 12px;
+	padding: 1px 9px 2px;
+}
+
+tbody .even td textarea
+{
+    background: #f1f7fc;
+}
+
+.table.StripedTable tbody td {
+	border: 0px;
+}
+
+
+table.StripedTable tr.paging td
+{
+	background: #ffffff;
+	border: 1px solid #ffffff;
+	border-top: 1px solid #000000;
+}
+
+/* ------------------------------------------------------------------------------------------ */
+/*	REPORT STYLES																			  */
+/*	Some of these are also used in the Inventory Manager.									  */
+/* ------------------------------------------------------------------------------------------ */
+
+
+/* ------------------------------------------------------------------------------------------ */
+/*	SCROLLING TABLE STYLES																	  */
+/*	This is a scrolling version of TableList, as used in the Inventory Manager.				  */
+/* ------------------------------------------------------------------------------------------ */
+div.scrollingTableContainer {
+	border-bottom: 1px solid #003366;
+	width: 100%;	/* table width will be 99% of this*/
+	height: 289px; 	/* must be greater than tbody*/
+	overflow: auto;
+	margin: 0 auto;
+}
+
+html>body div.scrollingTableContainer {
+	border-bottom: none;
+	height: 295px;
+}
+
+
+div.scrollingTableContainer td:last-child {
+	padding-right: 20px; /*prevent Mozilla scrollbar from hiding cell content*/
+} 
+
+/* ------------------------------------------------------------------------------------------ */
+/*	SORTABLE TABLE STYLES																	  */
+/*	For tables with JavaScript sorting, using sorttable.js, like the Inventory Manager.		  */
+/* ------------------------------------------------------------------------------------------ */
+table.sortable thead tr {
+	cursor: pointer;
+}
+
+
+/* ------------------------------------------------------------------------------------------ */
+/*	FORM SUBMISSION STYLES																	  */
+/* ------------------------------------------------------------------------------------------ */
+.ConfirmationMessage
+{
+    font-weight: bold;
+    color: #009933;
+}
+
+
+/* ------------------------------------------------------------------------------------------ */
+/*	OTHER STYLES																			  */
+/* ------------------------------------------------------------------------------------------ */
+
+
+
+.SearchDisplay
+{
+	padding:3px 3px 3px 3px;
+	height:115px;
+	width:165px;
+	overflow:hidden;
+}
+
+.SearchDisplay .Results
+{
+	width:500px;
+	white-space:nowrap;		
+	padding: 0px;
+}
+
+.helpitem
+{
+	color: #0077AA;
+}
+
+.ClearNPad
+{
+	clear:both;
+	height: 5px;
+	
+}
+
+/* This is used to fix a bug in IE with float: left */
+.clear 
+{
+	clear: both;
+}
+
+.checkbox, .xsf_PaymentControl .Payment_Container .Payment_Selector .Activation_Control input
+{
+	border: 0px;
+}
+
+.radio
+{
+	border: 0px;	
+}
+
+.TabBottom
+{
+	background-color: #eaeaea;
+	padding: 6px 10px 6px 10px;
+}
+
+.LanguageDropdown {
+	width: 200px;
+}
+
+.LanguageTextBox {
+	width: 195px;
+}
+
+#sorttable_sortfwdind, #sorttable_sortrevind {
+	line-height: 10px;
+}
+
+
+
+
+/* This is used for live validation.  It represents a field which has failed validation. */
+.badinput {
+	border: 1px solid red;
+}
+
+.paymentiframe {
+	border: 0px;
+	height: 180px;
+	/*width: 809px;*/
+	width: 835px;
+	background-color: Transparent;
+}
+
+
+.left_dbl_arrow
+{
+	background-image:url('../images/arrow_begin_2.gif');
+    background-color: Transparent;
+    border:none;
+    width: 13px;
+    height: 14px;
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+.right_dbl_arrow
+{
+	background-image:url('../images/arrow_end_2.gif');
+    background-color: Transparent;
+    border:none;
+    width: 13px;
+    height: 14px;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.btnHelp
+{
+
+    background-image:url('../images/all/btn_help.gif');
+    background-color: Transparent;
+    border:none;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.HighlightText 
+{
+    color:#CA1010;
+}
+
+.InfoBox, .xsf_PaymentControl .Payment_Container, .xsf_PaymentControl .Edit_Panel, .xsf_PaymentControl .Payment_Container .Payment_Selector .Edit_Selection
+{
+	background:#DFD8D0;
+	border:1px solid #C9BFB5;
+	color: #666666;
+}
+
+.basic_btn
+{
+	width: 60px;
+	height: 22px;
+	margin: 0px 0px;
+	padding: 2px 2px 3px 2px;
+	text-align: center;
+	border-left: 1px outset #CCCC99;
+	border-top: 1px outset #CCCC99;
+	border-right: 2px outset #616D7E;
+	border-bottom: 2px outset #616D7E;
+}
+
+.download {
+	background: #ffffcc url(../images/arrow_down.gif) left no-repeat;
+	background-position: 10px;
+	border: 1px solid #cccc99;
+	margin-bottom: 10px;
+	padding: 10px 10px 10px 32px;
+}
+
+img.clickable {
+	cursor: pointer;
+}
+
+td.reportfilterlabel {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #05121B;
+	padding-right: 5px;
+	vertical-align: top;
+	width: 100px;
+}
+
+td.reportfilterfield {
+	padding-bottom: 5px;
+}
+
+.xsf_PaymentControl .Edit_Panel table.chooseAddress td INPUT[type="radio"]
+{
+	border: 0px solid white;
+}
+
+.warehouseAddress .label1
+{
+    width: 91px;
+}
+
+
+a.CustomDelete:link
+{
+    text-decoration:none;
+    color:red;
+}
+
+fieldset { border-radius:5px; }
+
+.psudoLink { cursor:pointer; }
+.floatLeft { float:left; }
+
+/* Padding Classes */
+.paddingTop5 { padding-top:5px; }
+.paddingTop15 { padding-top:15px; }
+.paddingBottom5 { padding-bottom:5px; }
+.paddingBottom15 { padding-bottom:15px; }
+.paddingRight5 { padding-right:5px; }
+.paddingRight15 { padding-right:15px; }
+.paddingLeft5 { padding-left:5px; }
+.paddingLeft15 { padding-left:15px; }
+
+
+
+/* /WorldVu.Net/WebClient/Enrollment/Enroll.aspx */
+#pnlEnrollmentContainer .EnrollLabel, #pnlEnrollmentContainer .EnrollAddressTable th
+{
+    text-align: right;
+    width: 110px;
+    padding-right: 4px;
+}
+        
+#pnlEnrollmentContainer table tr td, #pnlEnrollmentContainer .EnrollAddressTable tr td
+{
+    padding-top: 4px;
+}
+                
+#pnlEnrollmentContainer .required
+{
+    color: Red;
+}
+
+
+
+
+
+
+
+/* Styles for Payment Method Manager */
+#payment-methods {
+  width: 100%;
+}
+
+#payment-methods tbody .description strong, #payment-methods tbody .description .rankbold {
+  display: block;
+}
+
+
+
+#payment-methods tbody tr.payment 
+{
+  background-color: #DED7CF;
+  border: 1px solid #C8BEB5;
+  color: #58585B;
+}
+
+#payment-methods tbody tr.payment td:nth-child(1){
+	width:30px;
+	text-align:center;
+}
+
+#payment-methods tbody tr.payment a
+{
+  color: #4F6B83;
+}
+
+
+th, dt, strong, .rankbold 
+{
+  font-weight: bold;
+}
+
+strong, ol
+{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+#payment-methods tbody .description 
+{
+  width: 25%;
+}
+
+#payment-methods tbody .default-payment {
+  color: #263142;
+}
+
+#payment-methods tfoot i {
+  color: #263142;
+}
+
+table.payments {
+  width: 100%;
+  max-height: 218px;
+  max-height: 21.8rem;
+}
+
+table.payments {
+  border: 1px solid #C8BEB5;
+}
+
+table.payments thead th {
+  padding: 5px;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+table.payments th, dt, strong, .rankbold {
+  font-weight: bold;
+}
+
+table.payments td, table.payments th {
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+table.payments tbody th {
+  text-align: left;
+  padding: 5px 5px 0;
+  padding: 0.5rem 0.5rem 0;
+}
+
+table.payments thead {
+  text-transform: uppercase;
+}
+
+table.payments thead
+{
+  background-color: #DED7CF;
+  color: #58585B;
+  border-right: 1px solid #C8BEB5;
+  font-size: 12px;
+}
+
+table.payments tbody tr.primary td {
+  padding-top: 0;
+  padding: 10px;
+  padding-: 10rem;
+}
+
+  table.payments tbody tr.edit-payment {
+    font-weight: bold; }
+      table.payments tbody tr.edit-section {
+    padding-top: 10px; }
+table.payments tbody th {
+    text-align: left;
+    padding: 5px 5px 0;
+    padding: 0.5rem 0.5rem 0; }
+table.payments tbody td:first-child {
+  width: 8%;
+}
+
+table.payments tbody td {
+  padding: 5px;
+  padding: 0.5rem;
+}
+
+table.payments tbody tr.edit-payment {
+    background-color: #efe8e1;
+    color: #58585B; }
+    /* line 154, Imports/_pages.scss */
+    table.payments tbody tr.edit-payment i {
+      color: #58585B; }
+  /* line 158, Imports/_pages.scss */
+  table.payments tbody tr.edit-section {
+    border-top: 2px solid #DED7CF; }
+
+.col_12
+{
+    width:100%;
+}
+
+.col_6
+{
+    width:50%;
+}
+
+.col_4
+{
+    width:30%;
+}
+
+.col_3
+{
+    width:25%;
+}
+
+
+#payment-methods tbody tr.payment.selected {
+  border: 1px solid #C8BEB5;
+  background-color:#C8BEB5;
+  color: #263142;
+}
+
+#payment-methods tbody tr.expanded {
+  border: 1px solid #C8BEB5;
+  color: #263142;
+}
+
+#payment-methods a{
+	text-decoration:none !important; 
+}
+
+#payments li
+{
+    vertical-align:top;
+    margin:0 10px 0 10px;
+}
+#payment-methods fieldset {
+  margin: 10px 0;
+  margin: 1rem 0;
+  padding: 15px 10px;
+  padding: 1.5rem 1rem;
+  border: 1px solid #ccc; 
+}
+
+  #payment-methods fieldset.minimal {
+    padding: 0;
+    border: 0; }
+
+    #payment-methods fieldset.minimal legend {
+      text-indent: -9999px; }
+
+  #payment-methods fieldset.divider {
+    border: 0 solid #000;
+    border-width: 1px 0 0;
+    border-color: red; }
+
+#payment-methods legend {
+	color: inherit;
+	padding-bottom: 0px;
+	padding-top: 0px;
+}
+
+.fields.vertical, .fields.horizontal 
+{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fields.horizontal li, .buttonbar li
+ {
+  display: inline-block;
+ }
+
+.fields li 
+{
+  margin: 0;
+  padding: 2px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.fields li label
+{
+    display:block;
+}
+
+.buttonbar li
+{
+    padding:10px;
+}
+
+.buttonbar {
+	min-height: 50px !important;
+	min-height: 5rem !important;
+	display: table; 
+}
+
+.buttonbar li {
+	display: table-cell;
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem; 
+}
+
+.buttonbar li.next {
+	text-align: right; 
+}
+
+ul.popup, ul.popup li
+{
+    padding:0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#payment-methods {
+  width: 100%; }
+
+  #payment-methods thead {
+    display: none; }
+
+  #payment-methods tbody tr.payment td {
+    padding: 5px;
+    padding: 0.5rem; }
+
+  #payment-methods tbody tr.expanded {
+    background-color: transparent; }
+
+    #payment-methods tbody tr.expanded td {
+      padding: 10px;
+      padding: 1rem; }
+
+  #payment-methods tbody .default-payment {
+    width: 1%; }
+
+  #payment-methods tbody .description {
+    width: 25%; }
+
+    #payment-methods tbody .description strong, #payment-methods tbody .description .rankbold {
+      display: block; }
+
+  #payment-methods tbody .date {
+    text-align: left;
+    width: auto; }
+
+  #payment-methods tbody .row-actions {
+    width: 1%;
+    text-align: right; }
+
+    #payment-methods tbody .row-actions i {
+      padding: 3px;
+      padding: 0.3rem;
+      display: block; }
+
+  #payment-methods tfoot td {
+    padding: 5px;
+    padding: 0.5rem; }
+
+  #payment-methods tfoot .action {
+    text-align: right; }
+
+table.payments {
+  width: 100%;
+  max-height: 218px;
+  max-height: 21.8rem; }
+
+  table.payments thead {
+    text-align: left; }
+
+    table.payments thead th {
+      padding: 5px;
+      padding: 0.5rem; }
+
+  table.payments tbody th {
+    text-align: left;
+    padding: 5px 5px 0;
+    padding: 0.5rem 0.5rem 0; }
+
+
+
+  table.payments tbody td {
+    padding: 5px;
+    padding: 0.5rem; }
+
+    table.payments tbody td:first-child {
+      width: 8%; }
+
+    table.payments tbody td:last-child {
+      text-align: right; }
+
+    table.payments tbody td.space {
+      height: 118px;
+      height: 11.8rem; }
+
+.fields.vertical, .fields.horizontal {
+    margin: 0px;
+    padding: 0px;
+    list-style: outside none none;
+}
+
+strong, ol {
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    outline: 0px none;
+    background: transparent none repeat scroll 0% 0%;
+    box-sizing: border-box;
+}
+
+#manual-adjustments fieldset {
+    margin: 10px 10px 10px 10px;
+    padding: 15px 10px;
+    padding: 1.5rem 1rem;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}
+
+#manual-adjustments fieldset.minimal 
+{
+    padding: 0;
+    border: 0; 
+}
+
+#manual-adjustments fieldset.minimal legend 
+{
+    text-indent: -9999px; 
+}
+
+#manual-adjustments fieldset.divider 
+{
+    border: 0 solid #000;
+    border-width: 1px 0 0;
+    border-color: red; 
+}
+
+#manual-adjustments legend 
+{
+	color: inherit;
+	padding-bottom: 0px;
+	padding-top: 0px;
+}
+
+.fields.horizontal li
+ {
+  display: inline-block; 
+ }
+
+.fields li
+{
+    display: inline-block;
+    margin: 0 12px 12px 0;
+    margin: 0 1.2rem 1.2rem 0;
+    vertical-align: top;
+}
+
+.fields li label
+{
+    display:block;
+}
+
+.fields
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#createNew, #manual-adjustments-table
+{
+    margin: 10px 10px 10px 10px;
+}
+
+/********************************************/
+/* Javascript Payment Control*/
+/********************************************/
+  .fieldsetStyle
+{
+    width: 90%;
+}
+
+#payment-control-payhub, 
+#payment-control-fieldset-paymentMethod-1, 
+#payment-control-fieldset-paymentMethod-2, 
+#payment-control-fieldset-paymentMethod-3,
+.EditDivClass
+{
+    background: #DFD8D0;
+    font: bold 12px arial;
+    border: 1px solid #C9BFB5;
+    color: #666666;
+    padding: 10px;
+}
+
+.EditDivClass 
+{
+    width: 90%;
+}
+
+.EditDivClass .buttonbar
+{
+    display: inherit;
+}
+
+.pciIframe
+{
+    width: 100%;
+    border: none;
+}
+
+dl.summary {
+    margin: 10px 0;
+    margin: 1rem 0;
+    padding: 10px;
+    padding: 1rem;
+}
+
+.summary{
+    border: 1px solid #797a7b;
+    border-radius: 5px;
+    border-radius: 0.5rem;
+}
+
+dl.summary dt {
+    margin: 0 0 5px;
+    margin: 0 0 0.5rem;
+}
+.summary dt {
+    border-bottom: 1px solid #797a7b;
+}
+th, dt, strong, .rankbold {
+    font-weight: bold;
+}
+
+#payment-control fieldset legend {
+    font-variant: small-caps;
+    font-weight: 600;
+}
+
+a {
+    cursor: pointer;
+    cursor: hand;
+}
+/********************************************/
+
+
+
+
+#crtlSideNav a {
+    font-size: .8rem;
+}
