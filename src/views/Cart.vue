@@ -1,14 +1,18 @@
 <template>
   <div class="cart">
+    <router-link to="/">Return To Shopping</router-link>
+    <router-link v-if="$store.state.orderItems.length >= 1"  to="/checkout">Checkout</router-link>
     <div class="row">
       <div class="col-6">
         <div class="col-12" v-for="item in $store.state.orderItems" >
-          <VueCard :title="item.make + ' ' + item.model" :text="item.price" cardimage="''"></VueCard>
+          <VueCard :title="item.make + ' ' + item.model" :text="'Quantity '+item.quantity" :hideimage="true" cardimage="''">
+            <NumericInput :min="item.quantity" :emptyValue="item.quantity" v-model="item.quantity" @change.native="updateQuantity"/>
+          </VueCard>
         </div>
       </div>
       <div class="col-6" >
-        <p v-for="item in $store.state.orderItems" >{{item.price}}</p>
-        <p>{{itemTotals}}</p>
+        <p v-for="item in $store.state.orderItems" >{{item.make}} - x{{item.quantity}} - ${{item.itemTotal}}<VueButton color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton></p>
+        <p>${{itemTotals}}</p>
       </div>
     </div>
   </div>
@@ -25,6 +29,12 @@ export default {
    methods: {
     addItemToCart(item){
       this.$store.dispatch("addItemToCart", item);
+    },
+    deleteItemFromCart(item){
+      this.$store.dispatch("deleteItemFromCart", item);
+    },
+    updateQuantity(e){
+      this.$store.dispatch("updateQuantity", e.target.value);
     }
    },
   computed: {

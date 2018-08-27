@@ -22,12 +22,20 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/list',
-      name: 'list',
+      path: '/cart',
+      name: 'cart',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "list" */ './views/List.vue')
+      component: () => import(/* webpackChunkName: "list" */ './views/Cart.vue')
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "checkout" */ './views/Checkout.vue')
     }
   ]
 })

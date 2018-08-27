@@ -106,7 +106,18 @@ export const store = new Vuex.Store({
       "model": "xB",
       "price": 2.12
     }],
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    streetAddress: '',
+    city: '',
+    zipCode: '',
+    state: '',
+    country: '',
+    shippingMethod: '',
     orderItems: [],
+    quantity: 1,
     orderTotal: 0,
     currentItem: {},
   	showModal: false,
@@ -137,12 +148,40 @@ export const store = new Vuex.Store({
       Vue.set(state, payload.key, payload.value);
     },
     addItemToCart(state, payload) {
-      state.orderTotal = state.orderTotal + payload.price;
-      state.orderItems.push(payload);
+      var index = state.orderItems.indexOf(payload);
+      console.log(payload);
+      if(index > -1){
+        // var a = parseInt(payload.quantity);
+        // var x = parseInt(state.orderItems[index].quantity)
+        // var b = parseInt(state.quantity);
+        // var c = a+b;
+        // console.log('A',a)
+        // console.log('B',b);
+        // console.log("C",c);
+        // console.log("X", x);
+        // state.orderItems.splice(index, 1);
+        // payload.quantity = c;
+        // state.orderTotal = state.orderTotal + payload.itemTotal;
+        // state.orderItems.push(payload)
+      }else{
+        state.orderItems.push(payload);
+      }
+      state.orderTotal = state.orderTotal + payload.itemTotal;
+
+    },
+    deleteItemFromCart(state, payload) {
+      state.orderTotal = state.orderTotal - payload.itemTotal;
+      var index = state.orderItems.indexOf(payload);
+      if (index > -1) {
+        state.orderItems.splice(index, 1);
+      }
     },
     setCurrentItem(state, payload){
       Vue.set(state, 'currentItem', payload)
-    }
+    },
+    updateQuantity: (state, payload) =>{
+      Vue.set(state, 'quantity', payload);
+    },
   },
   actions: {
   	modalAction: (context, payload) => {
@@ -154,9 +193,15 @@ export const store = new Vuex.Store({
     addItemToCart: (context, payload) =>{
       context.commit("addItemToCart", payload)
     },
+    deleteItemFromCart: (context, payload) =>{
+      context.commit("deleteItemFromCart", payload)
+    },
     goToDetails: (context, payload) =>{
       context.commit("setCurrentItem", payload)
-    }
+    },
+    updateQuantity: (context, payload) =>{
+      context.commit("updateQuantity", payload)
+    },
   },
   getters: {
 

@@ -4,7 +4,11 @@
     <VueButton @click.native="toggleView" v-if="!gridView">Grid View</VueButton>
     <div class="row" v-if="gridView">
       <div class="col-3" v-for="item in $store.state.items" >
-        <VueCard :title="item.make + ' ' + item.model" :text="'$'+item.price"><VueButton @click.native="addItemToCart(item)">Add</VueButton><VueButton color="secondary" @click.native="goToDetails(item)">View Details</VueButton></VueCard>
+        <VueCard :title="item.make + ' ' + item.model" :text="'$'+item.price">
+          <NumericInput :min="1" @change.native="updateQuantity"/>
+          <VueButton @click.native="addItemToCart(item)">Add</VueButton>
+          <router-link @click.native="goToDetails(item)" to="/about">View Details</router-link>
+        </VueCard>
       </div>
     </div>
     <div class="row" v-if="!gridView">
@@ -17,15 +21,30 @@
 
 <script>
 
+
 export default {
+  components: {
+    
+  },
   data(){
     return{
       gridView: true,
+      quantity: 1
     }
   },
   methods: {
     addItemToCart(item){
+      var int = parseInt(this.$store.state.quantity)
+      item.quantity = int;
+      item.itemTotal = int * item.price;
       this.$store.dispatch("addItemToCart", item);
+      this.resetQuantity();
+    },
+    updateQuantity(e){
+      this.$store.dispatch("updateQuantity", e.target.value);
+    },
+    resetQuantity(){
+      this.$store.dispatch("updateQuantity", 1);
     },
     toggleView(){
       if(this.gridView){
@@ -36,7 +55,6 @@ export default {
     },
     goToDetails(item){
       this.$store.dispatch("goToDetails", item);
-      this.showModal("showAbout", 'lg', item.make, '',true, false);
     },
     showModal(slot, size, title, content, header,footer){
       var modalObject = {};
