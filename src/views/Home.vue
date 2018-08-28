@@ -2,8 +2,7 @@
   <div class="home row">
     <div class="col-2"></div>
     <div class="col-8">
-      <router-link v-if="$store.state.orderItems.length >= 1" to="/cart">View Summary</router-link>
-      <router-link v-if="$store.state.orderItems.length >= 1" to="/checkout">Checkout</router-link>
+      
       <List/>
     </div>
     <div class="col-2"></div>

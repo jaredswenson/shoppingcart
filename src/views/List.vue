@@ -13,7 +13,10 @@
     </div>
     <div class="row" v-if="!gridView">
       <div class="col-12" v-for="item in $store.state.items" >
-        <VueCard :hideimage="true" :title="item.make + ' ' + item.model" :text="'$'+item.price"><VueButton @click.native="addItemToCart(item)">Add</VueButton></VueCard>
+        <VueCard :hideimage="true" :title="item.make + ' ' + item.model" :text="'$'+item.price">
+          <NumericInput :min="1" @change.native="updateQuantity"/>
+          <VueButton @click.native="addItemToCart(item)">Add</VueButton>
+        </VueCard>
       </div>
     </div>
   </div>
