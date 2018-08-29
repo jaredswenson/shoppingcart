@@ -6,7 +6,7 @@
       <div class="col-6">
         <div class="col-12" v-for="item in $store.state.orderItems" >
           <VueCard :title="item.make + ' ' + item.model" :text="'Quantity '+item.quantity" :hideimage="true" cardimage="''">
-            <NumericInput :min="item.quantity" :emptyValue="item.quantity" v-model="item.quantity" @change.native="updateQuantity"/>
+            <NumericInput :min="item.quantity" :emptyValue="item.quantity" v-model="item.quantity" @change.native="updateQuantity($event, item)"/>
           </VueCard>
         </div>
       </div>
@@ -23,7 +23,7 @@
 export default {
   data(){
     return{
-      
+      tempQuantity: 0
     }
   },
    methods: {
@@ -33,8 +33,9 @@ export default {
     deleteItemFromCart(item){
       this.$store.dispatch("deleteItemFromCart", item);
     },
-    updateQuantity(e){
-      this.$store.dispatch("updateQuantity", e.target.value);
+    updateQuantity(event, item){
+      this.$store.dispatch("updateQuantity", parseInt(event.target.value));
+      this.addItemToCart(item);
     }
    },
   computed: {

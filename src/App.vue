@@ -3,13 +3,13 @@
     <!--Navbar-->
     <Navbar class="indigo" dark>
       <!-- Navbar brand -->
-      <NavbarBrand>
+      <mdb-navbar-brand>
         Shopping Cart
-      </NavbarBrand>
+      </mdb-navbar-brand>
       <navbar-collapse>
         <navbar-nav>
-          <navbar-item><router-link v-if="$store.state.orderItems.length >= 1" to="/cart">View Summary</router-link></navbar-item>
-          <navbar-item><router-link v-if="$store.state.orderItems.length >= 1" to="/checkout">Checkout</router-link></navbar-item>
+          <navbar-item v-if="$store.state.orderItems.length >= 1" ><router-link to="/cart">View Summary</router-link></navbar-item>
+          <navbar-item v-if="$store.state.orderItems.length >= 1" ><router-link to="/checkout">Checkout</router-link></navbar-item>
           <navbar-item><router-link to="/">Return To Shopping</router-link></navbar-item>
         </navbar-nav>
         <!-- Search form -->
@@ -20,7 +20,7 @@
     </Navbar>
 
     <router-view/>
-    
+
     <VueModal v-if="this.$store.state.showModal" id="VueModal" :title="this.$store.state.modalTitle" :myclass="this.$store.state.modalSize" :headeron="this.$store.state.modalHeader" :footeron="this.$store.state.modalFooter" :content="this.$store.state.modalContent">
       <About v-if="this.$store.state.showAbout"/>
       <Template v-if="this.$store.state.showTemplate"/>
@@ -33,3 +33,4 @@
   color: #42b983;
 }
 </style>
+

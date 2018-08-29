@@ -21,7 +21,7 @@ export default {
         type: String,
         default: ''
     },
-    item: {
+    model: {
         type: String,
         default: ''
     },
@@ -37,7 +37,7 @@ export default {
   methods: {
   	update(){
   	  var textObject = {};
-  	  textObject.key = this.item;
+  	  textObject.key = this.model;
   	  textObject.value = this.itemValue;
       this.$store.dispatch("updateText", textObject);
   	}

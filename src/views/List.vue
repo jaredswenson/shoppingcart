@@ -2,20 +2,28 @@
   <div class="list">
     <VueButton @click.native="toggleView" v-if="gridView">List View</VueButton>
     <VueButton @click.native="toggleView" v-if="!gridView">Grid View</VueButton>
+    <VueButton color="warning">{{orderSize}}</VueButton>
+    <br>
+    <VueButton color="white" v-for="item in uniqCategory" v-if="item != $store.state.category" @click.native="setCategory(item)">{{item}}</VueButton>
+    <VueButton @click.native="setCategory('')" v-if="$store.state.category != ''">Clear Filter</VueButton><br>
+    <VueText size="sm" model="search" label="Search"/>
     <div class="row" v-if="gridView">
-      <div class="col-3" v-for="item in $store.state.items" >
+      <div class="col-3" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
         <VueCard :title="item.make + ' ' + item.model" :text="'$'+item.price">
-          <NumericInput :min="1" @change.native="updateQuantity"/>
+          <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" v-if="oItem.id == item.id" @change.native="updateQuantity($event, oItem)"/>
           <VueButton @click.native="addItemToCart(item)">Add</VueButton>
+          <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>
           <router-link @click.native="goToDetails(item)" to="/about">View Details</router-link>
         </VueCard>
       </div>
     </div>
     <div class="row" v-if="!gridView">
-      <div class="col-12" v-for="item in $store.state.items" >
+      <div class="col-12" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
         <VueCard :hideimage="true" :title="item.make + ' ' + item.model" :text="'$'+item.price">
-          <NumericInput :min="1" @change.native="updateQuantity"/>
+          <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" v-if="oItem.id == item.id" @change.native="updateQuantity($event, oItem)"/>
           <VueButton @click.native="addItemToCart(item)">Add</VueButton>
+          <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>
+          <router-link @click.native="goToDetails(item)" to="/about">View Details</router-link>
         </VueCard>
       </div>
     </div>
@@ -31,23 +39,22 @@ export default {
   },
   data(){
     return{
-      gridView: true,
-      quantity: 1
+      gridView: true
     }
   },
   methods: {
     addItemToCart(item){
-      var int = parseInt(this.$store.state.quantity)
-      item.quantity = int;
-      item.itemTotal = int * item.price;
       this.$store.dispatch("addItemToCart", item);
-      this.resetQuantity();
     },
-    updateQuantity(e){
-      this.$store.dispatch("updateQuantity", e.target.value);
+    deleteItemFromCart(item){
+      this.$store.dispatch("deleteItemFromCart", item);
     },
-    resetQuantity(){
-      this.$store.dispatch("updateQuantity", 1);
+    updateQuantity(event, item){
+      this.$store.dispatch("updateQuantity", parseInt(event.target.value));
+      this.addItemToCart(item);
+    },
+    setCategory(item){
+      this.$store.commit("setCategory", item);
     },
     toggleView(){
       if(this.gridView){
@@ -71,7 +78,30 @@ export default {
     },
   },
   computed: {
-    
+    uniqCategory(){
+      var items = this.$store.state.items;
+      var arr = []
+      $.each(items, function(i,v){
+        arr.push(v.Category);
+      });
+      var blah = _.uniq(arr);
+      return blah
+    },
+    filterItems(){
+      var self = this;
+      return this.$store.state.items.filter(function(item){
+        return item.make.toLowerCase().indexOf(self.$store.state.search.toLowerCase())>=0;
+        }
+      )
+    },
+    orderSize(){
+     var order = this.$store.state.orderItems;
+     var total = 0;
+     $.each(order, function(i,v){
+      return total += parseInt(v.quantity)
+     });
+     return total
+    },
   },
 }
 </script>
