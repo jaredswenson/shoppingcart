@@ -148,7 +148,7 @@ export const store = new Vuex.Store({
   	modalTitle: 'Modal',
   	modalContent: '',
  	  showAbout: false,
-  	showTemplate: false,
+    showCart: false,
     search: '',
   },
   mutations: {
@@ -176,6 +176,7 @@ export const store = new Vuex.Store({
       if(index > -1){
         state.orderItems[index].quantity = state.quantity;
       }else{
+        payload.inCart = true;
         state.orderItems.push(payload);
       }
       Vue.set(state, 'orderTotal', 0)
@@ -188,6 +189,7 @@ export const store = new Vuex.Store({
       state.orderTotal = state.orderTotal - payload.itemTotal;
       var index = state.orderItems.indexOf(payload);
       if (index > -1) {
+        payload.inCart = false;
         state.orderItems.splice(index, 1);
       }
     },

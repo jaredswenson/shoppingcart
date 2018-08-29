@@ -2,16 +2,16 @@
   <div class="list">
     <VueButton @click.native="toggleView" v-if="gridView">List View</VueButton>
     <VueButton @click.native="toggleView" v-if="!gridView">Grid View</VueButton>
-    <VueButton color="warning">{{orderSize}}</VueButton>
+    <VueButton color="warning" @click.native="showModal('showCart', 'md', 'Summary', '', true,true)">{{orderSize}}</VueButton>
     <br>
-    <VueButton color="white" v-for="item in uniqCategory" v-if="item != $store.state.category" @click.native="setCategory(item)">{{item}}</VueButton>
+    <VueButton color="white" v-for="item in uniqCategory" @click.native="setCategory(item)">{{item}}</VueButton>
     <VueButton @click.native="setCategory('')" v-if="$store.state.category != ''">Clear Filter</VueButton><br>
     <VueText size="sm" model="search" label="Search"/>
     <div class="row" v-if="gridView">
       <div class="col-3" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
         <VueCard :title="item.make + ' ' + item.model" :text="'$'+item.price">
           <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" v-if="oItem.id == item.id" @change.native="updateQuantity($event, oItem)"/>
-          <VueButton @click.native="addItemToCart(item)">Add</VueButton>
+          <VueButton v-if="!item.inCart" @click.native="addItemToCart(item)">Add</VueButton>
           <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>
           <router-link @click.native="goToDetails(item)" to="/about">View Details</router-link>
         </VueCard>
@@ -21,7 +21,7 @@
       <div class="col-12" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
         <VueCard :hideimage="true" :title="item.make + ' ' + item.model" :text="'$'+item.price">
           <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" v-if="oItem.id == item.id" @change.native="updateQuantity($event, oItem)"/>
-          <VueButton @click.native="addItemToCart(item)">Add</VueButton>
+          <VueButton v-if="!item.inCart" @click.native="addItemToCart(item)">Add</VueButton>
           <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>
           <router-link @click.native="goToDetails(item)" to="/about">View Details</router-link>
         </VueCard>
