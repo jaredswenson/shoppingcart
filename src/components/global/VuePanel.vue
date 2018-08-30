@@ -13,7 +13,7 @@
       <h2 id="heading0" class="xen-cart-heading h6">{{item.make}} {{item.model}}</h2>          
     </a>                   
       <p class="xen-cart-price m-b-0">   
-        <strong id="xen-cart-current-price" class="xen-cart-current-price">${{item.price}}</strong>   
+        <strong id="xen-cart-current-price" class="xen-cart-current-price">${{item.price.toFixed(2)}}</strong>   
         <span class="xen-cart-was text-muted" style="display: none;">       
           <span id="xen-cart-was" productwidgettransval="was">was</span>       
           <del id="xen-cart-former-price" class="xen-cart-former-price"></del>   
