@@ -25,7 +25,7 @@
     <fieldset class="xen-cart-custom-fields fieldset xen-cart-fieldset m-b-3" v-if="!hideradio">          
       <legend class="sr-only">Custom</legend>       
     </fieldset>       
-    <fieldset class="xen-cart-autoship-fields fieldset xen-cart-fieldset xen-autoship" v-if="!hideradio">         
+    <fieldset class="xen-cart-autoship-fields fieldset xen-cart-fieldset xen-autoship" v-if="!hideradio" >         
       <legend class="sr-only">Autoship</legend>                 
       <div class="radio">
         <label for="no0">   
@@ -33,7 +33,7 @@
           <span class="circle"></span><span class="check"></span>   
           <span productwidgettransval="One-Time Purchase">One-Time Purchase</span>
         </label>                  
-      </div>                  
+      </div>             
       <div class="radio">
         <label for="yes0">   
           <input name="0" id="yes0" value="1" index="0" class="xen-cart-autoship-radio radio  js-autoship" type="radio">
@@ -99,6 +99,10 @@ export default {
     updateQuantity(event, item){
       this.$store.dispatch("updateQuantity", parseInt(event.target.value));
       this.addItemToCart(item);
+    },
+    setPriceTier(event, item){
+      console.log(event);
+      console.log(item);
     },
   },
   props: {
