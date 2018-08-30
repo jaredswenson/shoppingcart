@@ -1,10 +1,6 @@
 <template>
   <div class="about">
-    <VueCard v-for="item in $store.state.items" v-if="item.id == $store.state.currentItem.id" :title="item.make + ' ' + item.model" :text="'$'+item.price">
-      <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" v-if="oItem.id == item.id" @change.native="updateQuantity($event, oItem)"/>
-      <VueButton v-if="!item.inCart" @click.native="addItemToCart(item)">Add</VueButton>
-      <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>
-    </VueCard>
+    <VueCard :item="item"/>
   </div>
 </template>
 

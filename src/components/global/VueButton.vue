@@ -1,5 +1,5 @@
 <template>
-    <Btn :color="color" :size="size"><slot></slot></Btn>
+    <Btn block  :color="color" :size="size"><slot></slot></Btn>
 </template>
 
 <script>

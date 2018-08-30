@@ -1,17 +1,18 @@
 <template>
-  <div class="checkout">
-    <VueButton color="danger" @click.native="cancelOrder">Cancel Order</VueButton>
-    <div class="row">
-      <div class="col-6">
-        <div class="col-12">
+  <div class="checkout row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <h1>CHECKOUT</h1><br>
+      <div class="row">
+        <div class="col-8">
           <VueAccordian/>
         </div>
-      </div>
-      <div class="col-6" >
-        <p v-for="item in $store.state.orderItems" >{{item.make}} - {{item.quantity}} - ${{item.itemTotal}}</p>
-        <p>${{itemTotals}}</p>
+        <div class="col-4">
+            <Cart :flyout="true" :hidecancel="true" :hidesummary="true"/>
+        </div>
       </div>
     </div>
+    <div class="col-2"></div>
   </div>
 </template>
 

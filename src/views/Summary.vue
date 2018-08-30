@@ -1,10 +1,21 @@
 <template>
-  <div class="home row">
-    <div class="col-2"></div>
-    <div class="col-8">
-      <List/>
-    </div>
-    <div class="col-2"></div>
+  <div class="summary row">
+  	<div class="col-2"></div>
+  	<div class="col-8">
+	  	<h1>Cart Summary</h1><br>
+	  	<div class="row">
+	    	<div class="col-8">
+	    	    <navbar class="grey lighten-3" dark style="margin-bottom:50px;">
+			   		<h3>TODAY'S ITEMS</h3>
+			    </navbar>
+	    		<Cart :hideradio="true" :hidedelete="true"/>
+		    </div>
+		    <div class="col-4">
+		        <Cart :flyout="true"/>
+		    </div>
+	  	</div>
+  	</div>
+  	<div class="col-2"></div>
   </div>
 </template>
 
@@ -14,7 +25,7 @@ import Vue from 'vue';
 
 
 export default {
-  name: 'home',
+  name: 'summary',
   components: {
     
   },

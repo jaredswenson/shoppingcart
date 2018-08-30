@@ -1,30 +1,47 @@
 <template>
   <div class="list">
-    <VueButton @click.native="toggleView" v-if="gridView">List View</VueButton>
-    <VueButton @click.native="toggleView" v-if="!gridView">Grid View</VueButton>
-    <VueButton color="warning" v-if="$store.state.orderItems.length > 0" @click.native="showModal('showCart', 'md', 'Summary', '', true,true)">Order Summary - {{this.$store.state.totalItemsInCart}}</VueButton>
-    <br>
-    <VueButton color="yellow" v-for="item in uniqCategory" v-if="item == $store.state.category" @click.native="setCategory('')">{{item}}</VueButton>
-    <VueButton color="white" v-for="item in uniqCategory" v-if="item != $store.state.category" @click.native="setCategory(item)">{{item}}</VueButton>
-    <VueText size="sm" model="search" label="Search"/>
+
+    <div id="categories">
+       <div class="row show-grid xen-cart-banner m-t-10 m-b-8">
+          <div class="col-xs-6 col-lg-8">
+             <h1 id="xen-cart-heading" class="m-b-3" role="banner" categorywidgettransval="Products">Products</h1>
+          </div>
+          <div class="col-xs-6 col-lg-4">
+             <div id="xen-cart-search">
+                <div id="xen-cart-search-container">
+                   <div id="xen-cart-search-input" class="form-group bmd-form-group bmd-form-group-sm is-empty d-inline-block">                                 
+                   <!--<label for="search" class="bmd-label-floating">Search</label>  -->                               
+                    <VueText size="sm" model="search" label="Search"/>                          
+                   </div>
+                </div>
+               <!-- <i class="fa fa-search fa-lg d-inline-block"></i> -->                   
+             </div>
+          </div>
+       </div>
+       <navbar style="margin-bottom:10px;">
+        <navbar-collapse>
+          <navbar-nav>
+            <navbar-item v-for="item in uniqCategory" @click.native="setCategory(item)">{{item}}</navbar-item>
+            <navbar-item v-if="$store.state.category != ''" @click.native="setCategory('')">Clear Category</navbar-item>
+          </navbar-nav>
+          <span class="navbar-text">
+            <navbar-nav>
+              <navbar-item @click.native="toggleView('grid')"><i class="fa fa-th-large fa-lg"></i></navbar-item>
+              <navbar-item @click.native="toggleView('list')"><i class="fa fa-th-list fa-lg"></i></navbar-item>
+            </navbar-nav>
+          </span>
+        </navbar-collapse>
+      </navbar>
+    </div>
     <div class="row" v-if="gridView">
-      <div class="col-3" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
-        <VueCard :title="item.make + ' ' + item.model" :text="'$'+item.price">
-          <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" v-if="oItem.id == item.id" @change.native="updateQuantity($event, oItem)"/>
-          <VueButton v-if="!item.inCart" @click.native="addItemToCart(item)">Add</VueButton>
-          <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>
-          <router-link @click.native="goToDetails(item)" to="/about">View Details</router-link>
-        </VueCard>
+      <div class="xen-cart-column col-lg-4 col-sm-6 m-b-3" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
+        <VueCard :item="item"/>
       </div>
     </div>
     <div class="row" v-if="!gridView">
       <div class="col-12" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
-        <VueCard :hideimage="true" :title="item.make + ' ' + item.model" :text="'$'+item.price">
-          <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" v-if="oItem.id == item.id" @change.native="updateQuantity($event, oItem)"/>
-          <VueButton v-if="!item.inCart" @click.native="addItemToCart(item)">Add</VueButton>
-          <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>
-          <router-link @click.native="goToDetails(item)" to="/about">View Details</router-link>
-        </VueCard>
+        <VuePanel :item="item"/>
+        <hr>
       </div>
     </div>
   </div>
@@ -39,7 +56,7 @@ export default {
   },
   data(){
     return{
-      gridView: true
+      gridView: false
     }
   },
   methods: {
@@ -57,11 +74,11 @@ export default {
     setCategory(item){
       this.$store.commit("setCategory", item);
     },
-    toggleView(){
-      if(this.gridView){
-        this.gridView = false;
-      }else{
+    toggleView(view){
+      if(view == "grid"){
         this.gridView = true;
+      } else{
+        this.gridView = false;
       }
     },
     goToDetails(item){

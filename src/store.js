@@ -10,121 +10,141 @@ export const store = new Vuex.Store({
       "make": "Volkswagen",
       "model": "GTI",
       "price": 8.31,
-      "Category": "European"
+      "Category": "European",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 2,
       "make": "Mercedes-Benz",
       "model": "E-Class",
       "price": 2.13,
-      "Category": "European"
+      "Category": "European",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 3,
       "make": "Ford",
       "model": "LTD Crown Victoria",
       "price": 1.05,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 4,
       "make": "Lamborghini",
       "model": "Gallardo",
       "price": 6.30,
-      "Category": "European"
+      "Category": "European",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 5,
       "make": "GMC",
       "model": "Safari",
       "price": 6.88,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 6,
       "make": "Toyota",
       "model": "Tacoma",
       "price": 1.54,
-      "Category": "Japanese"
+      "Category": "Japanese",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 7,
       "make": "Oldsmobile",
       "model": "Cutlass",
       "price": 3.13,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 8,
       "make": "Dodge",
       "model": "Neon",
       "price": 7.60,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 9,
       "make": "Ford",
       "model": "E-Series",
       "price": 8.03,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 10,
       "make": "Isuzu",
       "model": "Amigo",
       "price": 8.77,
-      "Category": "Japanese"
+      "Category": "Japanese",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 11,
       "make": "Nissan",
       "model": "300ZX",
       "price": 7.35,
-      "Category": "Japanese"
+      "Category": "Japanese",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 12,
       "make": "Suzuki",
       "model": "Samurai",
       "price": 6.58,
-      "Category": "Japanese"
+      "Category": "Japanese",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 13,
       "make": "Land Rover",
       "model": "Range Rover",
       "price": 0.38,
-      "Category": "European"
+      "Category": "European",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 14,
       "make": "Jeep",
       "model": "Cherokee",
       "price": 9.93,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 15,
       "make": "Chevrolet",
       "model": "Avalanche 2500",
       "price": 2.03,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 16,
       "make": "Chrysler",
       "model": "LHS",
       "price": 0.76,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 17,
       "make": "Chevrolet",
       "model": "Suburban",
       "price": 1.38,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 18,
       "make": "Ford",
       "model": "Expedition",
       "price": 3.19,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 19,
       "make": "Cadillac",
       "model": "Escalade",
       "price": 9.17,
-      "Category": "American"
+      "Category": "American",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
       "id": 20,
       "make": "Scion",
       "model": "xB",
       "price": 2.12,
-      "Category": "Japanese"
+      "Category": "Japanese",
+      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }],
     firstName: '',
     lastName: '',
@@ -189,7 +209,6 @@ export const store = new Vuex.Store({
          total += parseInt(v.quantity)
        });
        Vue.set(state, 'totalItemsInCart', total);
-       console.log(total);
       this.dispatch("updateQuantity", 1);
     },
     deleteItemFromCart(state, payload) {
