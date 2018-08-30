@@ -140,6 +140,7 @@ export const store = new Vuex.Store({
     quantity: 1,
     category: '',
     orderTotal: 0,
+    totalItemsInCart: 0,
     currentItem: {},
   	showModal: false,
   	modalFooter: true,
@@ -181,8 +182,14 @@ export const store = new Vuex.Store({
       }
       Vue.set(state, 'orderTotal', 0)
       $.each(state.orderItems, function(i,v){
-          state.orderTotal += v.itemTotal
-        })
+        state.orderTotal += v.itemTotal
+      })
+      var total = 0;
+       $.each(state.orderItems, function(i,v){
+         total += parseInt(v.quantity)
+       });
+       Vue.set(state, 'totalItemsInCart', total);
+       console.log(total);
       this.dispatch("updateQuantity", 1);
     },
     deleteItemFromCart(state, payload) {
@@ -192,6 +199,11 @@ export const store = new Vuex.Store({
         payload.inCart = false;
         state.orderItems.splice(index, 1);
       }
+       var total = 0;
+       $.each(state.orderItems, function(i,v){
+         total += parseInt(v.quantity)
+       });
+       Vue.set(state, 'totalItemsInCart', total);
     },
     setCurrentItem(state, payload){
       Vue.set(state, 'currentItem', payload)
@@ -201,6 +213,14 @@ export const store = new Vuex.Store({
     },
     setCategory: (state, payload) =>{
       Vue.set(state, 'category', payload);
+    },
+    cancelOrder: (state) =>{
+      $.each(state.items, function(i,v){
+        v.inCart = false;
+      });
+      Vue.set(state, 'totalItemsInCart', 0)
+      Vue.set(state, 'orderItems', []);
+      Vue.set(state, 'orderTotal', 0);
     },
   },
   actions: {
@@ -224,6 +244,9 @@ export const store = new Vuex.Store({
     },
     setCategory: (context, payload) =>{
       context.commit("setCategory", payload)
+    },
+    cancelOrder: (context) =>{
+      context.commit("cancelOrder", )
     },
   },
   getters: {

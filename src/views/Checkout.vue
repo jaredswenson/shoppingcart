@@ -1,7 +1,6 @@
 <template>
   <div class="checkout">
-    <router-link to="/cart">Return To Summary</router-link>
-	<router-link to="/">Return To Shopping</router-link>
+    <VueButton color="danger" @click.native="cancelOrder">Cancel Order</VueButton>
     <div class="row">
       <div class="col-6">
         <div class="col-12">
@@ -27,7 +26,11 @@ export default {
    methods: {
     addItemToCart(item){
       this.$store.dispatch("addItemToCart", item);
-    }
+    },
+    cancelOrder(){
+      this.$store.dispatch("cancelOrder");
+      this.$router.push('/')
+    },
    },
   computed: {
     itemTotals(){

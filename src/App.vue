@@ -8,9 +8,9 @@
       </mdb-navbar-brand>
       <navbar-collapse>
         <navbar-nav>
-          <navbar-item v-if="$store.state.orderItems.length >= 1" ><router-link to="/cart">View Summary</router-link></navbar-item>
-          <navbar-item v-if="$store.state.orderItems.length >= 1" ><router-link to="/checkout">Checkout</router-link></navbar-item>
-          <navbar-item><router-link to="/">Return To Shopping</router-link></navbar-item>
+          <navbar-item v-if="$route.path !== '/'"><router-link to="/">Return To Shopping</router-link></navbar-item>
+          <navbar-item v-if="$store.state.orderItems.length >= 1 && $route.path !== '/cart'"><router-link to="/cart">View Summary</router-link></navbar-item>
+          <navbar-item v-if="$store.state.orderItems.length >= 1 && $route.path !== '/checkout'"><router-link to="/checkout">Checkout</router-link></navbar-item>
         </navbar-nav>
         <!-- Search form -->
         <form class="form-inline">

@@ -1,7 +1,6 @@
 <template>
   <div class="cart">
-    <router-link to="/">Return To Shopping</router-link>
-    <router-link v-if="$store.state.orderItems.length >= 1"  to="/checkout">Checkout</router-link>
+    <VueButton color="danger" @click.native="cancelOrder">Cancel Order</VueButton>
     <div class="row">
       <div class="col-6">
         <div class="col-12" v-for="item in $store.state.orderItems" >
@@ -36,7 +35,11 @@ export default {
     updateQuantity(event, item){
       this.$store.dispatch("updateQuantity", parseInt(event.target.value));
       this.addItemToCart(item);
-    }
+    },
+    cancelOrder(){
+      this.$store.dispatch("cancelOrder");
+      this.$router.push('/')
+    },
    },
   computed: {
     itemTotals(){

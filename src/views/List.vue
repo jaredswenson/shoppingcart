@@ -2,10 +2,10 @@
   <div class="list">
     <VueButton @click.native="toggleView" v-if="gridView">List View</VueButton>
     <VueButton @click.native="toggleView" v-if="!gridView">Grid View</VueButton>
-    <VueButton color="warning" @click.native="showModal('showCart', 'md', 'Summary', '', true,true)">{{orderSize}}</VueButton>
+    <VueButton color="warning" v-if="$store.state.orderItems.length > 0" @click.native="showModal('showCart', 'md', 'Summary', '', true,true)">Order Summary - {{this.$store.state.totalItemsInCart}}</VueButton>
     <br>
-    <VueButton color="white" v-for="item in uniqCategory" @click.native="setCategory(item)">{{item}}</VueButton>
-    <VueButton @click.native="setCategory('')" v-if="$store.state.category != ''">Clear Filter</VueButton><br>
+    <VueButton color="yellow" v-for="item in uniqCategory" v-if="item == $store.state.category" @click.native="setCategory('')">{{item}}</VueButton>
+    <VueButton color="white" v-for="item in uniqCategory" v-if="item != $store.state.category" @click.native="setCategory(item)">{{item}}</VueButton>
     <VueText size="sm" model="search" label="Search"/>
     <div class="row" v-if="gridView">
       <div class="col-3" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
@@ -45,6 +45,7 @@ export default {
   methods: {
     addItemToCart(item){
       this.$store.dispatch("addItemToCart", item);
+      this.$forceUpdate();
     },
     deleteItemFromCart(item){
       this.$store.dispatch("deleteItemFromCart", item);
@@ -95,6 +96,7 @@ export default {
       )
     },
     orderSize(){
+    console.log('hi');
      var order = this.$store.state.orderItems;
      var total = 0;
      $.each(order, function(i,v){
