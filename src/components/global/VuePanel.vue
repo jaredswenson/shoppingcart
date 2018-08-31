@@ -57,32 +57,32 @@
   <div class="col-md-3">        
     <fieldset class="xen-cart-standard-fields fieldset xen-cart-fieldset">          
     <legend class="sr-only">Standard</legend>                   
-    <div class="row">                     
-      <div class="col-md-12 col-lg-5 offset-lg-1" v-if="!hidedelete">                        
-        <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
-          <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
-          <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id"@change.native="updateQuantity($event, oItem)"/>                     
+      <div class="row">                     
+       <div class="col-md-12 col-lg-5 offset-lg-1" v-if="!hidedelete">                        
+          <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
+            <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
+            <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>                     
+          </div>                      
+        </div>
+        <!-- <div class="col-md-7 col-lg-7 offset-lg-1" v-if="hidedelete">                        
+          <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
+            <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
+            <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>
+            <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" :min="oItem.quantity"  v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
+              <i class="fa fa-trash fa-lg"></i>
+            </VueButton>               
+          </div>                      
+        </div> -->
+        <div class="col-md-2 col-lg-2 offset-lg-1" v-if="hidedelete">                        
+          <p v-for="oItem in $store.state.orderItems" v-if="item.id == oItem.id">${{oItem.itemTotal.toFixed(2)}}</p>                   
         </div>                      
-      </div>
-      <div class="col-md-7 col-lg-7 offset-lg-1" v-if="hidedelete">                        
-        <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
-          <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
-          <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>
-          <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" :min="oItem.quantity"  v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
-            <i class="fa fa-trash fa-lg"></i>
-          </VueButton>               
-        </div>                      
-      </div> 
-      <div class="col-md-2 col-lg-2 offset-lg-1" v-if="hidedelete">                        
-        <p v-for="oItem in $store.state.orderItems" v-if="item.id == oItem.id">${{oItem.itemTotal.toFixed(2)}}</p>                   
-      </div>                      
-      <div class="col-md-12 col-lg-6" v-if="!hidedelete">                        
-        <div class="form-group p-t-3">
-          <VueButton v-if="!item.inCart" color="default" @click.native="addItemToCart(item)">Add</VueButton>
-          <!--<VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>-->                        
-        </div>                      
-      </div>                   
-    </div>       
+        <div class="col-md-12 col-lg-6" v-if="!hidedelete">                        
+          <div class="form-group p-t-3">
+            <VueButton v-if="!item.inCart" color="default" @click.native="addItemToCart(item)">Add</VueButton>
+            <!--<VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>-->                        
+          </div>                      
+        </div>                   
+      </div>       
     </fieldset>     
   </div>    
   </article>
@@ -99,6 +99,7 @@ export default {
     },
     deleteItemFromCart(item){
       this.$store.dispatch("deleteItemFromCart", item);
+      this.$forceUpdate();
     },
     updateQuantity(event, item){
       this.$store.dispatch("updateQuantity", parseInt(event.target.value));

@@ -282,9 +282,10 @@ export const store = new Vuex.Store({
     },
     deleteItemFromCart(state, payload) {
       state.orderTotal = state.orderTotal - payload.itemTotal;
-      var index = state.orderItems.indexOf(payload);
+      var index = state.orderItems.indexOf(payload);      
       if (index > -1) {
-        payload.inCart = false;
+        var item = _.where(state.items, {id: payload.id})[0];
+        item.inCart = false;
         state.orderItems.splice(index, 1);
       }
        var total = 0;
@@ -292,6 +293,7 @@ export const store = new Vuex.Store({
          total += parseInt(v.quantity)
        });
        Vue.set(state, 'totalItemsInCart', total);
+       localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     setCurrentItem(state, payload){
       Vue.set(state, 'currentItem', payload)
@@ -327,6 +329,17 @@ export const store = new Vuex.Store({
         state.orderTotal += v.itemTotal
       })
     },
+    setOrderFromStorage: (state, payload) =>{
+      var order =  JSON.parse(localStorage.getItem('order'));
+      var total = 0;
+      $.each(order, function(i,v){
+      var test = _.where(state.items,{id: v.id})[0];
+        test.inCart = true;
+        total += v.quantity;
+      });
+      Vue.set(state, 'totalItemsInCart', total)
+      Vue.set(state, "orderItems", order);
+    },
   },
   actions: {
   	modalAction: (context, payload) => {
@@ -355,6 +368,9 @@ export const store = new Vuex.Store({
     },
     updateAutoship: (context, payload) =>{
       context.commit("updateAutoship", payload)
+    },
+    setOrderFromStorage: (context, payload) =>{
+      context.commit("setOrderFromStorage", payload)
     },
   },
   getters: {

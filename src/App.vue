@@ -36,7 +36,9 @@ export default {
   components: {
     
   },
-
+  beforeCreate() {
+    if (localStorage.getItem('order')) this.$store.dispatch("setOrderFromStorage");
+  },
 };
 </script>
 
