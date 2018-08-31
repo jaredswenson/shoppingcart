@@ -11,7 +11,7 @@
 
     <div v-if="flyout">
       <VueButton outline="black" :block="true" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
-      <navbar class="grey lighten-3" dark style="margin-top:10px;">
+      <<navbar class="grey lighten-3" dark style="margin-top:10px;">
         <h4>TODAY'S ORDER</h4>
       </navbar>
       <br>
@@ -34,8 +34,8 @@
       </div>
       <br>
       <navbar class="grey lighten-3" dark style="margin-top:10px;">
-          <h4>AUTOSHIP ORDER</h4>
-        </navbar>
+        <h4>AUTOSHIP ORDER</h4>
+      </navbar>
       <div class="row" v-for="item in $store.state.orderItems" v-if="item.autoship">
         
         <div class="col-3">
@@ -53,6 +53,7 @@
         </div>
         
       </div>
+      <br>
       <div class="row">
         <div class="col-9"><h5>SUBTOTAL</h5></div>
         <div class="col-3">

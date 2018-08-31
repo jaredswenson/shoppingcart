@@ -13,7 +13,9 @@
       <h2 id="heading0" class="xen-cart-heading h6">{{item.make}} {{item.model}}</h2>          
     </a>                   
       <p class="xen-cart-price m-b-0">   
-        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">${{item.price.toFixed(2)}}</strong>   
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">${{item.price.toFixed(2)}}</strong>   <br v-if="!item.autoship" >
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">Pay ${{item.autoshipPrice}} <i>with autoship</i></strong>   
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="item.autoship" style="text-decoration:line-through;">${{item.price.toFixed(2)}}</strong><br v-if="item.autoship" > 
         <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="item.autoship">${{item.autoshipPrice.toFixed(2)}}</strong>   
         <span class="xen-cart-was text-muted" style="display: none;">       
           <span id="xen-cart-was" productwidgettransval="was">was</span>       
@@ -66,9 +68,9 @@
         <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
           <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
           <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>
-          <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" block="true" :min="oItem.quantity"  v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
+          <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" :min="oItem.quantity"  v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
             <i class="fa fa-trash fa-lg"></i>
-          </VueButton>                 
+          </VueButton>               
         </div>                      
       </div> 
       <div class="col-md-2 col-lg-2 offset-lg-1" v-if="hidedelete">                        
@@ -77,7 +79,7 @@
       <div class="col-md-12 col-lg-6" v-if="!hidedelete">                        
         <div class="form-group p-t-3">
           <VueButton v-if="!item.inCart" color="default" @click.native="addItemToCart(item)">Add</VueButton>
-          <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>                        
+          <!--<VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>-->                        
         </div>                      
       </div>                   
     </div>       

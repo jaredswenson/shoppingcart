@@ -5,187 +5,208 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    items: [{
-      "id": 1,
-      "make": "Volkswagen",
-      "model": "GTI",
-      "price": 8.31,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "European",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 2,
-      "make": "Mercedes-Benz",
-      "model": "E-Class",
-      "price": 2.13,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "European",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 3,
-      "make": "Ford",
-      "model": "LTD Crown Victoria",
-      "price": 1.05,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 4,
-      "make": "Lamborghini",
-      "model": "Gallardo",
-      "price": 6.30,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "European",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 5,
-      "make": "GMC",
-      "model": "Safari",
-      "price": 6.88,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 6,
-      "make": "Toyota",
-      "model": "Tacoma",
-      "price": 1.54,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "Japanese",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 7,
-      "make": "Oldsmobile",
-      "model": "Cutlass",
-      "price": 3.13,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 8,
-      "make": "Dodge",
-      "model": "Neon",
-      "price": 7.60,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 9,
-      "make": "Ford",
-      "model": "E-Series",
-      "price": 8.03,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 10,
-      "make": "Isuzu",
-      "model": "Amigo",
-      "price": 8.77,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "Japanese",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 11,
-      "make": "Nissan",
-      "model": "300ZX",
-      "price": 7.35,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "Japanese",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 12,
-      "make": "Suzuki",
-      "model": "Samurai",
-      "price": 6.58,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "Japanese",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 13,
-      "make": "Land Rover",
-      "model": "Range Rover",
-      "price": 0.38,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "European",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 14,
-      "make": "Jeep",
-      "model": "Cherokee",
-      "price": 9.93,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 15,
-      "make": "Chevrolet",
-      "model": "Avalanche 2500",
-      "price": 2.03,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 16,
-      "make": "Chrysler",
-      "model": "LHS",
-      "price": 0.76,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 17,
-      "make": "Chevrolet",
-      "model": "Suburban",
-      "price": 1.38,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 18,
-      "make": "Ford",
-      "model": "Expedition",
-      "price": 3.19,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 19,
-      "make": "Cadillac",
-      "model": "Escalade",
-      "price": 9.17,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "American",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }, {
-      "id": 20,
-      "make": "Scion",
-      "model": "xB",
-      "price": 2.12,
-      "autoshipPrice": 1,
-      "autoship": false,
-      "Category": "Japanese",
-      "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
-    }],
+    items: [
+      {
+        "id": 1,
+        "make": "Volkswagen",
+        "model": "GTI",
+        "price": 8.31,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "European",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 2,
+        "make": "Mercedes-Benz",
+        "model": "E-Class",
+        "price": 2.13,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "European",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 3,
+        "make": "Ford",
+        "model": "LTD Crown Victoria",
+        "price": 1.05,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 4,
+        "make": "Lamborghini",
+        "model": "Gallardo",
+        "price": 6.30,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "European",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 5,
+        "make": "GMC",
+        "model": "Safari",
+        "price": 6.88,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 6,
+        "make": "Toyota",
+        "model": "Tacoma",
+        "price": 1.54,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "Japanese",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 7,
+        "make": "Oldsmobile",
+        "model": "Cutlass",
+        "price": 3.13,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 8,
+        "make": "Dodge",
+        "model": "Neon",
+        "price": 7.60,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 9,
+        "make": "Ford",
+        "model": "E-Series",
+        "price": 8.03,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 10,
+        "make": "Isuzu",
+        "model": "Amigo",
+        "price": 8.77,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "Japanese",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 11,
+        "make": "Nissan",
+        "model": "300ZX",
+        "price": 7.35,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "Japanese",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 12,
+        "make": "Suzuki",
+        "model": "Samurai",
+        "price": 6.58,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "Japanese",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 13,
+        "make": "Land Rover",
+        "model": "Range Rover",
+        "price": 0.38,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "European",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 14,
+        "make": "Jeep",
+        "model": "Cherokee",
+        "price": 9.93,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 15,
+        "make": "Chevrolet",
+        "model": "Avalanche 2500",
+        "price": 2.03,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 16,
+        "make": "Chrysler",
+        "model": "LHS",
+        "price": 0.76,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 17,
+        "make": "Chevrolet",
+        "model": "Suburban",
+        "price": 1.38,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 18,
+        "make": "Ford",
+        "model": "Expedition",
+        "price": 3.19,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 19,
+        "make": "Cadillac",
+        "model": "Escalade",
+        "price": 9.17,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "American",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }, 
+      {
+        "id": 20,
+        "make": "Scion",
+        "model": "xB",
+        "price": 2.12,
+        "autoshipPrice": 1,
+        "autoship": false,
+        "Category": "Japanese",
+        "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
+      }
+    ],
     firstName: '',
     lastName: '',
     email: '',
@@ -230,6 +251,7 @@ export const store = new Vuex.Store({
     },
     addItemToCart(state, payload) {
       payload.quantity = state.quantity;
+
       if(payload.autoship){
         payload.itemTotal = state.quantity * payload.autoshipPrice;
       }else{
@@ -238,6 +260,9 @@ export const store = new Vuex.Store({
       var index = state.orderItems.indexOf(payload);
       if(index > -1){
         state.orderItems[index].quantity = state.quantity;
+        if(state.quantity <= 0){
+          this.dispatch("deleteItemFromCart", payload);
+        }
       }else{
         payload.inCart = true;
         state.orderItems.push(payload);
@@ -286,7 +311,7 @@ export const store = new Vuex.Store({
     updateAutoship: (state, payload) =>{
       var item = _.where(state.items, {id: payload.id})[0];
       var oItem = _.where(state.orderItems, {id: payload.id});
-      if(oItem.length >= 0){
+      if(oItem.length > 0){
         //Vue.set(state, oItem[0], payload);
         if(payload.autoship){
           oItem[0].itemTotal = oItem[0].quantity * oItem[0].autoshipPrice;
