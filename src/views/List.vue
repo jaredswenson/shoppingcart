@@ -21,13 +21,12 @@
        <navbar style="margin-bottom:10px;">
         <navbar-collapse>
           <navbar-nav>
-            <navbar-item v-for="item in uniqCategory" @click.native="setCategory(item)">{{item}}</navbar-item>
-            <navbar-item v-if="$store.state.category != ''" @click.native="setCategory('')">Clear Category</navbar-item>
+            <navbar-item v-for="item in uniqCategory" @click.native="setCategory(item)" :class="item">{{item}}</navbar-item>
           </navbar-nav>
           <span class="navbar-text">
             <navbar-nav>
-              <navbar-item @click.native="toggleView('grid')"><i class="fa fa-th-large fa-lg"></i></navbar-item>
-              <navbar-item @click.native="toggleView('list')"><i class="fa fa-th-list fa-lg"></i></navbar-item>
+              <navbar-item @click.native="toggleView('list')" class="list active"><i class="fa fa-th-list fa-lg"></i></navbar-item>
+              <navbar-item @click.native="toggleView('grid')" class="grid"><i class="fa fa-th-large fa-lg"></i></navbar-item>
             </navbar-nav>
           </span>
         </navbar-collapse>
@@ -72,13 +71,26 @@ export default {
       this.addItemToCart(item);
     },
     setCategory(item){
-      this.$store.commit("setCategory", item);
+      $.each(this.uniqCategory, function(i,v){
+        $('.' + v).removeClass('active');
+      })
+      if(item == this.$store.state.category){
+        this.$store.commit("setCategory", '');
+
+      }else{
+        this.$store.commit("setCategory", item);
+        $('.' + item).addClass('active');
+      }
     },
     toggleView(view){
       if(view == "grid"){
         this.gridView = true;
+        $('.list').removeClass('active');
+        $('.grid').addClass('active');
       } else{
         this.gridView = false;
+        $('.grid').removeClass('active');
+        $('.list').addClass('active');
       }
     },
     goToDetails(item){
@@ -125,3 +137,7 @@ export default {
 }
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+</style>
