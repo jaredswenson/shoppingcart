@@ -16,7 +16,7 @@
       </navbar>
       <br>
       <p v-if="$store.state.orderItems.length <= 0">Nothing In Cart!</p>
-      <div class="row"v-for="item in $store.state.orderItems">
+      <div class="row" v-for="item in $store.state.orderItems" v-if="!item.autoship">
         <div class="col-3">
           <img :src="item.image" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
         </div>
@@ -33,6 +33,26 @@
         
       </div>
       <br>
+      <navbar class="grey lighten-3" dark style="margin-top:10px;">
+          <h4>AUTOSHIP ORDER</h4>
+        </navbar>
+      <div class="row" v-for="item in $store.state.orderItems" v-if="item.autoship">
+        
+        <div class="col-3">
+          <img :src="item.image" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
+        </div>
+        <div class="col-3">
+          {{item.make}} {{item.model}}
+        </div>
+        <div class="col-3">
+          ${{item.price}}
+        </div>
+        <div class="col-3">
+          x{{item.quantity}}<br>
+          ${{item.itemTotal.toFixed(2)}}
+        </div>
+        
+      </div>
       <div class="row">
         <div class="col-9"><h5>SUBTOTAL</h5></div>
         <div class="col-3">

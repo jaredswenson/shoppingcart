@@ -13,7 +13,8 @@
       <h2 id="heading0" class="xen-cart-heading h6">{{item.make}} {{item.model}}</h2>          
     </a>                   
       <p class="xen-cart-price m-b-0">   
-        <strong id="xen-cart-current-price" class="xen-cart-current-price">${{item.price.toFixed(2)}}</strong>   
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">${{item.price.toFixed(2)}}</strong>   
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="item.autoship">${{item.autoshipPrice.toFixed(2)}}</strong>   
         <span class="xen-cart-was text-muted" style="display: none;">       
           <span id="xen-cart-was" productwidgettransval="was">was</span>       
           <del id="xen-cart-former-price" class="xen-cart-former-price"></del>   
@@ -21,8 +22,9 @@
       </p>       
     </header>     
   </div>      
-  <div class="col-md-4">        
-    <fieldset class="xen-cart-custom-fields fieldset xen-cart-fieldset m-b-3" v-if="!hideradio">          
+  <div class="col-md-4">     
+    <MdInput type="checkbox" id="checkbox1" label="Auto Ship" :checked="item.autoship" @change.native="updateAutoship($event)"/>
+    <!-- <fieldset class="xen-cart-custom-fields fieldset xen-cart-fieldset m-b-3" v-if="!hideradio">          
       <legend class="sr-only">Custom</legend>       
     </fieldset>       
     <fieldset class="xen-cart-autoship-fields fieldset xen-cart-fieldset xen-autoship" v-if="!hideradio" >         
@@ -46,8 +48,8 @@
           <i class="fa fa-info-circle fa-lg"></i>   
           </a>
         </label>                  
-      </div>        
-    </fieldset>     
+      </div>     
+    </fieldset> -->   
   </div>      
 
   <div class="col-md-3">        
@@ -64,7 +66,7 @@
         <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
           <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
           <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>
-          <VueButton outline="default" size="sm" v-for="oItem in $store.state.orderItems" block="true" v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
+          <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" block="true" :min="oItem.quantity"  v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
             <i class="fa fa-trash fa-lg"></i>
           </VueButton>                 
         </div>                      
@@ -104,6 +106,10 @@ export default {
       console.log(event);
       console.log(item);
     },
+    updateAutoship(e){
+      this.item.autoship = e.target.checked;
+      this.$store.dispatch("updateAutoship", this.item);
+    }
   },
   props: {
     item: {

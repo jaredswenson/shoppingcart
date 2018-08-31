@@ -8,7 +8,7 @@ import VueTable from './global/VueTable'
 import VueCard from './global/VueCard'
 import VuePanel from './global/VuePanel'
 import VueAccordian from './global/VueAccordian'
-import {NumericInput, Navbar, NavbarBrand, NavbarCollapse, NavbarItem, NavbarNav, Dropdown, DropdownToggle, DropdownMenu} from 'mdbvue';
+import {MdInput, NumericInput, Navbar, NavbarBrand, NavbarCollapse, NavbarItem, NavbarNav, Dropdown, DropdownToggle, DropdownMenu} from 'mdbvue';
 
 //instantiate components here
 Vue.component("VueButton", VueButton)
@@ -18,6 +18,7 @@ Vue.component("VueTable", VueTable)
 Vue.component("VueCard", VueCard)
 Vue.component("VuePanel", VuePanel)
 Vue.component("VueAccordian", VueAccordian)
+Vue.component("MdInput", MdInput)
 Vue.component("NumericInput", NumericInput)
 Vue.component("Navbar", Navbar)
 Vue.component("NavbarBrand", NavbarBrand)

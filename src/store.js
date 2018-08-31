@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
       "make": "Volkswagen",
       "model": "GTI",
       "price": 8.31,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "European",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -18,7 +19,8 @@ export const store = new Vuex.Store({
       "make": "Mercedes-Benz",
       "model": "E-Class",
       "price": 2.13,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "European",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -26,7 +28,8 @@ export const store = new Vuex.Store({
       "make": "Ford",
       "model": "LTD Crown Victoria",
       "price": 1.05,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -34,7 +37,8 @@ export const store = new Vuex.Store({
       "make": "Lamborghini",
       "model": "Gallardo",
       "price": 6.30,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "European",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -42,7 +46,8 @@ export const store = new Vuex.Store({
       "make": "GMC",
       "model": "Safari",
       "price": 6.88,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -50,7 +55,8 @@ export const store = new Vuex.Store({
       "make": "Toyota",
       "model": "Tacoma",
       "price": 1.54,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "Japanese",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -58,7 +64,8 @@ export const store = new Vuex.Store({
       "make": "Oldsmobile",
       "model": "Cutlass",
       "price": 3.13,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -66,7 +73,8 @@ export const store = new Vuex.Store({
       "make": "Dodge",
       "model": "Neon",
       "price": 7.60,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -74,7 +82,8 @@ export const store = new Vuex.Store({
       "make": "Ford",
       "model": "E-Series",
       "price": 8.03,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -82,7 +91,8 @@ export const store = new Vuex.Store({
       "make": "Isuzu",
       "model": "Amigo",
       "price": 8.77,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "Japanese",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -90,7 +100,8 @@ export const store = new Vuex.Store({
       "make": "Nissan",
       "model": "300ZX",
       "price": 7.35,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "Japanese",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -98,7 +109,8 @@ export const store = new Vuex.Store({
       "make": "Suzuki",
       "model": "Samurai",
       "price": 6.58,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "Japanese",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -106,7 +118,8 @@ export const store = new Vuex.Store({
       "make": "Land Rover",
       "model": "Range Rover",
       "price": 0.38,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "European",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -114,7 +127,8 @@ export const store = new Vuex.Store({
       "make": "Jeep",
       "model": "Cherokee",
       "price": 9.93,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -122,7 +136,8 @@ export const store = new Vuex.Store({
       "make": "Chevrolet",
       "model": "Avalanche 2500",
       "price": 2.03,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -130,7 +145,8 @@ export const store = new Vuex.Store({
       "make": "Chrysler",
       "model": "LHS",
       "price": 0.76,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -138,7 +154,8 @@ export const store = new Vuex.Store({
       "make": "Chevrolet",
       "model": "Suburban",
       "price": 1.38,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -146,7 +163,8 @@ export const store = new Vuex.Store({
       "make": "Ford",
       "model": "Expedition",
       "price": 3.19,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -154,7 +172,8 @@ export const store = new Vuex.Store({
       "make": "Cadillac",
       "model": "Escalade",
       "price": 9.17,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "American",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }, {
@@ -162,7 +181,8 @@ export const store = new Vuex.Store({
       "make": "Scion",
       "model": "xB",
       "price": 2.12,
-      "autshipPrice": 1,
+      "autoshipPrice": 1,
+      "autoship": false,
       "Category": "Japanese",
       "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
     }],
@@ -210,7 +230,11 @@ export const store = new Vuex.Store({
     },
     addItemToCart(state, payload) {
       payload.quantity = state.quantity;
-      payload.itemTotal = state.quantity * payload.price;
+      if(payload.autoship){
+        payload.itemTotal = state.quantity * payload.autoshipPrice;
+      }else{
+        payload.itemTotal = state.quantity * payload.price; 
+      }
       var index = state.orderItems.indexOf(payload);
       if(index > -1){
         state.orderItems[index].quantity = state.quantity;
@@ -259,6 +283,23 @@ export const store = new Vuex.Store({
       Vue.set(state, 'orderItems', []);
       Vue.set(state, 'orderTotal', 0);
     },
+    updateAutoship: (state, payload) =>{
+      var item = _.where(state.items, {id: payload.id})[0];
+      var oItem = _.where(state.orderItems, {id: payload.id});
+      if(oItem.length >= 0){
+        //Vue.set(state, oItem[0], payload);
+        if(payload.autoship){
+          oItem[0].itemTotal = oItem[0].quantity * oItem[0].autoshipPrice;
+        } else{
+          oItem[0].itemTotal = oItem[0].quantity * oItem[0].price;
+        }
+      }
+      Vue.set(state, item, payload);
+      Vue.set(state, 'orderTotal', 0)
+      $.each(state.orderItems, function(i,v){
+        state.orderTotal += v.itemTotal
+      })
+    },
   },
   actions: {
   	modalAction: (context, payload) => {
@@ -284,6 +325,9 @@ export const store = new Vuex.Store({
     },
     cancelOrder: (context) =>{
       context.commit("cancelOrder", )
+    },
+    updateAutoship: (context, payload) =>{
+      context.commit("updateAutoship", payload)
     },
   },
   getters: {
