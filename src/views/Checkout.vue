@@ -2,7 +2,7 @@
   <div class="checkout row">
     <div class="col-2"></div>
     <div class="col-8">
-      <h1>CHECKOUT</h1><br>
+      <h1>Checkout</h1><br>
       <div class="row">
         <div class="col-8">
           <VueAccordian/>

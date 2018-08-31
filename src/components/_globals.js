@@ -32,15 +32,16 @@ Vue.component("DropdownMenu", DropdownMenu)
 
 //import global Views here
 import About from '@/views/About.vue'
-import Template from '@/views/Template.vue'
+import Cancel from '@/views/Cancel.vue'
 import List from '@/views/List.vue'
 import Cart from '@/views/Cart.vue'
 import Checkout from '@/views/Checkout.vue'
 
 //instantiate views here
 Vue.component("About", About)
-Vue.component("Template", Template)
+Vue.component("Cancel", Cancel)
 Vue.component("List", List)
 Vue.component("Cart", Cart)
 Vue.component("Checkout", Checkout)
+
 

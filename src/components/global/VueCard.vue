@@ -21,14 +21,14 @@
            <legend class="sr-only">Standard</legend>
            <div class="row">
               <div class="col-lg-6">
-                 <div class="form-group bmd-form-group bmd-form-group-sm is-filled">
+                 <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-for="oItem in $store.state.orderItems" v-if="item.id == oItem.id" >
                   <label for="quantity26" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
-                  <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id"@change.native="updateQuantity($event, oItem)"/> 
+                  <NumericInput :min="oItem.quantity"@change.native="updateQuantity($event, oItem)"/> 
                  </div>
               </div>
               <div class="col-lg-6">
                  <div class="form-group p-t-3">
-                  <VueButton v-if="!item.inCart" @click.native="addItemToCart(item)">Add</VueButton>
+                  <VueButton v-if="!item.inCart" color="default" @click.native="addItemToCart(item)">Add</VueButton>
                   <VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id"  color="danger" @click.native="deleteItemFromCart(item)">Delete</VueButton>                        
                  </div>
               </div>

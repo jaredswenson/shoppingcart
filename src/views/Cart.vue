@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-    <div class="row" v-if="!flyout">
+    <div class="row" v-if="!flyout && !sidebar">
       <div class="col-12">
         <div class="col-12" v-for="item in $store.state.orderItems" >
           <VuePanel :item="item" :hideradio="hideradio" :hidedelete="hidedelete"/>
@@ -10,7 +10,7 @@
     </div>
 
     <div v-if="flyout">
-      <VueButton color="white" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
+      <VueButton outline="black" :block="true" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
       <navbar class="grey lighten-3" dark style="margin-top:10px;">
         <h4>TODAY'S ORDER</h4>
       </navbar>
@@ -40,9 +40,27 @@
         </div>
       </div>
       <br>
-      <VueButton color="danger" v-if="$store.state.orderItems.length >= 1 && !hidecancel" @click.native="cancelOrder">Cancel Order</VueButton>
-      <VueButton color="success" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/checkout'" @click.native="goToCheckout">Checkout</VueButton>
-      <VueButton color="primary" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/cart'  && !hidesummary" @click.native="goToSummary">View Summary</VueButton>
+      <VueButton outline="black" :block="true" v-if="$store.state.orderItems.length >= 1 && !hidecancel" @click.native="showModal('showCancel', 'md', 'Cancel Order', '', true, true)">Cancel Order</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/cart'  && !hidesummary" @click.native="goToSummary">View Summary</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/checkout' && $route.path !== '/'" @click.native="goToCheckout">Checkout</VueButton>
+    </div>
+    <div v-if="sidebar">
+      <VueButton outline="black" :block="true" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
+      <navbar class="grey lighten-3" dark style="margin-top:10px;">
+        <h4>TODAY'S ORDER</h4>
+      </navbar>
+      <br>
+      <p v-if="$store.state.orderItems.length <= 0">Nothing In Cart!</p>
+      <div class="row">
+        <div class="col-9"><h5>SUBTOTAL</h5></div>
+        <div class="col-3">
+          <h5>${{itemTotals}}</h5>
+        </div>
+      </div>
+      <br>
+      <VueButton outline="black" :block="true" v-if="$store.state.orderItems.length >= 1 && !hidecancel" @click.native="showModal('showCancel', 'md', 'Cancel Order', '', true, true)">Cancel Order</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/checkout'" @click.native="goToCheckout">Checkout</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/cart'  && !hidesummary" @click.native="goToSummary">View Summary</VueButton>
     </div>
   </div>
 </template>
@@ -57,6 +75,10 @@ export default {
   },
   props:{
     flyout: {
+        type: Boolean,
+        default: false
+    },
+    sidebar: {
         type: Boolean,
         default: false
     },
@@ -100,7 +122,17 @@ export default {
     },
     goToHome(){
       this.$router.push('/')
-    }
+    },
+    showModal(slot, size, title, content, header,footer){
+      var modalObject = {};
+      modalObject.slot = slot;
+      modalObject.size = size;
+      modalObject.title = title;
+      modalObject.content = content;
+      modalObject.header = header;
+      modalObject.footer = footer;
+      this.$store.dispatch("modalAction", modalObject);
+    },
    },
   computed: {
     itemTotals(){

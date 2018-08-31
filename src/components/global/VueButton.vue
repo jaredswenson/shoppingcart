@@ -1,5 +1,6 @@
 <template>
-    <Btn block  :color="color" :size="size"><slot></slot></Btn>
+    <Btn v-if="!block" :color="color" :outline="outline" :size="size"><slot></slot></Btn>
+    <Btn v-else-if="block" block :color="color" :outline="outline" :size="size"><slot></slot></Btn>
 </template>
 
 <script>
@@ -15,9 +16,17 @@ export default {
         type: String,
         default: 'Button'
     },
+    block:{
+      type: Boolean,
+      default: false
+    },
     color: {
     	type: String,
-      default: 'primary'
+      default: ''
+    },
+    outline: {
+      type: String,
+      default: ''
     },
     size: {
       type: String,

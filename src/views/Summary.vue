@@ -11,7 +11,7 @@
 	    		<Cart :hideradio="true" :hidedelete="true"/>
 		    </div>
 		    <div class="col-4">
-		        <Cart :flyout="true"/>
+		        <Cart :sidebar="true"/>
 		    </div>
 	  	</div>
   	</div>

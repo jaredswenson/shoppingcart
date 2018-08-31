@@ -24,8 +24,7 @@
     <router-view/>
 
     <VueModal v-if="this.$store.state.showModal" id="VueModal" :title="this.$store.state.modalTitle" :myclass="this.$store.state.modalSize" :headeron="this.$store.state.modalHeader" :footeron="this.$store.state.modalFooter" :content="this.$store.state.modalContent">
-      <About v-if="this.$store.state.showAbout"/>
-      <Cart v-if="this.$store.state.showCart"/>
+      <Cancel v-if="this.$store.state.showCancel"/>
     </VueModal>
   </div>
 </template>

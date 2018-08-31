@@ -188,15 +188,13 @@ export const store = new Vuex.Store({
   	modalSize: 'md',
   	modalTitle: 'Modal',
   	modalContent: '',
- 	  showAbout: false,
-    showCart: false,
+    showCancel: false,
     search: '',
   },
   mutations: {
  	setModal(state, payload) {
       //need to set all components in the modal to false first, so multiple don't show up
-      Vue.set(state, 'showAbout', false);
-      Vue.set(state, 'showTemplate', false);
+      Vue.set(state, 'showCancel', false);
       
       Vue.set(state, payload.slot, true);
       Vue.set(state, 'modalContent', payload.content);
