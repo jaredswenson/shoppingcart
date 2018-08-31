@@ -258,7 +258,6 @@ export const store = new Vuex.Store({
         payload.itemTotal = state.quantity * payload.price; 
       }
       var index = state.orderItems.indexOf(payload);
-      console.log(index);
       if(index > -1){
         state.orderItems[index].quantity = state.quantity;
         if(state.quantity <= 0){
@@ -311,34 +310,40 @@ export const store = new Vuex.Store({
       Vue.set(state, 'totalItemsInCart', 0)
       Vue.set(state, 'orderItems', []);
       Vue.set(state, 'orderTotal', 0);
+      localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     updateAutoship: (state, payload) =>{
       var item = _.where(state.items, {id: payload.id})[0];
-      var oItem = _.where(state.orderItems, {id: payload.id});
+      var oItem = _.where(state.orderItems, {id: payload.id})[0];
+      oItem.autoship = payload.autoship;
       if(oItem.length > 0){
-        //Vue.set(state, oItem[0], payload);
         if(payload.autoship){
-          oItem[0].itemTotal = oItem[0].quantity * oItem[0].autoshipPrice;
+          oItem.itemTotal = oItem.quantity * oItem.autoshipPrice;
         } else{
-          oItem[0].itemTotal = oItem[0].quantity * oItem[0].price;
+          oItem.itemTotal = oItem.quantity * oItem.price;
         }
       }
       Vue.set(state, item, payload);
       Vue.set(state, 'orderTotal', 0)
       $.each(state.orderItems, function(i,v){
         state.orderTotal += v.itemTotal
-      })
+      });
+       localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     setOrderFromStorage: (state, payload) =>{
       var order =  JSON.parse(localStorage.getItem('order'));
       var total = 0;
-      $.each(order, function(i,v){
-      var test = _.where(state.items,{id: v.id})[0];
-        test.inCart = true;
-        total += v.quantity;
-      });
-      Vue.set(state, 'totalItemsInCart', total)
+      var costTotal = 0;
       Vue.set(state, "orderItems", order);
+      $.each(order, function(i,v){
+      var item = _.where(state.items,{id: v.id})[0];
+        item.inCart = true;
+        item.autoship = v.autoship;
+        total += v.quantity;
+        costTotal += v.itemTotal;
+      });
+      Vue.set(state, 'totalItemsInCart', total);
+      Vue.set(state, 'orderTotal', costTotal);
     },
   },
   actions: {
