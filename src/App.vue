@@ -29,6 +29,17 @@
   </div>
 </template>
 
+<script>
+
+export default {
+  name: "app",
+  components: {
+    
+  },
+
+};
+</script>
+
 <style>
 #nav a.router-link-exact-active {
   color: #42b983;

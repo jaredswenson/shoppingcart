@@ -258,6 +258,7 @@ export const store = new Vuex.Store({
         payload.itemTotal = state.quantity * payload.price; 
       }
       var index = state.orderItems.indexOf(payload);
+      console.log(index);
       if(index > -1){
         state.orderItems[index].quantity = state.quantity;
         if(state.quantity <= 0){
@@ -277,6 +278,7 @@ export const store = new Vuex.Store({
        });
        Vue.set(state, 'totalItemsInCart', total);
       this.dispatch("updateQuantity", 1);
+      localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     deleteItemFromCart(state, payload) {
       state.orderTotal = state.orderTotal - payload.itemTotal;
