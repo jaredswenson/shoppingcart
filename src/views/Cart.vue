@@ -18,7 +18,7 @@
 
     <div v-if="flyout">
       <VueButton outline="black" :block="true" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
-      <navbar class="grey lighten-3" dark style="margin-top:10px;">
+      <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsNotAutoship">
         <h4>TODAY'S ORDER</h4>
       </navbar>
       <br>
@@ -74,7 +74,7 @@
     </div>
     <div v-if="sidebar">
       <VueButton outline="black" :block="true" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
-      <navbar class="grey lighten-3" dark style="margin-top:10px;">
+      <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsNotAutoship">
         <h4>TODAY'S ORDER</h4>
       </navbar>
       <br>

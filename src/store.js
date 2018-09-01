@@ -232,6 +232,7 @@ export const store = new Vuex.Store({
     showCancel: false,
     search: '',
     itemsInAutoship: false,
+    itemsNotAutoship: false,
   },
   mutations: {
  	setModal(state, payload) {
@@ -354,11 +355,16 @@ export const store = new Vuex.Store({
     },
     checkForAutoship: (state, payload) =>{
       var autoship = _.where(state.orderItems,{autoship: true});
-      console.log()
+      var nonAutoship = _.where(state.orderItems,{autoship: false});
       if(autoship.length > 0){
         Vue.set(state, 'itemsInAutoship', true);
       }else{
         Vue.set(state, 'itemsInAutoship', false);
+      }
+      if(nonAutoship.length > 0){
+        Vue.set(state, 'itemsNotAutoship', true);
+      }else{
+        Vue.set(state, 'itemsNotAutoship', false);
       }
     },
   },
