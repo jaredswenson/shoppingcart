@@ -38,6 +38,7 @@ export default {
   },
   beforeCreate() {
     if (localStorage.getItem('order')) this.$store.dispatch("setOrderFromStorage");
+    this.$store.dispatch('checkForAutoship')
   },
 };
 </script>

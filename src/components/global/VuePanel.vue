@@ -59,12 +59,12 @@
     <legend class="sr-only">Standard</legend>                   
       <div class="row">                     
        <div class="col-md-12 col-lg-5 offset-lg-1" v-if="!hidedelete">                        
-          <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
+          <div class="form-group bmd-form-group bmd-form-group-sm is-filled">
             <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
             <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>                     
           </div>                      
         </div>
-        <!-- <div class="col-md-7 col-lg-7 offset-lg-1" v-if="hidedelete">                        
+        <div class="col-md-7 col-lg-7 offset-lg-1" v-if="hidedelete">                        
           <div class="form-group bmd-form-group bmd-form-group-sm is-filled" v-if="item.inCart">
             <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
             <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>
@@ -72,7 +72,7 @@
               <i class="fa fa-trash fa-lg"></i>
             </VueButton>               
           </div>                      
-        </div> -->
+        </div>
         <div class="col-md-2 col-lg-2 offset-lg-1" v-if="hidedelete">                        
           <p v-for="oItem in $store.state.orderItems" v-if="item.id == oItem.id">${{oItem.itemTotal.toFixed(2)}}</p>                   
         </div>                      

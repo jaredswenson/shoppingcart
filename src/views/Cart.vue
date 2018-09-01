@@ -2,7 +2,14 @@
   <div class="cart">
     <div class="row" v-if="!flyout && !sidebar">
       <div class="col-12">
-        <div class="col-12" v-for="item in $store.state.orderItems" >
+        <div class="col-12" v-for="item in $store.state.orderItems" v-if="!item.autoship">
+          <VuePanel :item="item" :hideradio="hideradio" :hidedelete="hidedelete"/>
+          <hr>
+        </div>
+        <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsInAutoship">
+          <h4>AUTOSHIP ORDER</h4>
+        </navbar>
+         <div class="col-12" v-for="item in $store.state.orderItems" v-if="item.autoship">
           <VuePanel :item="item" :hideradio="hideradio" :hidedelete="hidedelete"/>
           <hr>
         </div>
@@ -33,7 +40,7 @@
         
       </div>
       <br>
-      <navbar class="grey lighten-3" dark style="margin-top:10px;">
+      <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsInAutoship">
         <h4>AUTOSHIP ORDER</h4>
       </navbar>
       <div class="row" v-for="item in $store.state.orderItems" v-if="item.autoship">

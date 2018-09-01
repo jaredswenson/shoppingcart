@@ -231,6 +231,7 @@ export const store = new Vuex.Store({
   	modalContent: '',
     showCancel: false,
     search: '',
+    itemsInAutoship: false,
   },
   mutations: {
  	setModal(state, payload) {
@@ -277,6 +278,8 @@ export const store = new Vuex.Store({
        });
        Vue.set(state, 'totalItemsInCart', total);
       this.dispatch("updateQuantity", 1);
+      store.dispatch("checkForAutoship");
+
       localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     deleteItemFromCart(state, payload) {
@@ -292,6 +295,7 @@ export const store = new Vuex.Store({
          total += parseInt(v.quantity)
        });
        Vue.set(state, 'totalItemsInCart', total);
+       store.dispatch("checkForAutoship");
        localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     setCurrentItem(state, payload){
@@ -310,25 +314,28 @@ export const store = new Vuex.Store({
       Vue.set(state, 'totalItemsInCart', 0)
       Vue.set(state, 'orderItems', []);
       Vue.set(state, 'orderTotal', 0);
+      Vue.set(state, 'itemsInAutoship', false);
       localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     updateAutoship: (state, payload) =>{
       var item = _.where(state.items, {id: payload.id})[0];
-      var oItem = _.where(state.orderItems, {id: payload.id})[0];
-      oItem.autoship = payload.autoship;
+      var oItem = _.where(state.orderItems, {id: payload.id});
+      oItem[0].autoship = payload.autoship;
+      console.log(oItem)
       if(oItem.length > 0){
         if(payload.autoship){
-          oItem.itemTotal = oItem.quantity * oItem.autoshipPrice;
+          oItem[0].itemTotal = oItem[0].quantity * oItem[0].autoshipPrice;
         } else{
-          oItem.itemTotal = oItem.quantity * oItem.price;
+          oItem[0].itemTotal = oItem[0].quantity * oItem[0].price;
         }
       }
-      Vue.set(state, item, payload);
+      //Vue.set(state, item, payload);
       Vue.set(state, 'orderTotal', 0)
       $.each(state.orderItems, function(i,v){
         state.orderTotal += v.itemTotal
       });
-       localStorage.setItem('order', JSON.stringify(state.orderItems));
+      store.dispatch("checkForAutoship");
+      localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     setOrderFromStorage: (state, payload) =>{
       var order =  JSON.parse(localStorage.getItem('order'));
@@ -344,6 +351,15 @@ export const store = new Vuex.Store({
       });
       Vue.set(state, 'totalItemsInCart', total);
       Vue.set(state, 'orderTotal', costTotal);
+    },
+    checkForAutoship: (state, payload) =>{
+      var autoship = _.where(state.orderItems,{autoship: true});
+      console.log()
+      if(autoship.length > 0){
+        Vue.set(state, 'itemsInAutoship', true);
+      }else{
+        Vue.set(state, 'itemsInAutoship', false);
+      }
     },
   },
   actions: {
@@ -376,6 +392,9 @@ export const store = new Vuex.Store({
     },
     setOrderFromStorage: (context, payload) =>{
       context.commit("setOrderFromStorage", payload)
+    },
+    checkForAutoship: (context) =>{
+      context.commit("checkForAutoship")
     },
   },
   getters: {
