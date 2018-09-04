@@ -1,15 +1,15 @@
 <template>
-  <article class="xen-cart-product row p-y-3" variantproduct="false" inventoryid="79">      
+  <article class="xen-cart-product row p-y-3" variantproduct="false" :inventoryid="item.id">      
     <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2">       
     <figure>          
-      <a href="#" id="detailsImage" class="xen-cart-link">            
+      <a id="detailsImage" class="xen-cart-link" @click="goToDetails(item)">            
         <img :src="item.image" inventoryid="item.id" width="160" height="160" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
       </a>       
     </figure>     
   </div>      
   <div class="col-xs-7 col-sm-9 col-md-3 col-lg-3">       
     <header class="xen-cart-header">          
-    <a id="detailsLink" class="xen-cart-link js-link" inventoryid="79" href="#">            
+    <a id="detailsLink" class="xen-cart-link js-link" :inventoryid="item.id" @click="goToDetails(item)">            
       <h2 id="heading0" class="xen-cart-heading h6">{{item.make}} {{item.model}}</h2>          
     </a>                   
       <p class="xen-cart-price m-b-0">   
@@ -115,7 +115,12 @@ export default {
     updateAutoship(e){
       this.item.autoship = e.target.checked;
       this.$store.dispatch("updateAutoship", this.item);
-    }
+    },
+    goToDetails(item){
+      this.$store.dispatch("goToDetails", item);
+      this.$router.push('/about')
+
+    },
   },
   props: {
     item: {

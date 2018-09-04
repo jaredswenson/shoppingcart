@@ -1,6 +1,9 @@
 <template>
   <div class="about">
-    <VueCard :item="item"/>
+    <router-link to="/">
+      Return to Shopping
+    </router-link>
+    <VueCard :item="$store.state.currentItem"/>
   </div>
 </template>
 

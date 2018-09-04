@@ -25,19 +25,19 @@
           </navbar-nav>
           <span class="navbar-text">
             <navbar-nav>
-              <navbar-item @click.native="toggleView('list')" class="list active"><i class="fa fa-th-list fa-lg"></i></navbar-item>
+              <navbar-item @click.native="toggleView('list')" class="list"><i class="fa fa-th-list fa-lg"></i></navbar-item>
               <navbar-item @click.native="toggleView('grid')" class="grid"><i class="fa fa-th-large fa-lg"></i></navbar-item>
             </navbar-nav>
           </span>
         </navbar-collapse>
       </navbar>
     </div>
-    <div class="row" v-if="gridView">
+    <div class="row" v-if="$store.state.gridView">
       <div class="xen-cart-column col-lg-4 col-sm-6 m-b-3" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
         <VueCard :item="item"/>
       </div>
     </div>
-    <div class="row" v-if="!gridView">
+    <div class="row" v-if="!$store.state.gridView">
       <div class="col-12" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
         <VuePanel :item="item"/>
         <hr>
@@ -55,7 +55,16 @@ export default {
   },
   data(){
     return{
-      gridView: false
+      
+    }
+  },
+  mounted() {
+    if(this.$store.state.gridView){
+      $('.list').removeClass('active');
+      $('.grid').addClass('active');
+    }else{
+      $('.grid').removeClass('active');
+      $('.list').addClass('active');
     }
   },
   methods: {
@@ -84,17 +93,14 @@ export default {
     },
     toggleView(view){
       if(view == "grid"){
-        this.gridView = true;
+        this.$store.state.gridView = true;
         $('.list').removeClass('active');
         $('.grid').addClass('active');
       } else{
-        this.gridView = false;
+        this.$store.state.gridView = false;
         $('.grid').removeClass('active');
         $('.list').addClass('active');
       }
-    },
-    goToDetails(item){
-      this.$store.dispatch("goToDetails", item);
     },
     showModal(slot, size, title, content, header,footer){
       var modalObject = {};

@@ -3,8 +3,8 @@
      <header class="xen-cart-header p-a-2">
         <figure>
            <a href="#" class="xen-cart-link js-link" :inventoryid="item.id">
-              <img :src="item.image" width="430" height="430" alt="" class="xen-cart-image img-fluid m-a-0 m-b-2" @click.native="showDetails(item)">                   
-              <h2 class="xen-cart-heading h4" @click.native="showDetails(item)">{{item.make}} {{item.model}}</h2>
+              <img :src="item.image" width="430" height="430" alt="" class="xen-cart-image img-fluid m-a-0 m-b-2" @click="goToDetails(item)">                   
+              <h2 class="xen-cart-heading h4" @click="goToDetails(item)">{{item.make}} {{item.model}}</h2>
            </a>
         </figure>
 
@@ -60,10 +60,10 @@ export default {
       this.$store.dispatch("updateQuantity", parseInt(event.target.value));
       this.addItemToCart(item);
     },
-    showDetails(item){
-      console.log("hello");
-      //this.$store.dispatch("goToDetails", item);
-      //this.$router.push('/about')
+    goToDetails(item){
+      this.$store.dispatch("goToDetails", item);
+      this.$router.push('/about')
+
     },
     updateAutoship(e){
       this.item.autoship = e.target.checked;

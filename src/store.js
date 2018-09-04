@@ -207,6 +207,7 @@ export const store = new Vuex.Store({
         "image": "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg"
       }
     ],
+    gridView: false,
     firstName: '',
     lastName: '',
     email: '',
@@ -300,6 +301,7 @@ export const store = new Vuex.Store({
        localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     setCurrentItem(state, payload){
+      console.log('store', payload);
       Vue.set(state, 'currentItem', payload)
     },
     updateQuantity: (state, payload) =>{
@@ -321,7 +323,6 @@ export const store = new Vuex.Store({
     updateAutoship: (state, payload) =>{
       var item = _.where(state.items, {id: payload.id})[0];
       var oItem = _.where(state.orderItems, {id: payload.id});
-      oItem[0].autoship = payload.autoship;
       console.log(oItem)
       if(oItem.length > 0){
         if(payload.autoship){
