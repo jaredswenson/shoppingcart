@@ -333,8 +333,8 @@ export const store = new Vuex.Store({
       Vue.set(state, payload.key, payload.value);
     },
     addItemToCart(state, payload) {
-      payload.quantity = state.quantity;
-
+      //payload.quantity = state.quantity;
+      console.log(payload);
       if(payload.autoship){
         payload.itemTotal = state.quantity * payload.autoshipPrice;
       }else{
@@ -496,6 +496,7 @@ export const store = new Vuex.Store({
       context.commit("setText", payload)
     },
     addItemToCart: (context, payload) =>{
+      console.log(payload);
       context.commit("addItemToCart", payload)
     },
     deleteItemFromCart: (context, payload) =>{
@@ -528,54 +529,54 @@ export const store = new Vuex.Store({
     setCurrentParty: (context, payload) =>{
       context.commit("setCurrentParty", payload)
     },
-            fakeAJAXcall: (context, time) => {
-            const waitTime = time.seconds * 1000;
-            return new Promise(resolve => {
-                setTimeout(() => {
+    fakeAJAXcall: (context, time) => {
+      const waitTime = time.seconds * 1000;
+        return new Promise(resolve => {
+          setTimeout(() => {
 
-                    var payload = [
-                        {
-                            "id": 1,
-                            "make": "Volkswagen",
-                            "model": "GTI",
-                            "price": 8.31
-                        },
-                        {
-                            "id": 2,
-                            "make": "Mercedes-Benz",
-                            "model": "E-Class",
-                            "price": 2.13
-                        },
-                        {
-                            "id": 3,
-                            "make": "Ford",
-                            "model": "LTD Crown Victoria",
-                            "price": 1.05
-                        },
-                        {
-                            "id": 4,
-                            "make": "Lamborghini",
-                            "model": "Gallardo",
-                            "price": 6.30
-                        },
-                        {
-                            "id": 5,
-                            "make": "Cadillac",
-                            "model": "Escalade",
-                            "price": 9.17
-                        },
-                        {
-                            "id": 6,
-                            "make": "Scion",
-                            "model": "xB",
-                            "price": 2.12
-                        }
-                    ];
+              var payload = [
+                  {
+                      "id": 1,
+                      "make": "Volkswagen",
+                      "model": "GTI",
+                      "price": 8.31
+                  },
+                  {
+                      "id": 2,
+                      "make": "Mercedes-Benz",
+                      "model": "E-Class",
+                      "price": 2.13
+                  },
+                  {
+                      "id": 3,
+                      "make": "Ford",
+                      "model": "LTD Crown Victoria",
+                      "price": 1.05
+                  },
+                  {
+                      "id": 4,
+                      "make": "Lamborghini",
+                      "model": "Gallardo",
+                      "price": 6.30
+                  },
+                  {
+                      "id": 5,
+                      "make": "Cadillac",
+                      "model": "Escalade",
+                      "price": 9.17
+                  },
+                  {
+                      "id": 6,
+                      "make": "Scion",
+                      "model": "xB",
+                      "price": 2.12
+                  }
+              ];
 
-                    resolve(payload);
-                }, waitTime);
-            });
-        },
+              resolve(payload);
+          }, waitTime);
+      });
+    },
         resolveAfter10Seconds: (context) => {
             return new Promise(resolve => {
                 setTimeout(() => {
@@ -633,7 +634,7 @@ export const store = new Vuex.Store({
                             state.items = [];
                         }
                         else {
-                            state.items = d
+                            state.items = d;
                             console.log(state.items)
                         }
                     }
@@ -842,16 +843,6 @@ export const store = new Vuex.Store({
         async populateStorage(context, payload) {
 
 
-
-
-
-
-
-
-
-
-
-
             //console.clear()
             console.log('--------populateStorage')
 
@@ -885,24 +876,17 @@ export const store = new Vuex.Store({
                         localStorage.getItem("ShoppingCart")
                     );
 
-
                     console.log(shoppingCart.t)
 
                     //alert('stop2')
-
                 }
                 else {
                     console.log(localStorage.getItem("ShoppingCart"))
                     //Something went wrong try again
                 }
-
                 resolve(sc);
-
-
-
-
-
             });
+          },
   },
   getters: {
 

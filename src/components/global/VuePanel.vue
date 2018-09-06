@@ -3,20 +3,20 @@
     <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2">       
     <figure>          
       <a id="detailsImage" class="xen-cart-link" @click="goToDetails(item)">            
-        <img :src="item.image" inventoryid="item.id" width="160" height="160" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
+        <img :src="item.ImageUrl" inventoryid="item.id" width="160" height="160" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
       </a>       
     </figure>     
   </div>      
   <div class="col-xs-7 col-sm-9 col-md-3 col-lg-3">       
     <header class="xen-cart-header">          
     <a id="detailsLink" class="xen-cart-link js-link" :inventoryid="item.id" @click="goToDetails(item)">            
-      <h2 id="heading0" class="xen-cart-heading h6">{{item.make}} {{item.model}}</h2>          
+      <h2 id="heading0" class="xen-cart-heading h6">{{item.Name}}</h2>          
     </a>                   
       <p class="xen-cart-price m-b-0">   
-        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">${{item.price.toFixed(2)}}</strong>   <br v-if="!item.autoship" >
-        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">Pay ${{item.autoshipPrice}} <i>with autoship</i></strong>   
-        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="item.autoship" style="text-decoration:line-through;">${{item.price.toFixed(2)}}</strong><br v-if="item.autoship" > 
-        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="item.autoship">${{item.autoshipPrice.toFixed(2)}}</strong>   
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">${{item.Prices[1].Cost}}</strong>   <br v-if="!item.autoship" >
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="!item.autoship">Pay ${{item.Prices[2].Cost}} <i>with autoship</i></strong>   
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="item.autoship" style="text-decoration:line-through;">${{item.Prices[1].Cost}}</strong><br v-if="item.autoship" > 
+        <strong id="xen-cart-current-price" class="xen-cart-current-price" v-if="item.autoship">${{item.Prices[2].Cost}}</strong>   
         <span class="xen-cart-was text-muted" style="display: none;">       
           <span id="xen-cart-was" productwidgettransval="was">was</span>       
           <del id="xen-cart-former-price" class="xen-cart-former-price"></del>   

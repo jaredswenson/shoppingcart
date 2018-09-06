@@ -126,20 +126,21 @@ export default {
       var items = this.$store.state.items;
       var arr = []
       $.each(items, function(i,v){
-        arr.push(v.Category);
+        arr.push(v.Categories);
       });
+      console.log(arr);
       var blah = _.uniq(arr);
+      console.log()
       return blah
     },
     filterItems(){
       var self = this;
       return this.$store.state.items.filter(function(item){
-        return item.make.toLowerCase().indexOf(self.$store.state.search.toLowerCase())>=0;
+        return item.Name.toLowerCase().indexOf(self.$store.state.search.toLowerCase())>=0;
         }
       )
     },
     orderSize(){
-      console.log('hi');
      var order = this.$store.state.orderItems;
      var total = 0;
      $.each(order, function(i,v){
