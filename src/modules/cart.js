@@ -46,6 +46,7 @@ const mutations = {
       // store.dispatch("checkForAutoship");
 
       localStorage.setItem('order', JSON.stringify(state.orderItems));
+      
     },
 };
 
