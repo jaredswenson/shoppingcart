@@ -96,7 +96,7 @@
 export default {
   name: "VuePanel",
   methods: {
-      addItemToCart(item){
+    addItemToCart(item){
       this.$store.dispatch("addItemToCart", item);
       this.$forceUpdate();
     },

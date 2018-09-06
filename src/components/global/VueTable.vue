@@ -1,16 +1,17 @@
 <template>
-  <tbl>
+  <tbl responsive striped>
     <tbl-head>
       <tr>
-        <th v-for="header in headers">{{header}}</th>
+        <th v-for="header in headers">{{header.label}}</th>
       </tr>
     </tbl-head>
     <tbl-body>
-      <tr v-for="party in tableData" @mouseover="test(party)">
-        <th scope="row" v-for="item in party">{{item}}</th>
+      <tr v-for="party in tableData">
+        <th scope="row" v-for="item in party" @dblclick="test(party)">{{item}}</th>
       </tr>
     </tbl-body>
   </tbl>
+
 </template>
 <script>
   import { Tbl, TblHead, TblBody } from 'mdbvue';
@@ -20,7 +21,7 @@
     components: {
       Tbl,
       TblHead,
-      TblBody
+      TblBody,
     },
     mounted(){
     	
@@ -42,7 +43,8 @@
     },
     methods:{
       test(party){
-        console.log(party)
+        this.$store.dispatch('setCurrentParty', party);
+        this.$router.push('/aboutParty')
       }
     }
   };

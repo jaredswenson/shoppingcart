@@ -66,6 +66,14 @@ export default {
       $('.grid').removeClass('active');
       $('.list').addClass('active');
     }
+    if(this.$store.state.category){
+       $.each(this.uniqCategory, function(i,v){
+        $('.' + v).removeClass('active');
+      })
+      $('.' + this.$store.state.category).addClass('active');
+
+
+    }
   },
   methods: {
     addItemToCart(item){
@@ -131,7 +139,7 @@ export default {
       )
     },
     orderSize(){
-    console.log('hi');
+      console.log('hi');
      var order = this.$store.state.orderItems;
      var total = 0;
      $.each(order, function(i,v){

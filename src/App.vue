@@ -25,6 +25,7 @@
 
     <VueModal v-if="this.$store.state.showModal" id="VueModal" :title="this.$store.state.modalTitle" :myclass="this.$store.state.modalSize" :headeron="this.$store.state.modalHeader" :footeron="this.$store.state.modalFooter" :content="this.$store.state.modalContent">
       <Cancel v-if="this.$store.state.showCancel"/>
+      <NewParty v-if="this.$store.state.showNewParty"/>
     </VueModal>
   </div>
 </template>
