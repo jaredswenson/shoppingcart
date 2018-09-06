@@ -10,11 +10,25 @@ const mutations = {
     , setUserName(store, { userName }) { store.userName = userName; }
     , setUserPassword(store, { userPassword }) { store.userPassword = userPassword; }
 
-    
+
+};
+
+const actions = {
+    fakeAJAXcall: (context, time) => {
+        alert('stop')
+        const waitTime = time.seconds * 1000;
+        return new Promise(resolve => {
+            setTimeout(() => {
+                var payload = 'Held for ' + time.seconds + ' seconds';
+                resolve(payload);
+            }, waitTime);
+        });
+    }
 };
 
 export default {
     namespaced: true,
     state,
-    mutations
+    mutations,
+    actions
 };
