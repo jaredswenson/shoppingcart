@@ -46,7 +46,7 @@
                             type: 'loadWarehouse'
                         }).then((res) => {
                             console.log('---loadWarehouse resolved');
-
+                            
                             //5th
                             this.$store.dispatch({
                                 type: 'loadCart',
@@ -54,6 +54,7 @@
                                 cartType: 5 //Retail
                             }).then((res) => {
                                 console.log('----loadCart resolved');
+                                this.$store.dispatch("setOrderFromStorage");
                             })
                         })
                     }
@@ -82,6 +83,7 @@
                                         }).then((res) => {
                                             console.log(res);
                                             console.log('----loadCart resolved');
+                                            this.$store.dispatch("setOrderFromStorage");
                                         })
                                     })
                                 })

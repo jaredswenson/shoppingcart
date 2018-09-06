@@ -15,390 +15,369 @@ import cart from './modules/cart'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-    modules: {
-        global,
-        products,
-        //, items
-        //, settings
-        //ui,
-        cart
+  modules: {
+    global,
+    products,
+    //, items
+    //, settings
+    //ui,
+    cart
+  },
+  state: {
+    asdf: null,
+    items: [],
+    gridView: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    streetAddress: '',
+    city: '',
+    zipCode: '',
+    state: '',
+    country: '',
+    shippingMethod: '',
+    orderItems: [],
+    quantity: 1,
+    category: '',
+    orderTotal: 0,
+    totalItemsInCart: 0,
+    currentItem: {},
+    showModal: false,
+    modalFooter: true,
+    modalHeader: true,
+    modalSize: 'md',
+    modalTitle: 'Modal',
+    modalContent: '',
+    showCancel: false,
+    showNewParty: false,
+    search: '',
+    itemsInAutoship: false,
+    itemsNotAutoship: false,
+    parties:[
+      {
+        "id": 1,
+        "name": "Dare",
+        "startDate": "3/13/2019",
+        "endDate": "4/15/2018",
+        "earnedPv": 1,
+        "status": "strategy",
+        "actions": "Distributed"
+      }, {
+        "id": 2,
+        "name": "Isabelle",
+        "startDate": "2/26/2019",
+        "endDate": "10/12/2017",
+        "earnedPv": 2,
+        "status": "Digitized",
+        "actions": "interface"
+      }, {
+        "id": 3,
+        "name": "Mirella",
+        "startDate": "9/20/2017",
+        "endDate": "7/14/2018",
+        "earnedPv": 3,
+        "status": "solution-oriented",
+        "actions": "protocol"
+      }, {
+        "id": 4,
+        "name": "Esma",
+        "startDate": "2/16/2018",
+        "endDate": "6/14/2018",
+        "earnedPv": 4,
+        "status": "Universal",
+        "actions": "Cloned"
+      }, {
+        "id": 5,
+        "name": "Merwin",
+        "startDate": "9/16/2018",
+        "endDate": "1/12/2019",
+        "earnedPv": 5,
+        "status": "homogeneous",
+        "actions": "Front-line"
+      } 
+    ],
+    headers: [
+      {"label":"ID", "field": "id", "sort": 'asc'}, 
+      {"label":"Name", "field": "name", "sort": "asc"}, 
+      {"label":"Start Date", "field": "start date", "sort": "asc"}, 
+      {"label":"End Date", "field": "end date", "sort": "asc"}, 
+      {"label":"Earned PV", "field": "earned pv", "sort": "asc"}, 
+      {"label":"Status", "field": "status", "sort": "asc"},
+      {"label":"Action", "field": "action", "sort": "asc"}
+    ],
+    hostName: '', 
+    hostEmail: '',
+    newStartDate: '',
+    newEndDate: '',
+    hostStatus: '',
+    hostAction: '',
+    currentParty: {}
+  },
+  mutations: {
+  setModal(state, payload) {
+      //need to set all components in the modal to false first, so multiple don't show up
+      Vue.set(state, 'showCancel', false);
+      Vue.set(state, 'showNewParty', false);
+      
+      Vue.set(state, payload.slot, true);
+      Vue.set(state, 'modalContent', payload.content);
+      Vue.set(state, 'modalTitle', payload.title);
+      Vue.set(state, 'modalSize', payload.size);
+      Vue.set(state, 'modalHeader', payload.header);
+      Vue.set(state, 'modalFooter', payload.footer);
+      Vue.set(state, 'showModal', true);
+      $('#VueModal').show();
     },
-    state: {
-        asdf: null,
-        items: [],
-        gridView: false,
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        streetAddress: '',
-        city: '',
-        zipCode: '',
-        state: '',
-        country: '',
-        shippingMethod: '',
-        orderItems: [],
-        quantity: 1,
-        category: '',
-        orderTotal: 0,
-        totalItemsInCart: 0,
-        currentItem: {},
-        showModal: false,
-        modalFooter: true,
-        modalHeader: true,
-        modalSize: 'md',
-        modalTitle: 'Modal',
-        modalContent: '',
-        showCancel: false,
-        showNewParty: false,
-        search: '',
-        itemsInAutoship: false,
-        itemsNotAutoship: false,
-        parties: [
-            {
-                "id": 1,
-                "name": "Dare",
-                "startDate": "3/13/2019",
-                "endDate": "4/15/2018",
-                "earnedPv": 1,
-                "status": "strategy",
-                "actions": "Distributed"
-            }, {
-                "id": 2,
-                "name": "Isabelle",
-                "startDate": "2/26/2019",
-                "endDate": "10/12/2017",
-                "earnedPv": 2,
-                "status": "Digitized",
-                "actions": "interface"
-            }, {
-                "id": 3,
-                "name": "Mirella",
-                "startDate": "9/20/2017",
-                "endDate": "7/14/2018",
-                "earnedPv": 3,
-                "status": "solution-oriented",
-                "actions": "protocol"
-            }, {
-                "id": 4,
-                "name": "Esma",
-                "startDate": "2/16/2018",
-                "endDate": "6/14/2018",
-                "earnedPv": 4,
-                "status": "Universal",
-                "actions": "Cloned"
-            }, {
-                "id": 5,
-                "name": "Merwin",
-                "startDate": "9/16/2018",
-                "endDate": "1/12/2019",
-                "earnedPv": 5,
-                "status": "homogeneous",
-                "actions": "Front-line"
-            }
-        ],
-        headers: [
-            { "label": "ID", "field": "id", "sort": 'asc' },
-            { "label": "Name", "field": "name", "sort": "asc" },
-            { "label": "Start Date", "field": "start date", "sort": "asc" },
-            { "label": "End Date", "field": "end date", "sort": "asc" },
-            { "label": "Earned PV", "field": "earned pv", "sort": "asc" },
-            { "label": "Status", "field": "status", "sort": "asc" },
-            { "label": "Action", "field": "action", "sort": "asc" }
-        ],
-        hostName: '',
-        hostEmail: '',
-        newStartDate: '',
-        newEndDate: '',
-        hostStatus: '',
-        hostAction: '',
-        currentParty: {},
-        localStorage: [
-            {
-                cart: [
-                    {
-                        items: [
-                            {}
-                        ]
-                    }
-                ]
-            }
-        ]
+    setText(state, payload) {
+      Vue.set(state, payload.key, payload.value);
     },
-    mutations: {
-        setModal(state, payload) {
-            //need to set all components in the modal to false first, so multiple don't show up
-            Vue.set(state, 'showCancel', false);
-            Vue.set(state, 'showNewParty', false);
-
-            Vue.set(state, payload.slot, true);
-            Vue.set(state, 'modalContent', payload.content);
-            Vue.set(state, 'modalTitle', payload.title);
-            Vue.set(state, 'modalSize', payload.size);
-            Vue.set(state, 'modalHeader', payload.header);
-            Vue.set(state, 'modalFooter', payload.footer);
-            Vue.set(state, 'showModal', true);
-            $('#VueModal').show();
-        },
-        setText(state, payload) {
-            Vue.set(state, payload.key, payload.value);
-        },
-        addItemToCart(state, payload) {
-            // payload.quantity = state.quantity;
-            // console.log(payload);
-            // if(payload.autoship){
-            //   payload.itemTotal = state.quantity * payload.Prices[2];
-            // }else{
-            //   payload.itemTotal = state.quantity * payload.Prices[1]; 
-            // }
-            // var index = state.orderItems.indexOf(payload);
-            // if(index > -1){
-            //   state.orderItems[index].quantity = state.quantity;
-            //   if(state.quantity <= 0){
-            //     this.dispatch("deleteItemFromCart", payload);
-            //   }
-            // }else{
-            //   payload.inCart = true;
-            //   state.orderItems.push(payload);
-            // }
-            // Vue.set(state, 'orderTotal', 0)
-            // $.each(state.orderItems, function(i,v){
-            //   state.orderTotal += v.itemTotal
-            // })
-            // var total = 0;
-            //  $.each(state.orderItems, function(i,v){
-            //    total += parseInt(v.quantity)
-            //  });
-            //  Vue.set(state, 'totalItemsInCart', total);
-            // this.dispatch("updateQuantity", 1);
-            // store.dispatch("checkForAutoship");
-
-            // localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        deleteItemFromCart(state, payload) {
-            // state.orderTotal = state.orderTotal - payload.itemTotal;
-            // var index = state.orderItems.indexOf(payload);      
-            // if (index > -1) {
-            //   var item = _.where(state.items, {id: payload.id})[0];
-            //   item.inCart = false;
-            //   state.orderItems.splice(index, 1);
-            // }
-            //  var total = 0;
-            //  $.each(state.orderItems, function(i,v){
-            //    total += parseInt(v.quantity)
-            //  });
-            //  Vue.set(state, 'totalItemsInCart', total);
-            //  store.dispatch("checkForAutoship");
-            //  localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        setCurrentItem(state, payload) {
-            console.log('store', payload);
-            Vue.set(state, 'currentItem', payload)
-        },
-        updateQuantity: (state, payload) => {
-            Vue.set(state, 'quantity', payload);
-        },
-        setCategory: (state, payload) => {
-            Vue.set(state, 'category', payload);
-        },
-        cancelOrder: (state) => {
-            $.each(state.items, function (i, v) {
-                v.inCart = false;
-            });
-            Vue.set(state, 'totalItemsInCart', 0)
-            Vue.set(state, 'orderItems', []);
-            Vue.set(state, 'orderTotal', 0);
-            Vue.set(state, 'itemsInAutoship', false);
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        updateAutoship: (state, payload) => {
-            var item = _.where(state.items, { id: payload.id })[0];
-            var oItem = _.where(state.orderItems, { id: payload.id });
-            if (oItem.length > 0) {
-                if (payload.autoship) {
-                    oItem[0].itemTotal = oItem[0].quantity * oItem[0].autoshipPrice;
-                } else {
-                    oItem[0].itemTotal = oItem[0].quantity * oItem[0].price;
-                }
-            }
-            //Vue.set(state, item, payload);
-            Vue.set(state, 'orderTotal', 0)
-            $.each(state.orderItems, function (i, v) {
-                state.orderTotal += v.itemTotal
-            });
-            store.dispatch("checkForAutoship");
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        setOrderFromStorage: (state, payload) => {
-            var order = JSON.parse(localStorage.getItem('order'));
-            var total = 0;
-            var costTotal = 0;
-            Vue.set(state, "orderItems", order);
-            $.each(order, function (i, v) {
-                var item = _.where(state.items, { id: v.id })[0];
-                item.inCart = true;
-                item.autoship = v.autoship;
-                total += v.quantity;
-                costTotal += v.itemTotal;
-            });
-            Vue.set(state, 'totalItemsInCart', total);
-            Vue.set(state, 'orderTotal', costTotal);
-        },
-        checkForAutoship: (state, payload) => {
-            var autoship = _.where(state.orderItems, { autoship: true });
-            var nonAutoship = _.where(state.orderItems, { autoship: false });
-            if (autoship.length > 0) {
-                Vue.set(state, 'itemsInAutoship', true);
-            } else {
-                Vue.set(state, 'itemsInAutoship', false);
-            }
-            if (nonAutoship.length > 0) {
-                Vue.set(state, 'itemsNotAutoship', true);
-            } else {
-                Vue.set(state, 'itemsNotAutoship', false);
-            }
-        },
-        saveParty: (state) => {
-            var newParty = {};
-            newParty.id = state.parties.length + 1;
-            newParty.name = state.hostName;
-            newParty.startDate = state.newStartDate;
-            newParty.endDate = state.newEndDate;
-            newParty.earnedPv = Math.floor(Math.random() * 100);
-            newParty.status = state.hostStatus;
-            newParty.action = state.hostAction;
-            state.parties.push(newParty);
-            Vue.set(state, 'showModal', false);
-            state.hostName = '';
-            state.hostEmail = '';
-            state.newStartDate = '';
-            state.newEndDate = '';
-            state.hostStatus = '';
-            state.hostAction = '';
-        },
-        setCurrentParty: (state, payload) => {
-            Vue.set(state, 'currentParty', payload)
-        },
-        loadCart: (state, payload) => {
-            Vue.set(state, 'items', payload);
+    addItemToCart(state, payload) {
+      payload.quantity = state.quantity;
+      console.log(payload);
+      if(payload.autoship){
+        payload.itemTotal = state.quantity * payload.Prices[2].Cost;
+      }else{
+        payload.itemTotal = state.quantity * payload.Prices[1].Cost; 
+      }
+      var index = state.orderItems.indexOf(payload);
+      if(index > -1){
+        state.orderItems[index].quantity = state.quantity;
+        if(state.quantity <= 0){
+          this.dispatch("deleteItemFromCart", payload);
         }
+      }else{
+        payload.inCart = true;
+        state.orderItems.push(payload);
+      }
+      Vue.set(state, 'orderTotal', 0)
+      $.each(state.orderItems, function(i,v){
+        state.orderTotal += v.itemTotal
+      })
+      var total = 0;
+       $.each(state.orderItems, function(i,v){
+         total += parseInt(v.quantity)
+       });
+       Vue.set(state, 'totalItemsInCart', total);
+      this.dispatch("updateQuantity", 1);
+      store.dispatch("checkForAutoship");
+
+      localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
-    actions: {
-        loadGlobalVariables({ commit, state }) {
-            console.log('-loadGlobalVariables')
-            store.commit('global/setBaseUrl', { coreUrl: 'https://dev-core.xennbox.com/' });
-            store.commit('global/setUserName', { userName: 'xennsoft' });
-            store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    var items = ['global items loaded',
-                        { 'state.global.baseUrl': state.global.baseUrl }
-                        , { 'state.global.userName': state.global.userName }
-                        , { 'state.global.userPassword': state.global.userPassword }
-                    ];
-                    resolve(items);
-                }, .2000);
-            });
-        },
-        modalAction: (context, payload) => {
-            context.commit("setModal", payload)
-        },
-        updateText: (context, payload) => {
-            context.commit("setText", payload)
-        },
-        addItemToCart1: (context, payload) => {
+    async addItemToCart1({ commit }, payload) {
+        console.clear()
+        //console.log(payload)
+        console.log('addItemToCart')
+        const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
+        //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+        //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+        //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
+        //console.log(d)
+        console.log('addItemToCart resolved')
+    },
+    deleteItemFromCart(state, payload) {
+      state.orderTotal = state.orderTotal - payload.itemTotal;
+      var index = state.orderItems.indexOf(payload);      
+      if (index > -1) {
+        var item = _.where(state.items, {Id: payload.Id})[0];
+        item.inCart = false;
+        state.orderItems.splice(index, 1);
+      }
+       var total = 0;
+       $.each(state.orderItems, function(i,v){
+         total += parseInt(v.quantity)
+       });
+       Vue.set(state, 'totalItemsInCart', total);
+       store.dispatch("checkForAutoship");
+       localStorage.setItem('order', JSON.stringify(state.orderItems));
+    },
+    setCurrentItem(state, payload){
+      console.log('store', payload);
+      Vue.set(state, 'currentItem', payload)
+    },
+    updateQuantity: (state, payload) =>{
+      Vue.set(state, 'quantity', payload);
+    },
+    setCategory: (state, payload) =>{
+      Vue.set(state, 'category', payload);
+    },
+    cancelOrder: (state) =>{
+      $.each(state.items, function(i,v){
+        v.inCart = false;
+      });
+      Vue.set(state, 'totalItemsInCart', 0)
+      Vue.set(state, 'orderItems', []);
+      Vue.set(state, 'orderTotal', 0);
+      Vue.set(state, 'itemsInAutoship', false);
+      localStorage.setItem('order', JSON.stringify(state.orderItems));
+    },
+    updateAutoship: (state, payload) =>{
+      console.log(payload);
+      var item = _.where(state.items, {Id: payload.item.Id})[0];
+      console.log(item);
+      var oItem = _.where(state.orderItems, {Id: payload.item.Id});
+      console.log(oItem);
+      if(oItem.length > 0){
+        if(payload.type == 'autoship'){
+          oItem[0].autoship = true;
+          oItem[0].itemTotal = oItem[0].quantity * oItem[0].Prices[2].Cost;
+        } else{
+          oItem[0].autoship = false;
+          oItem[0].itemTotal = oItem[0].quantity * oItem[0].Prices[1].Cost;
+        }
+      }
+      if(payload.type == 'autoship'){
+        item.autoship = true;
+      } else{
+        item.autoship = false;
+      }
+      //Vue.set(state, item, payload);
+      Vue.set(state, 'orderTotal', 0)
+      $.each(state.orderItems, function(i,v){
+        state.orderTotal += v.itemTotal
+      });
+      store.dispatch("checkForAutoship");
+      localStorage.setItem('order', JSON.stringify(state.orderItems));
+    },
+    setOrderFromStorage: (state, payload) =>{
+      var order =  JSON.parse(localStorage.getItem('order'));
+      var total = 0;
+      var costTotal = 0;
+      Vue.set(state, "orderItems", order);
+      $.each(order, function(i,v){
+        var item = _.where(state.items,{Id: v.Id})[0];
+        console.log(item);
+        item.inCart = true;
+        item.autoship = v.autoship;
+        total += v.quantity;
+        costTotal += v.itemTotal;
+      });
+      Vue.set(state, 'totalItemsInCart', total);
+      Vue.set(state, 'orderTotal', costTotal);
+    },
+    checkForAutoship: (state, payload) =>{
+      var autoship = _.where(state.orderItems,{autoship: true});
+      var nonAutoship = _.where(state.orderItems,{autoship: false});
+      if(autoship.length > 0){
+        Vue.set(state, 'itemsInAutoship', true);
+      }else{
+        Vue.set(state, 'itemsInAutoship', false);
+      }
+      if(nonAutoship.length > 0){
+        Vue.set(state, 'itemsNotAutoship', true);
+      }else{
+        Vue.set(state, 'itemsNotAutoship', false);
+      }
+    },
+    loadCart: (state, payload) => {
+      Vue.set(state, 'items', payload);
+    }
+  },
+  actions: {
+    loadGlobalVariables({ commit, state }) {
+      console.log('-loadGlobalVariables')
+      store.commit('global/setBaseUrl', { coreUrl: 'https://dev-core.xennbox.com/' });
+      store.commit('global/setUserName', { userName: 'xennsoft' });
+      store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
+      return new Promise(resolve => {
+          setTimeout(() => {
+              var items = ['global items loaded',
+                  { 'state.global.baseUrl': state.global.baseUrl }
+                  , { 'state.global.userName': state.global.userName }
+                  , { 'state.global.userPassword': state.global.userPassword }
+              ];
+              resolve(items);
+          }, .2000);
+      });
+    },
+    modalAction: (context, payload) => {
+      context.commit("setModal", payload)
+    },
+    updateText: (context, payload) => {
+      context.commit("setText", payload)
+    },
+    addItemToCart: (context, payload) =>{
+      context.commit("addItemToCart", payload)
+    },
+    deleteItemFromCart: (context, payload) =>{
+      context.commit("deleteItemFromCart", payload)
+    },
+    goToDetails: (context, payload) =>{
+      context.commit("setCurrentItem", payload)
+    },
+    updateQuantity: (context, payload) =>{
+      context.commit("updateQuantity", payload)
+    },
+    setCategory: (context, payload) =>{
+      context.commit("setCategory", payload)
+    },
+    cancelOrder: (context) =>{
+      context.commit("cancelOrder", )
+    },
+    updateAutoship: (context, payload) =>{
+      context.commit("updateAutoship", payload)
+    },
+    setOrderFromStorage: (context, payload) =>{
+      context.commit("setOrderFromStorage", payload)
+    },
+    checkForAutoship: (context) =>{
+      context.commit("checkForAutoship")
+    },
+    saveParty: (context) =>{
+      context.commit("saveParty")
+    },
+    setCurrentParty: (context, payload) =>{
+      context.commit("setCurrentParty", payload)
+    },
+    fakeAJAXcall: (context, time) => {
+      const waitTime = time.seconds * 1000;
+        return new Promise(resolve => {
+          setTimeout(() => {
 
-            context.commit("cart/addItemToCart", payload)
-        },
-        async addItemToCart({ commit }, payload) {
-            console.clear()
-            //console.log(payload)
-            console.log('addItemToCart')
-            const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
-            //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
-            //console.log(d)
-            console.log('addItemToCart resolved')
-        },
-        deleteItemFromCart: (context, payload) => {
-            context.commit("deleteItemFromCart", payload)
-        },
-        goToDetails: (context, payload) => {
-            context.commit("setCurrentItem", payload)
-        },
-        updateQuantity: (context, payload) => {
-            context.commit("updateQuantity", payload)
-        },
-        setCategory: (context, payload) => {
-            context.commit("setCategory", payload)
-        },
-        cancelOrder: (context) => {
-            context.commit("cancelOrder", )
-        },
-        updateAutoship: (context, payload) => {
-            context.commit("updateAutoship", payload)
-        },
-        setOrderFromStorage: (context, payload) => {
-            context.commit("setOrderFromStorage", payload)
-        },
-        checkForAutoship: (context) => {
-            context.commit("checkForAutoship")
-        },
-        saveParty: (context) => {
-            context.commit("saveParty")
-        },
-        setCurrentParty: (context, payload) => {
-            context.commit("setCurrentParty", payload)
-        },
-        fakeAJAXcall: (context, time) => {
-            const waitTime = time.seconds * 1000;
-            return new Promise(resolve => {
-                setTimeout(() => {
+              var payload = [
+                  {
+                      "id": 1,
+                      "make": "Volkswagen",
+                      "model": "GTI",
+                      "price": 8.31
+                  },
+                  {
+                      "id": 2,
+                      "make": "Mercedes-Benz",
+                      "model": "E-Class",
+                      "price": 2.13
+                  },
+                  {
+                      "id": 3,
+                      "make": "Ford",
+                      "model": "LTD Crown Victoria",
+                      "price": 1.05
+                  },
+                  {
+                      "id": 4,
+                      "make": "Lamborghini",
+                      "model": "Gallardo",
+                      "price": 6.30
+                  },
+                  {
+                      "id": 5,
+                      "make": "Cadillac",
+                      "model": "Escalade",
+                      "price": 9.17
+                  },
+                  {
+                      "id": 6,
+                      "make": "Scion",
+                      "model": "xB",
+                      "price": 2.12
+                  }
+              ];
 
-                    var payload = [
-                        {
-                            "id": 1,
-                            "make": "Volkswagen",
-                            "model": "GTI",
-                            "price": 8.31
-                        },
-                        {
-                            "id": 2,
-                            "make": "Mercedes-Benz",
-                            "model": "E-Class",
-                            "price": 2.13
-                        },
-                        {
-                            "id": 3,
-                            "make": "Ford",
-                            "model": "LTD Crown Victoria",
-                            "price": 1.05
-                        },
-                        {
-                            "id": 4,
-                            "make": "Lamborghini",
-                            "model": "Gallardo",
-                            "price": 6.30
-                        },
-                        {
-                            "id": 5,
-                            "make": "Cadillac",
-                            "model": "Escalade",
-                            "price": 9.17
-                        },
-                        {
-                            "id": 6,
-                            "make": "Scion",
-                            "model": "xB",
-                            "price": 2.12
-                        }
-                    ];
+              resolve(payload);
+          }, waitTime);
+      });
+    },
 
-                    resolve(payload);
-                }, waitTime);
-            });
-        },
         resolveAfter10Seconds: (context) => {
             return new Promise(resolve => {
                 setTimeout(() => {
@@ -456,6 +435,13 @@ export const store = new Vuex.Store({
                             state.items = [];
                         }
                         else {
+                            $.each(d, function(i,v){
+                              v.autoship = false;
+                              v.inCart = false;
+                              v.itemTotal = 0;
+                              v.quantity = 0;
+                            })
+                            Vue.set(state, 'items', d)
                             state.items = d;
                             console.log(state.items)
                         }
