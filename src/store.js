@@ -336,9 +336,9 @@ export const store = new Vuex.Store({
       //payload.quantity = state.quantity;
       console.log(payload);
       if(payload.autoship){
-        payload.itemTotal = state.quantity * payload.autoshipPrice;
+        payload.itemTotal = state.quantity * payload.Prices[2];
       }else{
-        payload.itemTotal = state.quantity * payload.price; 
+        payload.itemTotal = state.quantity * payload.Prices[1]; 
       }
       var index = state.orderItems.indexOf(payload);
       if(index > -1){
