@@ -2,7 +2,7 @@
   <div id="app">
     <navbar class="grey lighten-3" dark style="margin-bottom:50px;">
       <!-- Navbar brand -->
-      <!-- asdf -->
+      <!-- asdfasdfawefawef -->
       <navbar-collapse>
         <navbar-nav>
           <!-- <navbar-item v-if="$route.path !== '/'"><router-link to="/">Return To Shopping</router-link></navbar-item>
