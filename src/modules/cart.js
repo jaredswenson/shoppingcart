@@ -1,9 +1,3 @@
-import store from '@/store'
-
-const modules = {
-    store
-};
-
 const state = {
     orderItems:  [],
     orderTotal: 0,
@@ -45,7 +39,7 @@ const mutations = {
       // this.dispatch("updateQuantity", 1);
       // store.dispatch("checkForAutoship");
 
-      localStorage.setItem('order', JSON.stringify(state.orderItems));
+      //localStorage.setItem('order', JSON.stringify(state.orderItems));
       
     },
 };

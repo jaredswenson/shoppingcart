@@ -5,7 +5,7 @@
 	  	<h1>Cart Summary</h1><br>
 	  	<div class="row">
 	    	<div class="col-8">
-    	    <navbar class="grey lighten-3" dark style="margin-bottom:50px;" v-if="$store.state.itemsNotAutoship">
+    	    <navbar class="grey lighten-3" dark style="margin-bottom:50px;">
 			   		<h3>TODAY'S ITEMS</h3>
 			    </navbar>
 	    		<Cart :hideradio="true" :hidedelete="true"/>

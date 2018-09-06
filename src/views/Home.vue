@@ -54,6 +54,8 @@ export default {
                           cartType: 5 //Retail
                       }).then((res) => {
                           console.log('----loadCart resolved');
+                          this.$store.dispatch("setOrderFromStorage");
+
                       })
                   })
               }
@@ -82,6 +84,7 @@ export default {
                                   }).then((res) => {
                                       console.log(res);
                                       console.log('----loadCart resolved');
+                                      this.$store.dispatch("setOrderFromStorage");
                                   })
                               })
                           })

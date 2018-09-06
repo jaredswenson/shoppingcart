@@ -25,7 +25,18 @@
     </header>     
   </div>      
   <div class="col-md-4">     
-    <MdInput type="checkbox" id="checkbox1" label="Auto Ship" :checked="item.autoship" @change.native="updateAutoship($event)"/>
+  <!-- Default unchecked -->
+  <div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" :id="'oneTime' + item.Id" :name="'defaultExampleRadios' + item.Id" @change="updateAutoship($event, 'onetime')" checked>
+    <label class="custom-control-label" :for="'oneTime' + item.Id">One-Time Purchase</label>
+  </div>
+
+  <!-- Default checked -->
+  <div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" :id="'autoShip' + item.Id" :name="'defaultExampleRadios' + item.Id" @change="updateAutoship($event, 'autoship')">
+    <label class="custom-control-label" :for="'autoShip' + item.Id">Autoship</label>
+  </div>
+
     <!-- <fieldset class="xen-cart-custom-fields fieldset xen-cart-fieldset m-b-3" v-if="!hideradio">          
       <legend class="sr-only">Custom</legend>       
     </fieldset>       
@@ -60,9 +71,9 @@
       <div class="row">                     
        <div class="col-md-12 col-lg-5 offset-lg-1" v-if="!hidedelete">                        
           <div class="form-group bmd-form-group bmd-form-group-sm is-filled">
-            <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity" v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" >Quantity</label>
-            <NumericInput v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>   
-            <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
+            <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity" v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.Id == oItem.Id" >Quantity</label>
+            <NumericInput v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)"/>   
+            <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" v-if="item.Id == oItem.Id" @click.native="deleteItemFromCart(oItem)">
               <i class="fa fa-trash fa-lg"></i>
             </VueButton>                      
           </div>                      
@@ -70,19 +81,19 @@
         <div class="col-md-7 col-lg-7 offset-lg-1" v-if="hidedelete">                        
           <div class="form-group bmd-form-group bmd-form-group-sm is-filled">
             <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
-            <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.id == oItem.id" @change.native="updateQuantity($event, oItem)"/>
-            <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" v-if="item.id == oItem.id" @click.native="deleteItemFromCart(oItem)">
+            <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)"/>
+            <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" v-if="item.Id == oItem.Id" @click.native="deleteItemFromCart(oItem)">
               <i class="fa fa-trash fa-lg"></i>
             </VueButton>               
           </div>                      
         </div>
         <div class="col-md-2 col-lg-2 offset-lg-1" v-if="hidedelete">                        
-          <p v-for="oItem in $store.state.orderItems" v-if="item.id == oItem.id">${{oItem.itemTotal.toFixed(2)}}</p>                   
+          <p v-for="oItem in $store.state.orderItems" v-if="item.Id == oItem.Id">${{oItem.itemTotal.toFixed(2)}}</p>                   
         </div>                      
         <div class="col-md-12 col-lg-6" v-if="!hidedelete">                        
           <div class="form-group p-t-3">
             <VueButton v-if="!item.inCart" color="default" @click.native="addItemToCart(item)">Add</VueButton>
-            <!--<VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.id == item.id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>-->                        
+            <!--<VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.Id == item.Id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>-->                        
           </div>                      
         </div>                   
       </div>       
@@ -95,6 +106,14 @@
 
 export default {
   name: "VuePanel",
+  mounted(){
+    $.each(this.$store.state.orderItems, function(i,v){
+      if(v.autoship){
+        $('#oneTime' + v.Id).prop('checked', false);
+        $('#autoShip' + v.Id).prop('checked', true);
+      }
+    })
+  },
   methods: {
     addItemToCart(item){
       this.$store.dispatch("addItemToCart", item);
@@ -111,9 +130,11 @@ export default {
       console.log(event);
       console.log(item);
     },
-    updateAutoship(e){
-      this.item.autoship = e.target.checked;
-      this.$store.dispatch("updateAutoship", this.item);
+    updateAutoship(e, type){
+      var payload = {}
+      payload.item = this.item;
+      payload.type = type;
+      this.$store.dispatch("updateAutoship", payload);
     },
     goToDetails(item){
       this.$store.dispatch("goToDetails", item);
