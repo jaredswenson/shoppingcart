@@ -18,20 +18,20 @@
 
     <div v-if="flyout">
       <VueButton outline="black" :block="true" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
-      <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsNotAutoship">
+      <navbar class="grey lighten-3" dark style="margin-top:10px;">
         <h4>TODAY'S ORDER</h4>
       </navbar>
       <br>
       <p v-if="$store.state.orderItems.length <= 0">Nothing In Cart!</p>
       <div class="row" v-for="item in $store.state.orderItems" v-if="!item.autoship">
         <div class="col-3">
-          <img :src="item.image" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
+          <img :src="item.ImageUrl" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
         </div>
         <div class="col-3">
-          {{item.make}} {{item.model}}
+          {{item.Name}}
         </div>
         <div class="col-3">
-          ${{item.price}}
+          ${{item.Prices[1].Cost}}
         </div>
         <div class="col-3">
           x{{item.quantity}}<br>
@@ -46,13 +46,13 @@
       <div class="row" v-for="item in $store.state.orderItems" v-if="item.autoship">
         
         <div class="col-3">
-          <img :src="item.image" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
+          <img :src="item.ImageUrl" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
         </div>
         <div class="col-3">
-          {{item.make}} {{item.model}}
+          {{item.Name}}
         </div>
         <div class="col-3">
-          ${{item.price}}
+          ${{item.Prices[2].Cost}}
         </div>
         <div class="col-3">
           x{{item.quantity}}<br>

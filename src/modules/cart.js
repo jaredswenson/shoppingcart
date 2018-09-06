@@ -1,3 +1,4 @@
+
 import store from '@/store'
 import global from './global'
 
@@ -13,6 +14,7 @@ const state = {
 };
 
 const mutations = {
+
     //addItemToCart: (state, payload) => {
     //     console.log(payload);
     //     payload.quantity = state.quantity;
