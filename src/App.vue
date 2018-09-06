@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-
+<!-- this is a test -->
     <navbar class="grey lighten-3" dark style="margin-bottom:50px;">
       <!-- Navbar brand -->
       <navbar-collapse>
