@@ -54,65 +54,6 @@ export const store = new Vuex.Store({
     search: '',
     itemsInAutoship: false,
     itemsNotAutoship: false,
-    parties:[
-      {
-        "id": 1,
-        "name": "Dare",
-        "startDate": "3/13/2019",
-        "endDate": "4/15/2018",
-        "earnedPv": 1,
-        "status": "strategy",
-        "actions": "Distributed"
-      }, {
-        "id": 2,
-        "name": "Isabelle",
-        "startDate": "2/26/2019",
-        "endDate": "10/12/2017",
-        "earnedPv": 2,
-        "status": "Digitized",
-        "actions": "interface"
-      }, {
-        "id": 3,
-        "name": "Mirella",
-        "startDate": "9/20/2017",
-        "endDate": "7/14/2018",
-        "earnedPv": 3,
-        "status": "solution-oriented",
-        "actions": "protocol"
-      }, {
-        "id": 4,
-        "name": "Esma",
-        "startDate": "2/16/2018",
-        "endDate": "6/14/2018",
-        "earnedPv": 4,
-        "status": "Universal",
-        "actions": "Cloned"
-      }, {
-        "id": 5,
-        "name": "Merwin",
-        "startDate": "9/16/2018",
-        "endDate": "1/12/2019",
-        "earnedPv": 5,
-        "status": "homogeneous",
-        "actions": "Front-line"
-      } 
-    ],
-    headers: [
-      {"label":"ID", "field": "id", "sort": 'asc'}, 
-      {"label":"Name", "field": "name", "sort": "asc"}, 
-      {"label":"Start Date", "field": "start date", "sort": "asc"}, 
-      {"label":"End Date", "field": "end date", "sort": "asc"}, 
-      {"label":"Earned PV", "field": "earned pv", "sort": "asc"}, 
-      {"label":"Status", "field": "status", "sort": "asc"},
-      {"label":"Action", "field": "action", "sort": "asc"}
-    ],
-    hostName: '', 
-    hostEmail: '',
-    newStartDate: '',
-    newEndDate: '',
-    hostStatus: '',
-    hostAction: '',
-    currentParty: {}
   },
   mutations: {
   setModal(state, payload) {
