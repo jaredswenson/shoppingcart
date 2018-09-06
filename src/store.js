@@ -24,6 +24,7 @@ export const store = new Vuex.Store({
     cart
   },
   state: {
+    asdf: null,
     items: [],
     gridView: false,
     firstName: '',
@@ -162,6 +163,17 @@ export const store = new Vuex.Store({
       store.dispatch("checkForAutoship");
 
       localStorage.setItem('order', JSON.stringify(state.orderItems));
+    },
+    async addItemToCart1({ commit }, payload) {
+        console.clear()
+        //console.log(payload)
+        console.log('addItemToCart')
+        const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
+        //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+        //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+        //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
+        //console.log(d)
+        console.log('addItemToCart resolved')
     },
     deleteItemFromCart(state, payload) {
       state.orderTotal = state.orderTotal - payload.itemTotal;
@@ -365,6 +377,7 @@ export const store = new Vuex.Store({
           }, waitTime);
       });
     },
+
         resolveAfter10Seconds: (context) => {
             return new Promise(resolve => {
                 setTimeout(() => {
@@ -681,9 +694,9 @@ export const store = new Vuex.Store({
                 }
                 resolve(sc);
             });
-          },
-  },
-  getters: {
+        },
+    },
+    getters: {
 
-  }
+    }
 })

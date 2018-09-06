@@ -115,7 +115,7 @@ export default {
     })
   },
   methods: {
-    addItemToCart(item){
+      addItemToCart(item) {
       this.$store.dispatch("addItemToCart", item);
     },
     deleteItemFromCart(item){

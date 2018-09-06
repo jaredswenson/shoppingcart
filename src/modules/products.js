@@ -5,128 +5,7 @@ const modules = {
 };
 
 const state = {
-    items: [
-        {
-            "id": 1,
-            "make": "Volkswagen",
-            "model": "GTI",
-            "price": 8.31
-        },
-        {
-            "id": 2,
-            "make": "Mercedes-Benz",
-            "model": "E-Class",
-            "price": 2.13
-        },
-        {
-            "id": 3,
-            "make": "Ford",
-            "model": "LTD Crown Victoria",
-            "price": 1.05
-        },
-        {
-            "id": 4,
-            "make": "Lamborghini",
-            "model": "Gallardo",
-            "price": 6.30
-        },
-        {
-            "id": 5,
-            "make": "GMC",
-            "model": "Safari",
-            "price": 6.88
-        },
-        {
-            "id": 6,
-            "make": "Toyota",
-            "model": "Tacoma",
-            "price": 1.54
-        },
-        {
-            "id": 7,
-            "make": "Oldsmobile",
-            "model": "Cutlass",
-            "price": 3.13
-        },
-        {
-            "id": 8,
-            "make": "Dodge",
-            "model": "Neon",
-            "price": 7.60
-        },
-        {
-            "id": 9,
-            "make": "Ford",
-            "model": "E-Series",
-            "price": 8.03
-        },
-        {
-            "id": 10,
-            "make": "Isuzu",
-            "model": "Amigo",
-            "price": 8.77
-        },
-        {
-            "id": 11,
-            "make": "Nissan",
-            "model": "300ZX",
-            "price": 7.35
-        },
-        {
-            "id": 12,
-            "make": "Suzuki",
-            "model": "Samurai",
-            "price": 6.58
-        },
-        {
-            "id": 13,
-            "make": "Land Rover",
-            "model": "Range Rover",
-            "price": 0.38
-        },
-        {
-            "id": 14,
-            "make": "Jeep",
-            "model": "Cherokee",
-            "price": 9.93
-        },
-        {
-            "id": 15,
-            "make": "Chevrolet",
-            "model": "Avalanche 2500",
-            "price": 2.03
-        },
-        {
-            "id": 16,
-            "make": "Chrysler",
-            "model": "LHS",
-            "price": 0.76
-        },
-        {
-            "id": 17,
-            "make": "Chevrolet",
-            "model": "Suburban",
-            "price": 1.38
-        },
-        {
-            "id": 18,
-            "make": "Ford",
-            "model": "Expedition",
-            "price": 3.19
-        },
-        {
-            "id": 19,
-            "make": "Cadillac",
-            "model": "Escalade",
-            "price": 9.17
-        },
-        {
-            "id": 20,
-            "make": "Scion",
-            "model": "xB",
-            "price": 2.12
-        }
-    ]
+    items: []
 };
 
 const mutations = {
@@ -239,7 +118,49 @@ const actions = {
 
 
 
+    },
+    async template1({ commit }, payload) {
+        console.clear()
+        console.log(payload)
+        console.log('addItemToCart')
+        alert('stop2')
+        //const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
+        //const b = await store.dispatch({ type: 'resolveAfter0Seconds' });
+        //const c = await store.dispatch({ type: 'resolveAfter0Seconds' });
+        //const d = await store.dispatch({ type: 'asdf', aaa: a, bbb: b, ccc: c });
+
+        return 'd';
+    },
+    async template2({ dispatch, context, state }, payload) {
+        try {
+            //console.clear()
+            console.log('asdf');
+
+            var a = (function () {
+                var d;
+                function c() {
+
+                    return d;
+                }
+                return {
+                    b: function () {
+                        d = c();
+                        if (d != null) {
+
+                        }
+                        else {
+
+                        }
+                    }
+                };
+            })();
+            //await a.b();
+            return await a.b();
+        } catch (e) {
+
+        }
     }
+
 };
 
 export default {
