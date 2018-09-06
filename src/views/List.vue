@@ -33,7 +33,7 @@
       </navbar>
     </div>
     <div class="row" v-if="$store.state.gridView">
-      <div class="xen-cart-column col-lg-4 col-sm-6 m-b-3" v-for="item in filterItems" v-if="item.Category == $store.state.category || $store.state.category == ''">
+      <div class="xen-cart-column col-lg-4 col-sm-6 m-b-3" v-for="item in filterItems" v-if="item.Categories[0].Name == $store.state.category || $store.state.category == ''">
         <VueCard :item="item"/>
       </div>
     </div>
@@ -88,6 +88,7 @@ export default {
       this.addItemToCart(item);
     },
     setCategory(item){
+      console.log(item);
       $.each(this.uniqCategory, function(i,v){
         $('.' + v).removeClass('active');
       })
@@ -126,16 +127,16 @@ export default {
       var items = this.$store.state.items;
       var arr = []
       $.each(items, function(i,v){
-        arr.push(v.Categories);
+        arr.push(v.Categories[0].Name);
       });
-      console.log(arr);
       var blah = _.uniq(arr);
-      console.log()
       return blah
+
     },
     filterItems(){
       var self = this;
       return this.$store.state.items.filter(function(item){
+      item.Category = item.Categories[0].Name
         return item.Name.toLowerCase().indexOf(self.$store.state.search.toLowerCase())>=0;
         }
       )
