@@ -98,7 +98,6 @@ export default {
   methods: {
     addItemToCart(item){
       this.$store.dispatch("addItemToCart", item);
-      this.$forceUpdate();
     },
     deleteItemFromCart(item){
       this.$store.dispatch("deleteItemFromCart", item);

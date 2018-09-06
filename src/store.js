@@ -8,7 +8,7 @@ import global from './modules/global'
 //import settings from './modules/settings'
 //import ui from './modules/ui'
 import products from './modules/products'
-//import cart from './modules/cart'
+import cart from './modules/cart'
 
 //import myjs from './assets/js/myjs';
 
@@ -16,12 +16,12 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   modules: {
-    global
-    , products
+    global,
+    products,
     //, items
     //, settings
     //ui,
-    //cart
+    cart
   },
   state: {
     items: [
@@ -333,52 +333,52 @@ export const store = new Vuex.Store({
       Vue.set(state, payload.key, payload.value);
     },
     addItemToCart(state, payload) {
-      //payload.quantity = state.quantity;
-      console.log(payload);
-      if(payload.autoship){
-        payload.itemTotal = state.quantity * payload.Prices[2];
-      }else{
-        payload.itemTotal = state.quantity * payload.Prices[1]; 
-      }
-      var index = state.orderItems.indexOf(payload);
-      if(index > -1){
-        state.orderItems[index].quantity = state.quantity;
-        if(state.quantity <= 0){
-          this.dispatch("deleteItemFromCart", payload);
-        }
-      }else{
-        payload.inCart = true;
-        state.orderItems.push(payload);
-      }
-      Vue.set(state, 'orderTotal', 0)
-      $.each(state.orderItems, function(i,v){
-        state.orderTotal += v.itemTotal
-      })
-      var total = 0;
-       $.each(state.orderItems, function(i,v){
-         total += parseInt(v.quantity)
-       });
-       Vue.set(state, 'totalItemsInCart', total);
-      this.dispatch("updateQuantity", 1);
-      store.dispatch("checkForAutoship");
+      // payload.quantity = state.quantity;
+      // console.log(payload);
+      // if(payload.autoship){
+      //   payload.itemTotal = state.quantity * payload.Prices[2];
+      // }else{
+      //   payload.itemTotal = state.quantity * payload.Prices[1]; 
+      // }
+      // var index = state.orderItems.indexOf(payload);
+      // if(index > -1){
+      //   state.orderItems[index].quantity = state.quantity;
+      //   if(state.quantity <= 0){
+      //     this.dispatch("deleteItemFromCart", payload);
+      //   }
+      // }else{
+      //   payload.inCart = true;
+      //   state.orderItems.push(payload);
+      // }
+      // Vue.set(state, 'orderTotal', 0)
+      // $.each(state.orderItems, function(i,v){
+      //   state.orderTotal += v.itemTotal
+      // })
+      // var total = 0;
+      //  $.each(state.orderItems, function(i,v){
+      //    total += parseInt(v.quantity)
+      //  });
+      //  Vue.set(state, 'totalItemsInCart', total);
+      // this.dispatch("updateQuantity", 1);
+      // store.dispatch("checkForAutoship");
 
-      localStorage.setItem('order', JSON.stringify(state.orderItems));
+      // localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     deleteItemFromCart(state, payload) {
-      state.orderTotal = state.orderTotal - payload.itemTotal;
-      var index = state.orderItems.indexOf(payload);      
-      if (index > -1) {
-        var item = _.where(state.items, {id: payload.id})[0];
-        item.inCart = false;
-        state.orderItems.splice(index, 1);
-      }
-       var total = 0;
-       $.each(state.orderItems, function(i,v){
-         total += parseInt(v.quantity)
-       });
-       Vue.set(state, 'totalItemsInCart', total);
-       store.dispatch("checkForAutoship");
-       localStorage.setItem('order', JSON.stringify(state.orderItems));
+      // state.orderTotal = state.orderTotal - payload.itemTotal;
+      // var index = state.orderItems.indexOf(payload);      
+      // if (index > -1) {
+      //   var item = _.where(state.items, {id: payload.id})[0];
+      //   item.inCart = false;
+      //   state.orderItems.splice(index, 1);
+      // }
+      //  var total = 0;
+      //  $.each(state.orderItems, function(i,v){
+      //    total += parseInt(v.quantity)
+      //  });
+      //  Vue.set(state, 'totalItemsInCart', total);
+      //  store.dispatch("checkForAutoship");
+      //  localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
     setCurrentItem(state, payload){
       console.log('store', payload);
@@ -496,8 +496,8 @@ export const store = new Vuex.Store({
       context.commit("setText", payload)
     },
     addItemToCart: (context, payload) =>{
-      console.log(payload);
-      context.commit("addItemToCart", payload)
+
+      context.commit("cart/addItemToCart", payload)
     },
     deleteItemFromCart: (context, payload) =>{
       context.commit("deleteItemFromCart", payload)
