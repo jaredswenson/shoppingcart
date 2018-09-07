@@ -15,7 +15,6 @@ const mutations = {
 
 const actions = {
     fakeAJAXcall: (context, time) => {
-        alert('stop')
         const waitTime = time.seconds * 1000;
         return new Promise(resolve => {
             setTimeout(() => {

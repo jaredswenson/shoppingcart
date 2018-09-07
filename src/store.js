@@ -240,6 +240,17 @@ export const store = new Vuex.Store({
         addItemToCart: (context, payload) => {
             context.commit("addItemToCart", payload)
         },
+        async addItemToCart2({ commit, state }, payload) {
+            console.log('addItemToCart2')
+            const a = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+            //const b = await store.dispatch({ type: 'getUn' });
+            //const c = await store.dispatch({ type: 'getPw' });
+            //const d = await store.dispatch({ type: 'resolveAfter0Seconds' });
+            //const e = await store.dispatch({ type: 'generateToken', url: a, username: b, password: c });
+
+            console.log(a)
+            console.log('addItemToCart2 resolved')
+        },
         deleteItemFromCart: (context, payload) => {
             context.commit("deleteItemFromCart", payload)
         },
