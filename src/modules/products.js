@@ -349,7 +349,7 @@ const actions = {
         }
     },
     async template1({ commit }, payload) {
-        console.clear()
+        //console.clear()
         console.log(payload)
         console.log('addItemToCart')
         alert('stop2')
