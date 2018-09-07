@@ -55,11 +55,11 @@ export const store = new Vuex.Store({
         itemsInAutoship: false,
         itemsNotAutoship: false,
         userAccessToken: null,
-        cart: [
-            {
-                items: []
-            }
-        ]
+        // cart: [
+        //     {
+        //         items: []
+        //     }
+        // ]
     },
     mutations: {
         setModal(state, payload) {
@@ -79,38 +79,6 @@ export const store = new Vuex.Store({
         setText(state, payload) {
             Vue.set(state, payload.key, payload.value);
         },
-        addItemToCart(state, payload) {
-            payload.quantity = state.quantity;
-            console.log(payload);
-            if (payload.autoship) {
-                payload.itemTotal = state.quantity * payload.Prices[2].Cost;
-            } else {
-                payload.itemTotal = state.quantity * payload.Prices[1].Cost;
-            }
-            var index = state.orderItems.indexOf(payload);
-            if (index > -1) {
-                state.orderItems[index].quantity = state.quantity;
-                if (state.quantity <= 0) {
-                    this.dispatch("deleteItemFromCart", payload);
-                }
-            } else {
-                payload.inCart = true;
-                state.orderItems.push(payload);
-            }
-            Vue.set(state, 'orderTotal', 0)
-            $.each(state.orderItems, function (i, v) {
-                state.orderTotal += v.itemTotal
-            })
-            var total = 0;
-            $.each(state.orderItems, function (i, v) {
-                total += parseInt(v.quantity)
-            });
-            Vue.set(state, 'totalItemsInCart', total);
-            this.dispatch("updateQuantity", 1);
-            store.dispatch("checkForAutoship");
-
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
         async addItemToCart1({ commit }, payload) {
             //console.clear()
             //console.log(payload)
@@ -122,22 +90,22 @@ export const store = new Vuex.Store({
             //console.log(d)
             console.log('addItemToCart resolved')
         },
-        deleteItemFromCart(state, payload) {
-            state.orderTotal = state.orderTotal - payload.itemTotal;
-            var index = state.orderItems.indexOf(payload);
-            if (index > -1) {
-                var item = _.where(state.items, { Id: payload.Id })[0];
-                item.inCart = false;
-                state.orderItems.splice(index, 1);
-            }
-            var total = 0;
-            $.each(state.orderItems, function (i, v) {
-                total += parseInt(v.quantity)
-            });
-            Vue.set(state, 'totalItemsInCart', total);
-            store.dispatch("checkForAutoship");
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
+        // deleteItemFromCart(state, payload) {
+        //     state.orderTotal = state.orderTotal - payload.itemTotal;
+        //     var index = state.orderItems.indexOf(payload);
+        //     if (index > -1) {
+        //         var item = _.where(state.items, { Id: payload.Id })[0];
+        //         item.inCart = false;
+        //         state.orderItems.splice(index, 1);
+        //     }
+        //     var total = 0;
+        //     $.each(state.orderItems, function (i, v) {
+        //         total += parseInt(v.quantity)
+        //     });
+        //     Vue.set(state, 'totalItemsInCart', total);
+        //     store.dispatch("checkForAutoship");
+        //     localStorage.setItem('order', JSON.stringify(state.orderItems));
+        // },
         setCurrentItem(state, payload) {
             console.log('store', payload);
             Vue.set(state, 'currentItem', payload)
@@ -246,8 +214,8 @@ export const store = new Vuex.Store({
         updateText: (context, payload) => {
             context.commit("setText", payload)
         },
-        addItemToCart: (context, payload) => {
-            context.commit("addItemToCart", payload)
+        addItemToCart: ({commit, state}, payload) => {
+            store.dispatch('cart/addItemToCart', payload );
         },
         async addItemToCart2({ commit, state }, payload) {
             //console.clear();
@@ -262,7 +230,7 @@ export const store = new Vuex.Store({
             console.log('addItemToCart2 resolved')
         },
         deleteItemFromCart: (context, payload) => {
-            context.commit("deleteItemFromCart", payload)
+            context.commit("cart/deleteItemFromCart", payload)
         },
         goToDetails: (context, payload) => {
             context.commit("setCurrentItem", payload)
