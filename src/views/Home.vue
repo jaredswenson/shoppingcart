@@ -38,7 +38,7 @@
                     console.log('--getStorageStatus resolved');
 
                     //3rd
-                    if (storageExits) {
+                    if (1 == 2) {
                         //console.clear()
 
                         //4th
@@ -46,7 +46,7 @@
                             type: 'loadWarehouse'
                         }).then((res) => {
                             console.log('---loadWarehouse resolved');
-                            
+
                             //5th
                             this.$store.dispatch({
                                 type: 'loadCart',
@@ -59,39 +59,88 @@
                         })
                     }
                     else {
-                        //4th
-                        this.$store.dispatch({
-                            type: 'createToken'
-                        }).then((response) => {
-                            console.log(response)
-                            console.log('Token Created')
-                            if (response.length > 0) {
-                                //alert('stop1')
-                                this.$store.dispatch({
-                                    type: 'populateStorage',
-                                    t: response
-                                }).then((res) => {
-                                    console.log(res);
-                                    console.log('populateStorage resolved');
-                                    this.$store.dispatch({
-                                        type: 'loadWarehouse'
-                                    }).then((res) => {
+                        //3rd
+                        if (1 == 1) {
+                            //4th
+                            this.$store.dispatch({
+                                type: 'createToken'
+                            }).then((response) => {
+                                console.log(response)
+                                console.log('createToken resolved')
+                                if (response.length > 0) {
+
+
+
+
+
+
+
+
+
+
+                                    //5th
+                                    this.$store.dispatch(
+                                        'populateStorage',
+                                        response
+                                    ).then((res) => {
                                         console.log(res);
-                                        console.log('---loadWarehouse resolved');
+                                        console.log(this.$store.global.state.userAccessToken);
+                                        console.log('populateStorage resolved');
+                                        //6th
                                         this.$store.dispatch({
-                                            type: 'loadCart'
+                                            type: 'loadWarehouse'
                                         }).then((res) => {
                                             console.log(res);
-                                            console.log('----loadCart resolved');
-                                            this.$store.dispatch("setOrderFromStorage");
+                                            console.log('---loadWarehouse resolved');
+                                            //7th
+                                            this.$store.dispatch({
+                                                type: 'loadCart',
+                                                warehouseId: res,
+                                                cartType: 5 //Retail
+                                            }).then((res) => {
+                                                console.log('----loadCart resolved');
+                                                this.$store.dispatch("setOrderFromStorage");
+                                            })
                                         })
                                     })
-                                })
-                            }
-                            else {
-                                //Try again
-                            }
-                        })
+
+
+
+
+
+
+                                }
+                                else {
+                                    //Try again
+                                }
+                            })
+
+
+
+
+                        }
+                        else {
+                            alert('No token created, test items will be loaded.')
+                            //7th
+                            this.$store.dispatch({
+                                type: 'loadSimulatedCart',
+                            }).then((res) => {
+                                console.log('----loadSimulatedCart resolved');
+                                this.$store.dispatch("setOrderFromStorage");
+                            })
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
                     }
 
                 })
