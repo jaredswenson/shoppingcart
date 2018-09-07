@@ -84,18 +84,20 @@ const actions = {
         try {
             //console.clear()
             console.log('asdf');
-            var data = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-
+            
             var a = (function () {
-                alert('stop1')
+                //alert('stop1')
                 var d;
                 function c() {
-                    return data;
+                    alert();
+                    //return await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
                 }
                 return {
-                    b: function () {
+                    async b({ dispatch }) {
+                    //b: function () {
                         alert('stop2')
-                        d = c();
+                        
+                        d = await c();
                         if (d != null) {
                             alert('stop3')
                             //If setting something
