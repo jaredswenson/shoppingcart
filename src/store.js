@@ -112,7 +112,7 @@ export const store = new Vuex.Store({
             localStorage.setItem('order', JSON.stringify(state.orderItems));
         },
         async addItemToCart1({ commit }, payload) {
-            console.clear()
+            //console.clear()
             //console.log(payload)
             console.log('addItemToCart')
             const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
@@ -250,7 +250,7 @@ export const store = new Vuex.Store({
             context.commit("addItemToCart", payload)
         },
         async addItemToCart2({ commit, state }, payload) {
-            console.clear();
+            //console.clear();
             console.log('addItemToCart2')
             const a = await store.dispatch({ type: 'cart/asdf', asdf: 'asdf' });
             const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
@@ -342,7 +342,7 @@ export const store = new Vuex.Store({
         },
         async loadSimulatedCart({ commit, state }, payload) {
 
-            console.clear()
+            //console.clear()
             console.log('----loadSimulatedCart')
 
             var data = await store.dispatch({ type: 'products/getSimulatedInventoryItems' });
@@ -498,7 +498,7 @@ export const store = new Vuex.Store({
         },     
         async populateStorage({ state }, payload) {
             //async populateStorage(context, payload) {
-            console.clear()
+            //console.clear()
             //console.log(payload)
             console.log('--------populateStorage')
             return new Promise(resolve => {
