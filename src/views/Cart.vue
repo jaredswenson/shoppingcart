@@ -2,14 +2,14 @@
   <div class="cart">
     <div class="row" v-if="!flyout && !sidebar">
       <div class="col-12">
-        <div class="col-12" v-for="item in $store.state.orderItems" v-if="!item.autoship">
+        <div class="col-12" v-for="item in $store.state.cart.orderItems" v-if="!item.autoship">
           <VuePanel :item="item" :hideradio="hideradio" :hidedelete="hidedelete"/>
           <hr>
         </div>
         <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsInAutoship">
           <h4>AUTOSHIP ORDER</h4>
         </navbar>
-         <div class="col-12" v-for="item in $store.state.orderItems" v-if="item.autoship">
+         <div class="col-12" v-for="item in $store.state.cart.orderItems" v-if="item.autoship">
           <VuePanel :item="item" :hideradio="hideradio" :hidedelete="hidedelete"/>
           <hr>
         </div>
@@ -22,8 +22,8 @@
         <h4>TODAY'S ORDER</h4>
       </navbar>
       <br>
-      <p v-if="$store.state.orderItems.length <= 0">Nothing In Cart!</p>
-      <div class="row" v-for="item in $store.state.orderItems" v-if="!item.autoship">
+      <p v-if="$store.state.cart.orderItems.length <= 0">Nothing In Cart!</p>
+      <div class="row" v-for="item in $store.state.cart.orderItems" v-if="!item.autoship">
         <div class="col-3">
           <img :src="item.ImageUrl" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
         </div>
@@ -43,7 +43,7 @@
       <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsInAutoship">
         <h4>AUTOSHIP ORDER</h4>
       </navbar>
-      <div class="row" v-for="item in $store.state.orderItems" v-if="item.autoship">
+      <div class="row" v-for="item in $store.state.cart.orderItems" v-if="item.autoship">
         
         <div class="col-3">
           <img :src="item.ImageUrl" inventoryid="item.id" width="80" height="80" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
@@ -68,9 +68,9 @@
         </div>
       </div>
       <br>
-      <VueButton outline="black" :block="true" v-if="$store.state.orderItems.length >= 1 && !hidecancel" @click.native="showModal('showCancel', 'md', 'Cancel Order', '', true, true)">Cancel Order</VueButton>
-      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/cart'  && !hidesummary" @click.native="goToSummary">View Summary</VueButton>
-      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/checkout' && $route.path !== '/'" @click.native="goToCheckout">Checkout</VueButton>
+      <VueButton outline="black" :block="true" v-if="$store.state.cart.orderItems.length >= 1 && !hidecancel" @click.native="showModal('showCancel', 'md', 'Cancel Order', '', true, true)">Cancel Order</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.cart.orderItems.length >= 1 && $route.path !== '/cart'  && !hidesummary" @click.native="goToSummary">View Summary</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.cart.orderItems.length >= 1 && $route.path !== '/checkout' && $route.path !== '/'" @click.native="goToCheckout">Checkout</VueButton>
     </div>
     <div v-if="sidebar">
       <VueButton outline="black" :block="true" @click.native="goToHome" v-if="$route.path !== '/'">Return To Shopping</VueButton>
@@ -78,7 +78,7 @@
         <h4>TODAY'S ORDER</h4>
       </navbar>
       <br>
-      <p v-if="$store.state.orderItems.length <= 0">Nothing In Cart!</p>
+      <p v-if="$store.state.cart.orderItems.length <= 0">Nothing In Cart!</p>
       <div class="row">
         <div class="col-9"><h5>SUBTOTAL</h5></div>
         <div class="col-3">
@@ -86,9 +86,9 @@
         </div>
       </div>
       <br>
-      <VueButton outline="black" :block="true" v-if="$store.state.orderItems.length >= 1 && !hidecancel" @click.native="showModal('showCancel', 'md', 'Cancel Order', '', true, true)">Cancel Order</VueButton>
-      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/checkout'" @click.native="goToCheckout">Checkout</VueButton>
-      <VueButton color="default" :block="true" v-if="$store.state.orderItems.length >= 1 && $route.path !== '/cart'  && !hidesummary" @click.native="goToSummary">View Summary</VueButton>
+      <VueButton outline="black" :block="true" v-if="$store.state.cart.orderItems.length >= 1 && !hidecancel" @click.native="showModal('showCancel', 'md', 'Cancel Order', '', true, true)">Cancel Order</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.cart.orderItems.length >= 1 && $route.path !== '/checkout'" @click.native="goToCheckout">Checkout</VueButton>
+      <VueButton color="default" :block="true" v-if="$store.state.cart.orderItems.length >= 1 && $route.path !== '/cart'  && !hidesummary" @click.native="goToSummary">View Summary</VueButton>
     </div>
   </div>
 </template>
@@ -100,6 +100,9 @@ export default {
     return{
       
     }
+  },
+  mounted(){
+    console.log(this.$store.state.cart.orderItems);
   },
   props:{
     flyout: {
