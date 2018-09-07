@@ -11,6 +11,7 @@ const mutations = {
     , setUserPassword(store, { userPassword }) { store.userPassword = userPassword; }
     , setAccessToken(store, { userAccessToken }) { store.userAccessToken = userAccessToken; }
 
+
     
 };
 

@@ -54,6 +54,7 @@ export const store = new Vuex.Store({
         search: '',
         itemsInAutoship: false,
         itemsNotAutoship: false,
+        userAccessToken: null,
         cart: [
             {
                 items: []
@@ -218,18 +219,18 @@ export const store = new Vuex.Store({
         loadCart: (state, payload) => {
             Vue.set(state, 'items', payload);
         },
-        async setAccessToken({ commit }, payload) {
-            //console.clear()
-            console.log(payload)
-            console.log('setAccessToken')
-            //const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
-            //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
-            //console.log(d)
-            console.log('setAccessToken resolved')
-        },
-
+        setAccessToken: (state, payload) => {
+        //console.clear()
+        //console.log(payload)
+        console.log('setAccessToken')
+        Vue.set(state, 'userAccessToken', payload)
+        //const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
+        //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+        //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+        //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
+        //console.log(d)
+        console.log('setAccessToken resolved')
+    }
 
 
 
@@ -343,7 +344,7 @@ export const store = new Vuex.Store({
                             })
                             Vue.set(state, 'items', d)
                             state.items = d;
-                            console.log(state.items)
+                            //console.log(JSON.stringify(state.items))
                         }
                     }
                 };
@@ -378,7 +379,6 @@ export const store = new Vuex.Store({
                             })
                             Vue.set(state, 'items', d)
                             state.items = d;
-                            console.log(state.items)
                         }
                     }
                 };
@@ -507,13 +507,14 @@ export const store = new Vuex.Store({
                 resolve(token);
             });
         },     
-        async populateStorage({ commit }, payload) {
+        async populateStorage({ state }, payload) {
             //async populateStorage(context, payload) {
             console.clear()
             //console.log(payload)
             console.log('--------populateStorage')
             return new Promise(resolve => {
                 if (1 == 1) {
+                    store.commit('global/setAccessToken', { userAccessToken: payload });
                     store.commit('setAccessToken', payload );
                 }
                 else {

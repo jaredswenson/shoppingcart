@@ -7,11 +7,183 @@ const modules = {
 const state = {
     items: [],
     simulatedItems: [
-        { Id: 730160125, CurrencyCode: "USD", Name: "Root Beer", Sku: "011", ShortDescription: "Root Beer" },
-        { Id: 730160124, CurrencyCode: "USD", Name: "Dr Pepper", Sku: "010", ShortDescription: "Dr Pepper" },
-        { Id: 730160126, CurrencyCode: "USD", Name: "Sprite", Sku: "012", ShortDescription: "Sprite" },
-        { Id: 730160099, CurrencyCode: "USD", Name: "Diet Coke", Sku: "04965802", ShortDescription: "Diet Coke" },
-        { Id: 730160123, CurrencyCode: "USD", Name: "Coke", Sku: "009", ShortDescription: "Coke" }
+        {
+            Id: 730160125,
+            CurrencyCode: "USD",
+            Name: "Root Beer",
+            Sku: "011",
+            ShortDescription: "Root Beer",
+            LongDescription: "\r\nevery once in a while\r\n",
+            OnHand: 999,
+            Prices: [
+                {
+                    "Id": 1,
+                    "Cost": 5,
+                    "PriceTier": "Wholesale"
+                },
+                {
+                    "Id": 2,
+                    "Cost": 5,
+                    "PriceTier": "Retail"
+                },
+                {
+                    "Id": 3,
+                    "Cost": 5,
+                    "PriceTier": "Preferred"
+                },
+                {
+                    "Id": 4,
+                    "Cost": 5,
+                    "PriceTier": "AtCost"
+                },
+                {
+                    "Id": 5,
+                    "Cost": 5,
+                    "PriceTier": "Awesome"
+                },
+                {
+                    "Id": 6,
+                    "Cost": 5,
+                    "PriceTier": "Replacement"
+                }
+            ],
+            ThumbnailImageUrl: "https://dev-classic.xennbox.com/branding/Pandora/images/inventory/noimage.gif",
+            ImageUrl: "https://dev-classic.xennbox.com/branding/Pandora/images/inventory/noimage.gif",
+            Categories: [
+                {
+                    Id: 8,
+                    Name: "Drinks1",
+                    SortOrder: 0
+                }
+            ],
+            ProductVariations: null,
+            AvailableForAutoship: true,
+            AvailableVariations: null,
+            VariationCount: 0,
+            HideAutoShip: true,
+            autoship: false,
+            inCart: false,
+            itemTotal: 0,
+            quantity: 0
+        },
+        {
+            Id: 730160124,
+            CurrencyCode: "USD",
+            Name: "Dr Pepper",
+            Sku: "010",
+            ShortDescription: "Dr Pepper",
+            LongDescription: "\r\n good backup flavor\r\n",
+            OnHand: 999,
+            Prices: [
+                {
+                    "Id": 1,
+                    "Cost": 5,
+                    "PriceTier": "Wholesale"
+                },
+                {
+                    "Id": 2,
+                    "Cost": 5,
+                    "PriceTier": "Retail"
+                },
+                {
+                    "Id": 3,
+                    "Cost": 5,
+                    "PriceTier": "Preferred"
+                },
+                {
+                    "Id": 4,
+                    "Cost": 5,
+                    "PriceTier": "AtCost"
+                },
+                {
+                    "Id": 5,
+                    "Cost": 5,
+                    "PriceTier": "Awesome"
+                },
+                {
+                    "Id": 6,
+                    "Cost": 5,
+                    "PriceTier": "Replacement"
+                }
+            ],
+            ThumbnailImageUrl: "https://dev-classic.xennbox.com/branding/Pandora/images/inventory/noimage.gif",
+            ImageUrl: "https://dev-classic.xennbox.com/branding/Pandora/images/inventory/noimage.gif",
+            Categories: [
+                {
+                    Id: 8,
+                    Name: "Drinks1",
+                    SortOrder: 0
+                }
+            ],
+            ProductVariations: null,
+            AvailableForAutoship: true,
+            AvailableVariations: null,
+            VariationCount: 0,
+            HideAutoShip: true,
+            autoship: false,
+            inCart: false,
+            itemTotal: 0,
+            quantity: 0
+        },
+        {
+            Id: 730160126,
+            CurrencyCode: "USD",
+            Name: "Sprite",
+            Sku: "012",
+            ShortDescription: "Sprite",
+            LongDescription: "\r\n Only when you are sick\r\n",
+            OnHand: 999,
+            Prices: [
+                {
+                    "Id": 1,
+                    "Cost": 5,
+                    "PriceTier": "Wholesale"
+                },
+                {
+                    "Id": 2,
+                    "Cost": 5,
+                    "PriceTier": "Retail"
+                },
+                {
+                    "Id": 3,
+                    "Cost": 5,
+                    "PriceTier": "Preferred"
+                },
+                {
+                    "Id": 4,
+                    "Cost": 5,
+                    "PriceTier": "AtCost"
+                },
+                {
+                    "Id": 5,
+                    "Cost": 5,
+                    "PriceTier": "Awesome"
+                },
+                {
+                    "Id": 6,
+                    "Cost": 5,
+                    "PriceTier": "Replacement"
+                }
+            ],
+            ThumbnailImageUrl: "https://dev-classic.xennbox.com/branding/Pandora/images/inventory/noimage.gif",
+            ImageUrl: "https://dev-classic.xennbox.com/branding/Pandora/images/inventory/noimage.gif",
+            Categories: [
+                {
+                    Id: 8,
+                    Name: "Drinks1",
+                    SortOrder: 0
+                }
+            ],
+            ProductVariations: null,
+            AvailableForAutoship: true,
+            AvailableVariations: null,
+            VariationCount: 0,
+            HideAutoShip: true,
+            autoship: false,
+            inCart: false,
+            itemTotal: 0,
+            quantity: 0
+        }
     ]
 };
 
@@ -44,6 +216,27 @@ const actions = {
         try {
             var a = (function () {
 
+
+
+                //console.clear();
+
+                //console.log(store)
+                //console.log(state)
+                //console.log(store.state.userAccessToken)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 var coreUrl = global.state.coreUrl;
                 var token = null;
                 var url = 'api/Inventory/GetProducts';
@@ -53,6 +246,9 @@ const actions = {
 
                 if (global.state.userAccessToken != undefined && global.state.userAccessToken != null && global.state.userAccessToken != '') {
                     token = global.state.userAccessToken;
+                }
+                else {
+                    //Handle the error
                 }
 
 
