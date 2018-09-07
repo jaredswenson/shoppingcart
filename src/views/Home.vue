@@ -104,7 +104,6 @@
 
 
 
-                                        console.log(this.$store.state.userAccessToken);
 
 
 
@@ -165,7 +164,7 @@
 
                         }
                         else {
-                            alert('No token created, test items will be loaded.')
+                            console.warn('++++++++++++++++++ No token created, test items will be loaded. +++++++++++++++++++++++')
                             //7th
                             this.$store.dispatch({
                                 type: 'loadSimulatedCart',

@@ -218,19 +218,8 @@ export const store = new Vuex.Store({
         },
         loadCart: (state, payload) => {
             Vue.set(state, 'items', payload);
-        },
-        setAccessToken: (state, payload) => {
-        //console.clear()
-        //console.log(payload)
-        console.log('setAccessToken')
-        Vue.set(state, 'userAccessToken', payload)
-        //const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
-        //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-        //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-        //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
-        //console.log(d)
-        console.log('setAccessToken resolved')
-    }
+        }
+    
 
 
 
@@ -515,7 +504,6 @@ export const store = new Vuex.Store({
             return new Promise(resolve => {
                 if (1 == 1) {
                     store.commit('global/setAccessToken', { userAccessToken: payload });
-                    store.commit('setAccessToken', payload );
                 }
                 else {
                     //Something went wrong try again
