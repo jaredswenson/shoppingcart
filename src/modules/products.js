@@ -28,7 +28,7 @@ const state = {
                 },
                 {
                     "Id": 3,
-                    "Cost": 5,
+                    "Cost": 2,
                     "PriceTier": "Preferred"
                 },
                 {
@@ -87,7 +87,7 @@ const state = {
                 },
                 {
                     "Id": 3,
-                    "Cost": 5,
+                    "Cost": 2,
                     "PriceTier": "Preferred"
                 },
                 {
@@ -146,7 +146,7 @@ const state = {
                 },
                 {
                     "Id": 3,
-                    "Cost": 5,
+                    "Cost": 2,
                     "PriceTier": "Preferred"
                 },
                 {
