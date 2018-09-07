@@ -1,66 +1,75 @@
 <template>
     <div class="accordion" id="accordionExample">
-      <div class="card z-depth-0 bordered">
-        <div class="card-header" id="headingOne">
+      <div class="card z-depth-0">
+        <div>
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <VueButton color="white" :block="true" v-if="$store.state.firstName == '' || $store.state.lastName == '' || $store.state.email == '' || $store.state.phone == ''">
               Account Info
-            </button>
+            </VueButton>
+            <VueButton color="white" :block="true" v-if="$store.state.firstName != '' && $store.state.lastName != '' && $store.state.email != '' && $store.state.phone != ''" @click.native="toggleAccount">
+              Account Info
+            </VueButton>
           </h5>
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body" v-if="!accountDone">
-            <VueText label="First Name" model="firstName" :value="$store.state.firstName" @keyup.native="update"/>
-            <VueText label="Last Name" model="lastName" :value="$store.state.lastName" @keyup.native="update"/>
-            <VueText label="Email" model="email" :value="$store.state.email" @keyup.native="update"/>
-            <VueText label="Phone" model="phone" :value="$store.state.phone" @keyup.native="update"/>
+            <VueText label="First Name" model="firstName" :value="$store.state.firstName"/>
+            <VueText label="Last Name" model="lastName" :value="$store.state.lastName"/>
+            <VueText label="Email" model="email" :value="$store.state.email"/>
+            <VueText label="Phone" model="phone" :value="$store.state.phone"/>
             <VueButton outline="default" :block="true" disabled v-if="$store.state.firstName == '' || $store.state.lastName == '' || $store.state.email == '' || $store.state.phone == ''">Proceed To Address</VueButton>
             <VueButton outline="default" :block="true" v-if="$store.state.firstName != '' && $store.state.lastName != '' && $store.state.email != '' && $store.state.phone != ''" @click.native="setAccountDone">Proceed To Address</VueButton>
           </div>
         </div>
       </div>
-      <div class="card z-depth-0 bordered">
-        <div class="card-header" id="headingTwo">
+      <div class="card z-depth-0">
+        <div>
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <VueButton color="white" :block="true" v-if="$store.state.streetAddress == '' || $store.state.city == '' || $store.state.state == '' || $store.state.zipCode == '' || $store.state.country == ''">
               Address
-            </button>
+            </VueButton>
+            <VueButton color="white" :block="true" v-if="$store.state.streetAddress != '' && $store.state.city != '' && $store.state.state != '' && $store.state.zipCode != '' && $store.state.country != ''" @click.native="toggleAddress">
+              Address
+            </VueButton>
           </h5>
         </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body" v-if="accountDone && !addressDone">
-            <VueText label="Street Address" model="streetAddress" :value="$store.state.streetAddress" @keyup.native="update"/>
-            <VueText label="City" model="city" :value="$store.state.city" @keyup.native="update"/>
-            <VueText label="State" model="state" :value="$store.state.state" @keyup.native="update"/>
-            <VueText label="Postal Code" model="zipCode" :value="$store.state.zipCode" @keyup.native="update"/>
-            <VueText label="Country" model="country" :value="$store.state.country" @keyup.native="update"/>
+            <VueText label="Street Address" model="streetAddress" :value="$store.state.streetAddress"/>
+            <VueText label="City" model="city" :value="$store.state.city"/>
+            <VueText label="State" model="state" :value="$store.state.state"/>
+            <VueText label="Postal Code" model="zipCode" :value="$store.state.zipCode"/>
+            <VueText label="Country" model="country" :value="$store.state.country"/>
             <VueButton outline="default" :block="true" disabled v-if="$store.state.streetAddress == '' || $store.state.city == '' || $store.state.state == '' || $store.state.zipCode == '' || $store.state.country == ''">Proceed To Shipping</VueButton>
             <VueButton outline="default" :block="true" v-if="$store.state.streetAddress != '' && $store.state.city != '' && $store.state.state != '' && $store.state.zipCode != '' && $store.state.country != ''" @click.native="setAddressDone">Proceed To Shipping</VueButton>
           </div>
         </div>
       </div>
-      <div class="card z-depth-0 bordered">
-        <div class="card-header" id="headingTwo">
+      <div class="card z-depth-0">
+        <div>
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <VueButton color="white" :block="true" v-if="$store.state.shippingMethod == ''"">
               Shipping Method
-            </button>
+            </VueButton>
+            <VueButton color="white" :block="true" v-if="$store.state.shippingMethod != ''" @click.native="toggleShipping">
+              Shipping Method
+            </VueButton>
           </h5>
         </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body" v-if="accountDone && addressDone && !shippingDone">
-            <VueText label="Shipping Method" model="shippingMethod" :value="$store.state.shippingMethod" @keyup.native="update"/>
+            <VueText label="Shipping Method" model="shippingMethod" :value="$store.state.shippingMethod"/>
             <VueButton outline="default" :block="true" disabled v-if="$store.state.shippingMethod == ''">Proceed To Shipping</VueButton>
             <VueButton outline="default" :block="true" v-if="$store.state.shippingMethod != ''" @click.native="setShippingDone">Proceed To Shipping</VueButton>
           </div>
         </div>
       </div>
-      <div class="card z-depth-0 bordered">
-        <div class="card-header" id="headingTwo">
+      <div class="card z-depth-0">
+        <div>
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <VueButton color="white" :block="true">
               Place order
-            </button>
+            </VueButton>
           </h5>
         </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -70,12 +79,12 @@
           </div>
         </div>
       </div>
-      <div class="card z-depth-0 bordered" v-if="order">
-        <div class="card-header" id="headingTwo">
+      <div class="card z-depth-0" v-if="order">
+        <div>
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <VueButton color="white" :block="true" type="VueButton" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               Order Details
-            </button>
+            </VueButton>
           </h5>
         </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -127,6 +136,16 @@ export default {
     },
     setShippingDone(){
       this.shippingDone = true;
+    },
+    toggleAccount(){
+      this.accountDone = false;
+    },
+    toggleAddress(){
+      this.addressDone = false;
+      this.shippingAddress = false;
+    },
+    toggleShipping(){
+      this.shippingDone = false;
     },
     submitOrder(){
       this.order = true;
