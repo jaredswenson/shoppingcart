@@ -60,7 +60,7 @@
                     }
                     else {
                         //3rd
-                        if (1 == 1) {
+                        if (1 == 2) {
                             //4th
                             this.$store.dispatch({
                                 type: 'createToken'
@@ -83,8 +83,53 @@
                                         'populateStorage',
                                         response
                                     ).then((res) => {
-                                        console.log(res);
-                                        console.log(this.$store.global.state.userAccessToken);
+                                        //console.log(res);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        console.log(this.$store.state.userAccessToken);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                         console.log('populateStorage resolved');
                                         //6th
                                         this.$store.dispatch({
