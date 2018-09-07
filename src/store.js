@@ -90,6 +90,26 @@ export const store = new Vuex.Store({
             //console.log(d)
             console.log('addItemToCart resolved')
         },
+        addItemToCart(state, payload) {
+            // payload.quantity = state.quantity;
+            // console.log(payload);
+            // if (payload.autoship) {
+            //     payload.itemTotal = state.quantity * payload.Prices[2].Cost;
+            // } else {
+            //     payload.itemTotal = state.quantity * payload.Prices[1].Cost;
+            // }
+            // var index = state.orderItems.indexOf(payload);
+            // if (index > -1) {
+            //     state.orderItems[index].quantity = state.quantity;
+            //     if (state.quantity <= 0) {
+            //         this.dispatch("deleteItemFromCart", payload);
+            //     }
+            // } else {
+              console.log(payload)
+                payload.inCart = true;
+            //     state.orderItems.push(payload);
+            // }
+        },
         // deleteItemFromCart(state, payload) {
         //     state.orderTotal = state.orderTotal - payload.itemTotal;
         //     var index = state.orderItems.indexOf(payload);
@@ -214,7 +234,8 @@ export const store = new Vuex.Store({
         updateText: (context, payload) => {
             context.commit("setText", payload)
         },
-        addItemToCart: ({commit, state}, payload) => {
+        addItemToCart: (context, payload) => {
+            context.commit('addItemToCart', payload );
             store.dispatch('cart/addItemToCart', payload );
         },
         async addItemToCart2({ commit, state }, payload) {

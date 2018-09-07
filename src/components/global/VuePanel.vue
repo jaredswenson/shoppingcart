@@ -116,7 +116,6 @@ export default {
   },
   methods: {
     addItemToCart(item) {
-      console.log(this.$store.state)
       this.$store.dispatch("addItemToCart", item);
     },
     deleteItemFromCart(item){
