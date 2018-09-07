@@ -54,6 +54,11 @@ export const store = new Vuex.Store({
         search: '',
         itemsInAutoship: false,
         itemsNotAutoship: false,
+        cart: [
+            {
+                items: []
+            }
+        ]
     },
     mutations: {
         setModal(state, payload) {
@@ -212,7 +217,23 @@ export const store = new Vuex.Store({
         },
         loadCart: (state, payload) => {
             Vue.set(state, 'items', payload);
-        }
+        },
+        async setAccessToken({ commit }, payload) {
+            //console.clear()
+            console.log(payload)
+            console.log('setAccessToken')
+            //const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
+            //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+            //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+            //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
+            //console.log(d)
+            console.log('setAccessToken resolved')
+        },
+
+
+
+
+
     },
     actions: {
         loadGlobalVariables({ commit, state }) {
@@ -329,73 +350,40 @@ export const store = new Vuex.Store({
             })();
             await a.b();
         },
-        loadCart2({ commit, state }, payload) {
-            //console.clear()
-            console.log('loadCart')
-            //console.log(payload)
-            //console.log(state.items)
-            //console.table(state.items)
+        async loadSimulatedCart({ commit, state }, payload) {
 
-            console.log('--393--');
-            store.dispatch({ type: 'doubleAfter2Seconds' })
-            console.log('--395--');
+            console.clear()
+            console.log('----loadSimulatedCart')
 
-            return new Promise(resolve => {
+            var data = await store.dispatch({ type: 'products/getSimulatedInventoryItems' });
 
-
-                console.log('--400--');
-                if (state.items > 0) {
-                    state.items = [];
+            console.log('-getSimulatedInventoryItems resolved');
+            var a = (function () {
+                var d;
+                function c() {
+                    return data;
                 }
-                else {
-                    state.items = [
-                        {
-                            "id": 1,
-                            "make": "Volkswagen",
-                            "model": "GTI",
-                            "price": 8.31
-                        },
-                        {
-                            "id": 2,
-                            "make": "Mercedes-Benz",
-                            "model": "E-Class",
-                            "price": 2.13
-                        },
-                        {
-                            "id": 3,
-                            "make": "Ford",
-                            "model": "LTD Crown Victoria",
-                            "price": 1.05
-                        },
-                        {
-                            "id": 4,
-                            "make": "Lamborghini",
-                            "model": "Gallardo",
-                            "price": 6.30
-                        },
-                        {
-                            "id": 5,
-                            "make": "Cadillac",
-                            "model": "Escalade",
-                            "price": 9.17
-                        },
-                        {
-                            "id": 6,
-                            "make": "Scion",
-                            "model": "xB",
-                            "price": 2.12
+                return {
+                    b: function () {
+                        d = c();
+                        if (state.items > 0) {
+                            state.items = [];
                         }
-                    ];
-                }
-
-
-
-
-                console.log('--449--');
-                //context.commit('loadCart', payload)
-                resolve('done loading cart');
-                console.log('--452--');
-            });
+                        else {
+                            $.each(d, function (i, v) {
+                                v.autoship = false;
+                                v.inCart = false;
+                                v.itemTotal = 0;
+                                v.quantity = 0;
+                            })
+                            Vue.set(state, 'items', d)
+                            state.items = d;
+                            console.log(state.items)
+                        }
+                    }
+                };
+            })();
+            await a.b();
         },
 
 
@@ -418,19 +406,18 @@ export const store = new Vuex.Store({
         },
 
 
-        async getBaseURL(context) {
+        async getBaseURL({ commit, state }) {
             var a = (function () {
                 var data;
                 return {
                     b: function () {
-                        return data = 'https://dev-core.xennbox.com';
-                        //theToken = store.dispatch({ type: 'createToken' });
+                        return data = state.global.coreUrl;
                     }
                 };
             })();
             return await a.b();
         },
-        async getUn(context) {
+        async getUn({ commit, state }) {
             var a = (function () {
                 var data;
                 return {
@@ -441,7 +428,7 @@ export const store = new Vuex.Store({
             })();
             return await a.b();
         },
-        async getPw(context) {
+        async getPw({ commit, state }) {
             var a = (function () {
                 var data;
                 return {
@@ -519,52 +506,20 @@ export const store = new Vuex.Store({
 
                 resolve(token);
             });
-        },
-        async populateStorage(context, payload) {
-
-
-            //console.clear()
+        },     
+        async populateStorage({ commit }, payload) {
+            //async populateStorage(context, payload) {
+            console.clear()
+            //console.log(payload)
             console.log('--------populateStorage')
-
-
-
-
-
-
-
             return new Promise(resolve => {
-
-                var sc;
-
-
-
-                if (localStorage.getItem("ShoppingCart") == null) {
-
-                    //Clear the cart as a precaution
-                    localStorage.removeItem("ShoppingCart");
-
-
-                    var t = { t: payload };
-                    localStorage.setItem("ShoppingCart", JSON.stringify(t));
-
-                    console.log(t)
-                    console.log(localStorage.getItem("ShoppingCart"))
-                    console.log(localStorage)
-
-
-                    var shoppingCart = JSON.parse(
-                        localStorage.getItem("ShoppingCart")
-                    );
-
-                    console.log(shoppingCart.t)
-
-                    //alert('stop2')
+                if (1 == 1) {
+                    store.commit('setAccessToken', payload );
                 }
                 else {
-                    console.log(localStorage.getItem("ShoppingCart"))
                     //Something went wrong try again
                 }
-                resolve(sc);
+                resolve(global.state.userAccessToken);
             });
         },
     },

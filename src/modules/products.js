@@ -5,7 +5,14 @@ const modules = {
 };
 
 const state = {
-    items: []
+    items: [],
+    simulatedItems: [
+        { Id: 730160125, CurrencyCode: "USD", Name: "Root Beer", Sku: "011", ShortDescription: "Root Beer" },
+        { Id: 730160124, CurrencyCode: "USD", Name: "Dr Pepper", Sku: "010", ShortDescription: "Dr Pepper" },
+        { Id: 730160126, CurrencyCode: "USD", Name: "Sprite", Sku: "012", ShortDescription: "Sprite" },
+        { Id: 730160099, CurrencyCode: "USD", Name: "Diet Coke", Sku: "04965802", ShortDescription: "Diet Coke" },
+        { Id: 730160123, CurrencyCode: "USD", Name: "Coke", Sku: "009", ShortDescription: "Coke" }
+    ]
 };
 
 const mutations = {
@@ -44,8 +51,8 @@ const actions = {
 
                 var d;
 
-                if (global.state.access_token != undefined && global.state.access_token != null && global.state.access_token != '') {
-                    token = global.state.access_token;
+                if (global.state.userAccessToken != undefined && global.state.userAccessToken != null && global.state.userAccessToken != '') {
+                    token = global.state.userAccessToken;
                 }
 
 
@@ -71,7 +78,7 @@ const actions = {
                             console.warn('url:', url)
                             console.warn('response:', response)
                             console.warn('type:', type)
-                
+
 
                             deferred.resolve(response);
                         })
@@ -118,6 +125,32 @@ const actions = {
 
 
 
+    },
+    async getSimulatedInventoryItems({ dispatch, context, state }) {
+        console.log('-getSimulatedInventoryItems')
+        try {
+            var a = (function () {
+                var d;
+                function c() {
+                    return state.simulatedItems;
+                }
+                return {
+                    b: function () {
+                        try {
+                            d = c();
+                            if (d != null) {
+                                return d;
+                            } else throw new Error('Attempting to generateToken')
+                        } catch (e) {
+                            console.log(e)
+                        }
+                    }
+                };
+            })();
+            return await a.b();
+        } catch (e) {
+            return e;
+        }
     },
     async template1({ commit }, payload) {
         console.clear()
