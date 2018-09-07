@@ -6,6 +6,7 @@
       <div class="row">
         <div class="col-8">
           <VueAccordian/>
+
         </div>
         <div class="col-4">
             <Cart :flyout="true" :hidecancel="true" :hidesummary="true"/>
@@ -19,6 +20,8 @@
 <script>
 
 export default {
+  components: {
+  },
   data(){
     return{
       
