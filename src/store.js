@@ -221,14 +221,12 @@ export const store = new Vuex.Store({
             store.commit('global/setUserName', { userName: 'xennsoft' });
             store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
             return new Promise(resolve => {
-                setTimeout(() => {
-                    var items = ['global items loaded',
-                        { 'state.global.baseUrl': state.global.baseUrl }
-                        , { 'state.global.userName': state.global.userName }
-                        , { 'state.global.userPassword': state.global.userPassword }
-                    ];
-                    resolve(items);
-                }, .2000);
+                var items = ['global items loaded',
+                    { 'state.global.baseUrl': state.global.baseUrl }
+                    , { 'state.global.userName': state.global.userName }
+                    , { 'state.global.userPassword': state.global.userPassword }
+                ];
+                resolve(items);
             });
         },
         modalAction: (context, payload) => {
@@ -241,11 +239,12 @@ export const store = new Vuex.Store({
             context.commit("addItemToCart", payload)
         },
         async addItemToCart2({ commit, state }, payload) {
+            console.clear();
             console.log('addItemToCart2')
-            const a = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const b = await store.dispatch({ type: 'getUn' });
-            //const c = await store.dispatch({ type: 'getPw' });
-            //const d = await store.dispatch({ type: 'resolveAfter0Seconds' });
+            const a = await store.dispatch({ type: 'cart/asdf', asdf: 'asdf' });
+            const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+            const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+            const d = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
             //const e = await store.dispatch({ type: 'generateToken', url: a, username: b, password: c });
 
             console.log(a)
@@ -281,84 +280,12 @@ export const store = new Vuex.Store({
         setCurrentParty: (context, payload) => {
             context.commit("setCurrentParty", payload)
         },
-        fakeAJAXcall: (context, time) => {
-            const waitTime = time.seconds * 1000;
-            return new Promise(resolve => {
-                setTimeout(() => {
-
-                    var payload = [
-                        {
-                            "id": 1,
-                            "make": "Volkswagen",
-                            "model": "GTI",
-                            "price": 8.31
-                        },
-                        {
-                            "id": 2,
-                            "make": "Mercedes-Benz",
-                            "model": "E-Class",
-                            "price": 2.13
-                        },
-                        {
-                            "id": 3,
-                            "make": "Ford",
-                            "model": "LTD Crown Victoria",
-                            "price": 1.05
-                        },
-                        {
-                            "id": 4,
-                            "make": "Lamborghini",
-                            "model": "Gallardo",
-                            "price": 6.30
-                        },
-                        {
-                            "id": 5,
-                            "make": "Cadillac",
-                            "model": "Escalade",
-                            "price": 9.17
-                        },
-                        {
-                            "id": 6,
-                            "make": "Scion",
-                            "model": "xB",
-                            "price": 2.12
-                        }
-                    ];
-
-                    resolve(payload);
-                }, waitTime);
-            });
-        },
-
-        resolveAfter10Seconds: (context) => {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(10);
-                }, 10000);
-            });
-        },
-        resolveAfter5Seconds: (context) => {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(5);
-                }, 5000);
-            });
-        },
-        resolveAfter0Seconds: (context) => {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(0);
-                }, .5000);
-            });
-        },
 
 
         loadWarehouse: (context) => {
             console.log('---loadWarehouse')
             return new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(1);
-                }, .2000);
+                resolve(1);
             });
         },
 
@@ -464,12 +391,10 @@ export const store = new Vuex.Store({
 
 
 
-                //setTimeout(() => {
                 console.log('--449--');
                 //context.commit('loadCart', payload)
                 resolve('done loading cart');
                 console.log('--452--');
-                //}, 12000);
             });
         },
 
@@ -477,20 +402,18 @@ export const store = new Vuex.Store({
         getStorageStatus({ commit, state }) {
             console.log('--getStorageStatus')
             return new Promise(resolve => {
-                setTimeout(() => {
 
-                    var localStorageShoppingCart;
+                var localStorageShoppingCart;
 
-                    if (state.global.access_token == null) {
-                        localStorageShoppingCart = false;
-                    }
-                    else {
-                        localStorageShoppingCart = true;
-                    }
+                if (state.global.access_token == null) {
+                    localStorageShoppingCart = false;
+                }
+                else {
+                    localStorageShoppingCart = true;
+                }
 
 
-                    resolve(localStorageShoppingCart);
-                }, 2000);
+                resolve(localStorageShoppingCart);
             });
         },
 
@@ -576,7 +499,6 @@ export const store = new Vuex.Store({
             const a = await store.dispatch({ type: 'getBaseURL' });
             const b = await store.dispatch({ type: 'getUn' });
             const c = await store.dispatch({ type: 'getPw' });
-            const d = await store.dispatch({ type: 'resolveAfter0Seconds' });
             const e = await store.dispatch({ type: 'generateToken', url: a, username: b, password: c });
 
             return e.access_token;
@@ -584,20 +506,18 @@ export const store = new Vuex.Store({
         async getToken(context) {
             console.log('------getToken')
             return new Promise(resolve => {
-                setTimeout(() => {
 
-                    var token;
+                var token;
 
-                    if (state.global.access_token == null) {
-                        //Get the token
+                if (state.global.access_token == null) {
+                    //Get the token
 
-                    }
-                    else {
-                        //Something went wrong try again
-                    }
+                }
+                else {
+                    //Something went wrong try again
+                }
 
-                    resolve(token);
-                }, .2000);
+                resolve(token);
             });
         },
         async populateStorage(context, payload) {
