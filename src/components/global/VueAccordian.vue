@@ -81,7 +81,7 @@
       </div>
       <div class="card z-depth-0" v-if="order">
         <div>
-          <h5 class="mb-0">
+          <h1 class="mb-0">
             <VueButton color="white" :block="true" type="VueButton" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               Order Details
             </VueButton>
