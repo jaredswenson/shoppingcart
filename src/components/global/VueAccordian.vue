@@ -59,8 +59,27 @@
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body" v-if="accountDone && addressDone && !shippingDone">
             <VueText label="Shipping Method" model="shippingMethod" :value="$store.state.shippingMethod"/>
-            <VueButton outline="default" :block="true" disabled v-if="$store.state.shippingMethod == ''">Proceed To Shipping</VueButton>
-            <VueButton outline="default" :block="true" v-if="$store.state.shippingMethod != ''" @click.native="setShippingDone">Proceed To Shipping</VueButton>
+            <VueButton outline="default" :block="true" disabled v-if="$store.state.shippingMethod == ''">Proceed To Payment</VueButton>
+            <VueButton outline="default" :block="true" v-if="$store.state.shippingMethod != ''" @click.native="setShippingDone">Proceed To Payment</VueButton>
+          </div>
+        </div>
+      </div>
+      <div class="card z-depth-0">
+        <div>
+          <h5 class="mb-0">
+            <VueButton color="white" v-if="!paymentDone" :block="true">
+              Payment Info
+            </VueButton>
+            <VueButton color="white" :block="true" v-if="paymentDone" @click.native="togglePayment">
+              Payment Info
+            </VueButton>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body" v-if="accountDone && addressDone && shippingDone && !paymentDone">
+            <VueText label="Shipping Method" model="shippingMethod" :value="$store.state.shippingMethod"/>
+            <VueButton outline="default" :block="true" disabled v-if="$store.state.shippingMethod == ''">Place Order</VueButton>
+            <VueButton outline="default" :block="true" v-if="$store.state.shippingMethod != ''" @click.native="setPaymentDone">Place Order</VueButton>
           </div>
         </div>
       </div>
@@ -73,7 +92,7 @@
           </h5>
         </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body"  v-if="accountDone && addressDone && shippingDone">
+          <div class="card-body"  v-if="accountDone && addressDone && shippingDone && paymentDone">
             <VueButton color="success" :block="true" @click.native="submitOrder">Place Order</VueButton>
           </div>
         </div>
@@ -112,6 +131,7 @@ export default {
       accountDone: false,
       addressDone: false,
       shippingDone: false,
+      paymentDone: false
     }
   },
   props: {
@@ -126,6 +146,9 @@ export default {
     setShippingDone(){
       this.shippingDone = true;
     },
+    setPaymentDone(){
+      this.paymentDone = true;
+    },
     toggleAccount(){
       this.accountDone = false;
     },
@@ -135,6 +158,10 @@ export default {
     },
     toggleShipping(){
       this.shippingDone = false;
+    },
+    togglePayment(){
+      console.log(this.paymentDone);
+      this.paymentDone = false;
     },
     submitOrder(){
       this.order = true;
