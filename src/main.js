@@ -23,6 +23,8 @@ import {getters} from './store';
 import {mutations} from './store';
 import {actions} from './store';
 
+//modules
+import cart from '@/modules/cart'
 
 
 Vue.config.productionTip = false
@@ -37,5 +39,6 @@ new Vue({
   library,
   faCoffee,
   FontAwesomeIcon,
+  cart,
   render: h => h(App)
 }).$mount('#app')

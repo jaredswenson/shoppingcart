@@ -79,7 +79,6 @@
         </div>
       </div>
       <div class="card z-depth-0" v-if="order">
-        
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body row">
             <div class="col-8">
