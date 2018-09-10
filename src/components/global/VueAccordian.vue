@@ -74,19 +74,11 @@
         </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body"  v-if="accountDone && addressDone && shippingDone">
-            <Cart :hideradio="true" :hidedelete="true"/>
             <VueButton color="success" :block="true" @click.native="submitOrder">Place Order</VueButton>
           </div>
         </div>
       </div>
       <div class="card z-depth-0" v-if="order">
-        <div>
-          <h5 class="mb-0">
-            <VueButton color="white" :block="true" type="VueButton" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-              Order Details
-            </VueButton>
-          </h5>
-        </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body row">
             <div class="col-8">
@@ -100,7 +92,7 @@
               <p>{{$store.state.country}}</p>
             </div>
             <div class="col-4">
-              <p v-for="item in $store.state.orderItems" >{{item.make}} - {{item.price}}</p>
+              <p v-for="item in $store.state.orderItems" >{{item.Name}} - x{{item.quantity}}</p>
               <p>${{itemTotals}}</p>
             </div>
           </div>
@@ -108,9 +100,7 @@
       </div>
     </div>
 </template>
-
 <script>
-
 export default {
   name: "VueAccordian",
   components: {
@@ -125,7 +115,6 @@ export default {
     }
   },
   props: {
-
   },
   methods:{
     setAccountDone(){
@@ -159,8 +148,6 @@ export default {
   },
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
