@@ -30,7 +30,7 @@ const mutations = {
                 this.dispatch("deleteItemFromCart", payload);
             }
         } else {
-            payload.inCart = true;
+            //payload.inCart = true;
             state.orderItems.push(payload);
         }
         Vue.set(state, 'orderTotal', 0)
@@ -60,7 +60,7 @@ const mutations = {
             total += parseInt(v.quantity)
         });
         Vue.set(state, 'totalItemsInCart', total);
-        store.dispatch("checkForAutoship");
+        // store.dispatch("checkForAutoship");
         localStorage.setItem('order', JSON.stringify(state.orderItems));
     },
 

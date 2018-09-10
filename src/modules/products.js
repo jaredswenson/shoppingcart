@@ -14,7 +14,7 @@ const state = {
             Sku: "011",
             ShortDescription: "Root Beer",
             LongDescription: "\r\nevery once in a while\r\n",
-            OnHand: 999,
+            OnHand: 7,
             Prices: [
                 {
                     "Id": 1,
@@ -73,7 +73,7 @@ const state = {
             Sku: "010",
             ShortDescription: "Dr Pepper",
             LongDescription: "\r\n good backup flavor\r\n",
-            OnHand: 999,
+            OnHand: 8,
             Prices: [
                 {
                     "Id": 1,
@@ -132,7 +132,7 @@ const state = {
             Sku: "012",
             ShortDescription: "Sprite",
             LongDescription: "\r\n Only when you are sick\r\n",
-            OnHand: 999,
+            OnHand: 4,
             Prices: [
                 {
                     "Id": 1,
