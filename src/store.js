@@ -82,6 +82,10 @@ export const store = new Vuex.Store({
         addItemToCart(state, payload) {
             payload.quantity = state.quantity;
             console.log(payload);
+            if(state.quantity > payload.OnHand){
+              alert("Max Quantity For This Item Is " + payload.OnHand);
+              state.quantity = payload.OnHand;
+            }
             if (payload.autoship) {
                 payload.itemTotal = state.quantity * payload.Prices[2].Cost;
             } else {
@@ -159,11 +163,8 @@ export const store = new Vuex.Store({
             localStorage.setItem('order', JSON.stringify(state.orderItems));
         },
         updateAutoship: (state, payload) => {
-            console.log(payload);
             var item = _.where(state.items, { Id: payload.item.Id })[0];
-            console.log(item);
             var oItem = _.where(state.orderItems, { Id: payload.item.Id });
-            console.log(oItem);
             if (oItem.length > 0) {
                 if (payload.type == 'autoship') {
                     oItem[0].autoship = true;

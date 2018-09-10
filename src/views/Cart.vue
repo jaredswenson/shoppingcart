@@ -9,6 +9,7 @@
         <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsInAutoship">
           <h4>AUTOSHIP ORDER</h4>
         </navbar>
+        <br>
          <div class="col-12" v-for="item in $store.state.orderItems" v-if="item.autoship">
           <VuePanel :item="item" :hideradio="hideradio" :hidedelete="hidedelete"/>
           <hr>
@@ -21,7 +22,7 @@
       <navbar class="grey lighten-3" dark style="margin-top:10px;">
         <h4>TODAY'S ORDER</h4>
       </navbar>
-      <br>
+      <!-- <br> -->
       <p v-if="$store.state.orderItems.length <= 0">Nothing In Cart!</p>
       <div class="row" v-for="item in $store.state.orderItems" v-if="!item.autoship">
         <div class="col-3">
@@ -43,6 +44,7 @@
       <navbar class="grey lighten-3" dark style="margin-top:10px;" v-if="$store.state.itemsInAutoship">
         <h4>AUTOSHIP ORDER</h4>
       </navbar>
+      <br>
       <div class="row" v-for="item in $store.state.orderItems" v-if="item.autoship">
         
         <div class="col-3">
