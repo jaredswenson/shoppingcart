@@ -1,6 +1,6 @@
 <template>
   <article class="xen-cart-product row p-y-3" variantproduct="false" :inventoryid="item.id">      
-    <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2">       
+    <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2"  v-if="!hideimage">       
     <figure>          
       <a id="detailsImage" class="xen-cart-link" @click="goToDetails(item)">            
         <img :src="item.ImageUrl" inventoryid="item.id" width="160" height="160" alt="" class="xen-cart-image js-image img-fluid m-a-0">         
@@ -152,6 +152,10 @@ export default {
       default: false
     },
     hidedelete:{
+      type: Boolean,
+      default: false
+    },
+    hideimage:{
       type: Boolean,
       default: false
     }
