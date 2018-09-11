@@ -145,7 +145,22 @@ export default {
       this.$router.push('/')
     },
     goToCheckout(){
-      this.$router.push('/checkout')
+
+        this.$store.dispatch('createOrder').then((response) => {
+            console.log('createOrder');
+            console.log(response);
+            console.log('createOrder resolved');
+            if (response.length > 0) {
+                this.$router.push('/checkout')
+            }
+        })
+
+
+
+
+
+
+
     },
     goToSummary(){
       this.$router.push('/cart')

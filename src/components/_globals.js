@@ -1,5 +1,6 @@
 import Vue from "vue";
 import mdb from 'mdbvue/src/index.js';
+
 // import global components here
 import VueButton from './global/VueButton'
 import VueText from './global/VueText'
@@ -28,8 +29,6 @@ Vue.component("NavbarNav", NavbarNav)
 Vue.component("Dropdown", Dropdown)
 Vue.component("DropdownToglge", DropdownToggle)
 Vue.component("DropdownMenu", DropdownMenu)
-
-
 
 //import global Views here
 import About from '@/views/About.vue'

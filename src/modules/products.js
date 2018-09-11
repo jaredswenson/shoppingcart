@@ -240,7 +240,7 @@ const actions = {
                 var coreUrl = global.state.coreUrl;
                 var token = null;
                 var url = 'api/Inventory/GetProducts';
-                var getProducts_url = coreUrl + url + '/' + '1' + '/' + 'WP_Retail';
+                var getProducts_url = coreUrl + '/' + url + '/' + '1' + '/' + 'WP_Retail';
 
                 var d;
 
@@ -254,6 +254,8 @@ const actions = {
 
                 var headers = [];
                 headers.Authorization = "Bearer " + token;
+
+                console.log(headers)
 
                 function c() {
 
@@ -269,11 +271,11 @@ const actions = {
                             headers: headers
                         }))
                         .then(function (response) {
-                            console.warn('++++++++++++++++ NEW AJAX REQUEST ++++++++++++++++++')
-                            console.warn('coreUrl:', coreUrl)
-                            console.warn('url:', url)
-                            console.warn('response:', response)
-                            console.warn('type:', type)
+                            //console.warn('++++++++++++++++ NEW AJAX REQUEST ++++++++++++++++++')
+                            //console.warn('coreUrl:', coreUrl)
+                            //console.warn('url:', url)
+                            //console.warn('response:', response)
+                            //console.warn('type:', type)
 
 
                             deferred.resolve(response);

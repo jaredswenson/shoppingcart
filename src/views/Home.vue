@@ -29,14 +29,10 @@
             this.$store.dispatch({
                 type: 'loadGlobalVariables'
             }).then((response) => {
-                console.log('-loadGlobalVariables resolved');
-
                 //2nd
                 this.$store.dispatch({
                     type: 'getStorageStatus'
-                }).then((storageExits) => {
-                    console.log('--getStorageStatus resolved');
-
+                }).then((storageExits) => {                  
                     //3rd
                     if (1 == 2) {
                         //console.clear()
@@ -60,13 +56,12 @@
                     }
                     else {
                         //3rd
-                        if (1 == 2) {
+                        if (1 == 1) {
                             //4th
                             this.$store.dispatch({
                                 type: 'createToken'
                             }).then((response) => {
-                                console.log(response)
-                                console.log('createToken resolved')
+                                //console.log(response)                          
                                 if (response.length > 0) {
 
 
@@ -129,21 +124,19 @@
 
 
 
-                                        console.log('populateStorage resolved');
+                                        
                                         //6th
                                         this.$store.dispatch({
                                             type: 'loadWarehouse'
                                         }).then((res) => {
-                                            console.log(res);
-                                            console.log('---loadWarehouse resolved');
+                                            //console.log(res);
                                             //7th
                                             this.$store.dispatch({
                                                 type: 'loadCart',
                                                 warehouseId: res,
                                                 cartType: 5 //Retail
                                             }).then((res) => {
-                                                console.log('----loadCart resolved');
-                                                this.$store.dispatch("setOrderFromStorage");
+                                                //this.$store.dispatch("setOrderFromStorage");
                                             })
                                         })
                                     })

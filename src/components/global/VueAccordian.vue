@@ -141,7 +141,13 @@ export default {
       this.accountDone = true;
     },
     setAddressDone(){
-      this.addressDone = true;
+        this.addressDone = true;
+
+        this.$store.dispatch('getShippingMethods').then((response) => {
+            console.log('getShippingMethods');
+            console.log(response);
+            console.log('getShippingMethods resolved');
+        })
     },
     setShippingDone(){
       this.shippingDone = true;
