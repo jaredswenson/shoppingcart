@@ -37,11 +37,7 @@ export const store = new Vuex.Store({
         state: '',
         country: '',
         shippingMethod: '',
-        orderItems: [],
-        quantity: 1,
         category: '',
-        orderTotal: 0,
-        totalItemsInCart: 0,
         currentItem: {},
         showModal: false,
         modalFooter: true,
@@ -50,10 +46,7 @@ export const store = new Vuex.Store({
         modalTitle: 'Modal',
         modalContent: '',
         showCancel: false,
-        showNewParty: false,
         search: '',
-        itemsInAutoship: false,
-        itemsNotAutoship: false,
         userAccessToken: null,
         cart: [
             {
@@ -62,184 +55,60 @@ export const store = new Vuex.Store({
         ]
     },
     mutations: {
-        setModal(state, payload) {
-            //need to set all components in the modal to false first, so multiple don't show up
-            Vue.set(state, 'showCancel', false);
-            Vue.set(state, 'showNewParty', false);
+      setModal(state, payload) {
+          //need to set all components in the modal to false first, so multiple don't show up
+          Vue.set(state, 'showCancel', false);
+          Vue.set(state, 'showNewParty', false);
 
-            Vue.set(state, payload.slot, true);
-            Vue.set(state, 'modalContent', payload.content);
-            Vue.set(state, 'modalTitle', payload.title);
-            Vue.set(state, 'modalSize', payload.size);
-            Vue.set(state, 'modalHeader', payload.header);
-            Vue.set(state, 'modalFooter', payload.footer);
-            Vue.set(state, 'showModal', true);
-            $('#VueModal').show();
-        },
-        setText(state, payload) {
-            Vue.set(state, payload.key, payload.value);
-        },
-        addItemToCart(state, payload) {
-            payload.quantity = state.quantity;
-            console.log(payload);
-            if(state.quantity > payload.OnHand){
-              alert("Max Quantity For This Item Is " + payload.OnHand);
-              state.quantity = payload.OnHand;
-            }
-            if (payload.autoship) {
-                payload.itemTotal = state.quantity * payload.Prices[2].Cost;
-            } else {
-                payload.itemTotal = state.quantity * payload.Prices[1].Cost;
-            }
-            var index = state.orderItems.indexOf(payload);
-            if (index > -1) {
-                state.orderItems[index].quantity = state.quantity;
-                if (state.quantity <= 0) {
-                    this.dispatch("deleteItemFromCart", payload);
-                }
-            } else {
-                payload.inCart = true;
-                state.orderItems.push(payload);
-            }
-            Vue.set(state, 'orderTotal', 0)
-            $.each(state.orderItems, function (i, v) {
-                state.orderTotal += v.itemTotal
-            })
-            var total = 0;
-            $.each(state.orderItems, function (i, v) {
-                total += parseInt(v.quantity)
-            });
-            Vue.set(state, 'totalItemsInCart', total);
-            this.dispatch("updateQuantity", 1);
-            store.dispatch("checkForAutoship");
-
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        async addItemToCart1({ commit }, payload) {
-            //console.clear()
-            //console.log(payload)
-            console.log('addItemToCart')
-            const a = await store.dispatch({ type: 'cart/asdf', p: payload.p });
-            //const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const d = await store.dispatch({ type: 'addItemToCart', aaa: a, bbb: b, ccc: c });
-            //console.log(d)
-            console.log('addItemToCart resolved')
-        },
-        deleteItemFromCart(state, payload) {
-            state.orderTotal = state.orderTotal - payload.itemTotal;
-            var index = state.orderItems.indexOf(payload);
-            if (index > -1) {
-                var item = _.where(state.items, { Id: payload.Id })[0];
-                item.inCart = false;
-                state.orderItems.splice(index, 1);
-            }
-            var total = 0;
-            $.each(state.orderItems, function (i, v) {
-                total += parseInt(v.quantity)
-            });
-            Vue.set(state, 'totalItemsInCart', total);
-            store.dispatch("checkForAutoship");
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        setCurrentItem(state, payload) {
-            console.log('store', payload);
-            Vue.set(state, 'currentItem', payload)
-        },
-        updateQuantity: (state, payload) => {
-            Vue.set(state, 'quantity', payload);
-        },
-        setCategory: (state, payload) => {
-            Vue.set(state, 'category', payload);
-        },
-        cancelOrder: (state) => {
-            $.each(state.items, function (i, v) {
-                v.inCart = false;
-            });
-            Vue.set(state, 'totalItemsInCart', 0)
-            Vue.set(state, 'orderItems', []);
-            Vue.set(state, 'orderTotal', 0);
-            Vue.set(state, 'itemsInAutoship', false);
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        updateAutoship: (state, payload) => {
-            var item = _.where(state.items, { Id: payload.item.Id })[0];
-            var oItem = _.where(state.orderItems, { Id: payload.item.Id });
-            if (oItem.length > 0) {
-                if (payload.type == 'autoship') {
-                    oItem[0].autoship = true;
-                    oItem[0].itemTotal = oItem[0].quantity * oItem[0].Prices[2].Cost;
-                } else {
-                    oItem[0].autoship = false;
-                    oItem[0].itemTotal = oItem[0].quantity * oItem[0].Prices[1].Cost;
-                }
-            }
-            if (payload.type == 'autoship') {
-                item.autoship = true;
-            } else {
-                item.autoship = false;
-            }
-            //Vue.set(state, item, payload);
-            Vue.set(state, 'orderTotal', 0)
-            $.each(state.orderItems, function (i, v) {
-                state.orderTotal += v.itemTotal
-            });
-            store.dispatch("checkForAutoship");
-            localStorage.setItem('order', JSON.stringify(state.orderItems));
-        },
-        setOrderFromStorage: (state, payload) => {
-            var order = JSON.parse(localStorage.getItem('order'));
-            var total = 0;
-            var costTotal = 0;
-            Vue.set(state, "orderItems", order);
-            $.each(order, function (i, v) {
-                var item = _.where(state.items, { Id: v.Id })[0];
-                console.log(item);
-                item.inCart = true;
-                item.autoship = v.autoship;
-                total += v.quantity;
-                costTotal += v.itemTotal;
-            });
-            Vue.set(state, 'totalItemsInCart', total);
-            Vue.set(state, 'orderTotal', costTotal);
-        },
-        checkForAutoship: (state, payload) => {
-            var autoship = _.where(state.orderItems, { autoship: true });
-            var nonAutoship = _.where(state.orderItems, { autoship: false });
-            if (autoship.length > 0) {
-                Vue.set(state, 'itemsInAutoship', true);
-            } else {
-                Vue.set(state, 'itemsInAutoship', false);
-            }
-            if (nonAutoship.length > 0) {
-                Vue.set(state, 'itemsNotAutoship', true);
-            } else {
-                Vue.set(state, 'itemsNotAutoship', false);
-            }
-        },
-        loadCart: (state, payload) => {
-            Vue.set(state, 'items', payload);
-        }
-    
-
-
-
-
+          Vue.set(state, payload.slot, true);
+          Vue.set(state, 'modalContent', payload.content);
+          Vue.set(state, 'modalTitle', payload.title);
+          Vue.set(state, 'modalSize', payload.size);
+          Vue.set(state, 'modalHeader', payload.header);
+          Vue.set(state, 'modalFooter', payload.footer);
+          Vue.set(state, 'showModal', true);
+          $('#VueModal').show();
+      },
+      setText(state, payload) {
+          Vue.set(state, payload.key, payload.value);
+      },
+      setCurrentItem(state, payload) {
+          console.log('store', payload);
+          Vue.set(state, 'currentItem', payload)
+      },
+      setCategory: (state, payload) => {
+          Vue.set(state, 'category', payload);
+      },
+      loadCart: (state, payload) => {
+          Vue.set(state, 'items', payload);
+      },
+      addItemToCart: (state, payload) => {
+        console.log("store");
+        var item = _.where(state.items, {Id: payload.Id})[0];
+        console.log(item);
+        Vue.set(item, "inCart", true);
+        store.dispatch('cart/addItemToCart', payload);
+      },
+      deleteItemFromCart: (state, payload) => {
+        var item = _.where(state.items, {Id: payload.Id})[0];
+        Vue.set(item, "inCart", false);
+        store.dispatch('cart/deleteItemFromCart', payload);
+      }
     },
     actions: {
-        loadGlobalVariables({ commit, state }) {
-            console.log('-loadGlobalVariables')
-            store.commit('global/setBaseUrl', { coreUrl: 'https://dev-core.xennbox.com/' });
-            store.commit('global/setUserName', { userName: 'xennsoft' });
-            store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
-            return new Promise(resolve => {
-                var items = ['global items loaded',
-                    { 'state.global.baseUrl': state.global.baseUrl }
-                    , { 'state.global.userName': state.global.userName }
-                    , { 'state.global.userPassword': state.global.userPassword }
-                ];
-                resolve(items);
-            });
+      loadGlobalVariables({ commit, state }) {
+          console.log('-loadGlobalVariables')
+          store.commit('global/setBaseUrl', { coreUrl: 'https://dev-core.xennbox.com/' });
+          store.commit('global/setUserName', { userName: 'xennsoft' });
+          store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
+          return new Promise(resolve => {
+              var items = ['global items loaded',
+                  { 'state.global.baseUrl': state.global.baseUrl }
+                  , { 'state.global.userName': state.global.userName }
+                  , { 'state.global.userPassword': state.global.userPassword }
+              ];
+              resolve(items);
+          });
         },
         modalAction: (context, payload) => {
             context.commit("setModal", payload)
@@ -248,52 +117,32 @@ export const store = new Vuex.Store({
             context.commit("setText", payload)
         },
         addItemToCart: (context, payload) => {
-            context.commit("addItemToCart", payload)
-        },
-        async addItemToCart2({ commit, state }, payload) {
-            //console.clear();
-            console.log('addItemToCart2')
-            const a = await store.dispatch({ type: 'cart/asdf', asdf: 'asdf' });
-            const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            const d = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const e = await store.dispatch({ type: 'generateToken', url: a, username: b, password: c });
-
-            console.log(a)
-            console.log('addItemToCart2 resolved')
+          context.commit('addItemToCart', payload)
         },
         deleteItemFromCart: (context, payload) => {
-            context.commit("deleteItemFromCart", payload)
+            context.commit('deleteItemFromCart', payload)
         },
         goToDetails: (context, payload) => {
             context.commit("setCurrentItem", payload)
         },
         updateQuantity: (context, payload) => {
-            context.commit("updateQuantity", payload)
+            store.dispatch("cart/updateQuantity", payload)
         },
         setCategory: (context, payload) => {
             context.commit("setCategory", payload)
         },
         cancelOrder: (context) => {
-            context.commit("cancelOrder", )
+            store.dispatch('cart/cancelOrder',)
         },
         updateAutoship: (context, payload) => {
-            context.commit("updateAutoship", payload)
+            store.dispatch("cart/updateAutoship", payload)
         },
-        setOrderFromStorage: (context, payload) => {
-            context.commit("setOrderFromStorage", payload)
-        },
-        checkForAutoship: (context) => {
-            context.commit("checkForAutoship")
-        },
-        saveParty: (context) => {
-            context.commit("saveParty")
-        },
-        setCurrentParty: (context, payload) => {
-            context.commit("setCurrentParty", payload)
-        },
-
-
+        // setOrderFromStorage: (context, payload) => {
+        //     store.dispatch("cart/setOrderFromStorage", payload)
+        // },
+        // checkForAutoship: (context) => {
+        //     context.commit("checkForAutoship")
+        // },
         loadWarehouse: (context) => {
             console.log('---loadWarehouse')
             return new Promise(resolve => {
@@ -303,13 +152,7 @@ export const store = new Vuex.Store({
 
 
         async loadCart({ commit, state }, payload) {
-
-            //console.clear()
             console.log('----loadCart')
-            //console.log('payload')
-            //console.log(payload.t)
-            //console.log(payload.warehouseId)
-            //console.log(payload.cartType)
 
             var data = await store.dispatch({ type: 'products/getInventoryItems', t: payload.t, warehouseId: payload.warehouseId, cartType: payload.cartType });
 
@@ -334,7 +177,6 @@ export const store = new Vuex.Store({
                             })
                             Vue.set(state, 'items', d)
                             state.items = d;
-                            //console.log(JSON.stringify(state.items))
                         }
                     }
                 };
@@ -342,8 +184,6 @@ export const store = new Vuex.Store({
             await a.b();
         },
         async loadSimulatedCart({ commit, state }, payload) {
-
-            //console.clear()
             console.log('----loadSimulatedCart')
 
             var data = await store.dispatch({ type: 'products/getSimulatedInventoryItems' });
@@ -375,8 +215,6 @@ export const store = new Vuex.Store({
             })();
             await a.b();
         },
-
-
         getStorageStatus({ commit, state }) {
             console.log('--getStorageStatus')
             return new Promise(resolve => {
@@ -389,13 +227,9 @@ export const store = new Vuex.Store({
                 else {
                     localStorageShoppingCart = true;
                 }
-
-
                 resolve(localStorageShoppingCart);
             });
         },
-
-
         async getBaseURL({ commit, state }) {
             var a = (function () {
                 var data;
@@ -429,8 +263,6 @@ export const store = new Vuex.Store({
             })();
             return await a.b();
         },
-
-
         async generateToken(context, payload) {
             console.log('------generateToken')
             try {
@@ -498,9 +330,6 @@ export const store = new Vuex.Store({
             });
         },     
         async populateStorage({ state }, payload) {
-            //async populateStorage(context, payload) {
-            //console.clear()
-            //console.log(payload)
             console.log('--------populateStorage')
             return new Promise(resolve => {
                 if (1 == 1) {

@@ -37,21 +37,5 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "checkout" */ './views/Checkout.vue')
     },
-    {
-      path: '/party',
-      name: 'party',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "praty" */ './views/PartyPlan.vue')
-    },
-    {
-      path: '/aboutParty',
-      name: 'aboutParty',
-      // route level code-splitting
-      // this generates a separate chunk (aboutParty.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "aboutParty" */ './views/AboutParty.vue')
-    },
   ]
 })

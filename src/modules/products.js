@@ -215,28 +215,6 @@ const actions = {
 
         try {
             var a = (function () {
-
-
-
-                //console.clear();
-
-                //console.log(store)
-                //console.log(state)
-                //console.log(store.state.userAccessToken)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 var coreUrl = global.state.coreUrl;
                 var token = null;
                 var url = 'api/Inventory/GetProducts';

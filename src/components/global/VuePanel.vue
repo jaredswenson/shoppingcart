@@ -71,9 +71,9 @@
       <div class="row">                     
        <div class="col-md-12 col-lg-5 offset-lg-1" v-if="!hidedelete">                        
           <div class="form-group bmd-form-group bmd-form-group-sm is-filled">
-            <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity" v-for="oItem in $store.state.orderItems" :min="oItem.quantity"  v-if="item.Id == oItem.Id" >Quantity</label>
-            <NumericInput v-for="oItem in $store.state.orderItems" :min="oItem.quantity" :max="oItem.OnHand" v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)"/>
-            <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" v-if="item.Id == oItem.Id" @click.native="deleteItemFromCart(oItem)">
+            <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity" v-for="oItem in $store.state.cart.orderItems" :min="oItem.quantity"  v-if="item.Id == oItem.Id" >Quantity</label>
+            <NumericInput v-for="oItem in $store.state.cart.orderItems" :min="oItem.quantity" :max="oItem.OnHand" v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)"/>
+            <VueButton color="white" size="sm" v-for="oItem in $store.state.cart.orderItems" :block="true" v-if="item.Id == oItem.Id" @click.native="deleteItemFromCart(oItem)">
               <i class="fa fa-trash fa-lg"></i>
             </VueButton>                      
           </div>                      
@@ -81,19 +81,19 @@
         <div class="col-md-7 col-lg-7 offset-lg-1" v-if="hidedelete">                        
           <div class="form-group bmd-form-group bmd-form-group-sm is-filled">
             <label for="quantity25" class="bmd-label-floating" productwidgettransval="Quantity">Quantity</label>
-            <NumericInput  v-for="oItem in $store.state.orderItems" :min="oItem.quantity" :max="oItem.OnHand"  v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)"/>
-            <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" v-if="item.Id == oItem.Id" @click.native="deleteItemFromCart(oItem)">
+            <NumericInput  v-for="oItem in $store.state.cart.orderItems" :min="oItem.quantity" :max="oItem.OnHand"  v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)"/>
+            <VueButton color="white" size="sm" v-for="oItem in $store.state.cart.orderItems" :block="true" v-if="item.Id == oItem.Id" @click.native="deleteItemFromCart(oItem)">
               <i class="fa fa-trash fa-lg"></i>
             </VueButton>               
           </div>                      
         </div>
         <div class="col-md-2 col-lg-2 offset-lg-1" v-if="hidedelete">                        
-          <p v-for="oItem in $store.state.orderItems" v-if="item.Id == oItem.Id">${{oItem.itemTotal.toFixed(2)}}</p>                   
+          <p v-for="oItem in $store.state.cart.orderItems" v-if="item.Id == oItem.Id">${{oItem.itemTotal.toFixed(2)}}</p>                   
         </div>                      
         <div class="col-md-12 col-lg-6" v-if="!hidedelete">                        
           <div class="form-group p-t-3">
             <VueButton v-if="!item.inCart" color="default" @click.native="addItemToCart(item)">Add</VueButton>
-            <!--<VueButton v-for="oItem in $store.state.orderItems" v-if="oItem.Id == item.Id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>-->                        
+            <!--<VueButton v-for="oItem in $store.state.cart.orderItems" v-if="oItem.Id == item.Id" outline="default" @click.native="deleteItemFromCart(item)"><i class="fa fa-trash"></i></VueButton>-->                        
           </div>                      
         </div>                   
       </div>       
@@ -107,7 +107,7 @@
 export default {
   name: "VuePanel",
   mounted(){
-    $.each(this.$store.state.orderItems, function(i,v){
+    $.each(this.$store.state.cart.orderItems, function(i,v){
       if(v.autoship){
         $('#oneTime' + v.Id).prop('checked', false);
         $('#autoShip' + v.Id).prop('checked', true);

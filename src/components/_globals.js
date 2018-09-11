@@ -1,5 +1,6 @@
 import Vue from "vue";
 import mdb from 'mdbvue/src/index.js';
+
 // import global components here
 import VueButton from './global/VueButton'
 import VueText from './global/VueText'
@@ -37,7 +38,6 @@ import Cancel from '@/views/Cancel.vue'
 import List from '@/views/List.vue'
 import Cart from '@/views/Cart.vue'
 import Checkout from '@/views/Checkout.vue'
-import NewParty from '@/views/NewParty.vue'
 
 //instantiate views here
 Vue.component("About", About)
@@ -45,6 +45,3 @@ Vue.component("Cancel", Cancel)
 Vue.component("List", List)
 Vue.component("Cart", Cart)
 Vue.component("Checkout", Checkout)
-Vue.component("NewParty", NewParty)
-
-

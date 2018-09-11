@@ -12,7 +12,7 @@
           <dropdown dropleft >
             <dropdown-toggle slot="toggle">
               <i class="fa fa-shopping-cart fa-lg"></i>
-              <span v-if="$store.state.orderItems.length > 0" style="background-color:gray;color:white;border-radius:5px;">{{this.$store.state.totalItemsInCart}}</span>
+              <span v-if="$store.state.cart.orderItems.length > 0" style="background-color:gray;color:white;border-radius:5px;">{{this.$store.state.cart.totalItemsInCart}}</span>
             </dropdown-toggle>
             <dropdown-menu style="width:350px!important;">
               <Cart :flyout="true"/>
