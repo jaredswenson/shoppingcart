@@ -1,8 +1,11 @@
-﻿const state = {
-    coreUrl: null
+﻿import Vue from 'vue'
+
+const state = {
+    coreUrl: 'https://dev-core.xennbox.com'
     , userName: null
     , userPassword: null
     , userAccessToken: null
+    , headers: []
 };
 
 const mutations = {
@@ -12,7 +15,7 @@ const mutations = {
     , setAccessToken(store, { userAccessToken }) { store.userAccessToken = userAccessToken; }
 
 
-    
+
 };
 
 const actions = {
@@ -24,7 +27,18 @@ const actions = {
                 resolve(payload);
             }, waitTime);
         });
-    }
+    },
+    setHeadersAuthorization: (e) => {
+        return new Promise(resolve => {
+            e = state.headers.Authorization = 'Bearer' + ' ' + state.userAccessToken;
+            resolve(e);
+        });
+    },
+    async setHeaders({ dispatch }) {
+        console.log('-setHeaders')
+        await dispatch({ type: 'setHeadersAuthorization' });
+        console.log('-setHeaders resolved')
+    },
 };
 
 export default {

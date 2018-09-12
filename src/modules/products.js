@@ -238,42 +238,43 @@ const actions = {
 
 
                 var coreUrl = global.state.coreUrl;
-                var token = null;
+                //var token = null;
                 var url = 'api/Inventory/GetProducts';
-                var getProducts_url = coreUrl + url + '/' + '1' + '/' + 'WP_Retail';
+                var getProducts_url = coreUrl + '/' + url + '/' + '1' + '/' + 'WP_Retail';
 
                 var d;
 
-                if (global.state.userAccessToken != undefined && global.state.userAccessToken != null && global.state.userAccessToken != '') {
-                    token = global.state.userAccessToken;
-                }
-                else {
-                    //Handle the error
-                }
+                //if (global.state.userAccessToken != undefined && global.state.userAccessToken != null && global.state.userAccessToken != '') {
+                //    token = global.state.userAccessToken;
+                //}
+                //else {
+                //    //Handle the error
+                //}
 
 
-                var headers = [];
-                headers.Authorization = "Bearer " + token;
+                //var headers = [];
+                //headers.Authorization = "Bearer " + token;
+
+                //console.log(headers)
 
                 function c() {
 
                     var deferred = jQuery.Deferred();
                     var type = 'GET';
-
                     jQuery.when(
                         jQuery.ajax({
                             url: getProducts_url,
                             type: type,
                             dataType: "json",
                             contentType: "application/json",
-                            headers: headers
+                            headers: global.state.headers
                         }))
                         .then(function (response) {
-                            console.warn('++++++++++++++++ NEW AJAX REQUEST ++++++++++++++++++')
-                            console.warn('coreUrl:', coreUrl)
-                            console.warn('url:', url)
-                            console.warn('response:', response)
-                            console.warn('type:', type)
+                            //console.warn('++++++++++++++++ NEW AJAX REQUEST ++++++++++++++++++')
+                            //console.warn('coreUrl:', coreUrl)
+                            //console.warn('url:', url)
+                            //console.warn('response:', response)
+                            //console.warn('type:', type)
 
 
                             deferred.resolve(response);

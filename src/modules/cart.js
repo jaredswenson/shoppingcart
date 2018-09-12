@@ -1,3 +1,4 @@
+import cart from '../api/cart'
 import store from '@/store'
 import global from './global'
 import Vue from 'vue'
@@ -138,6 +139,44 @@ const actions = {
     deleteItemToCart(context, payload) {
         context.commit('deleteItemToCart', payload)
     },
+    checkout({ commit, state }, products) {
+        const savedCartItems = [...state.items]
+        commit('setCheckoutStatus', null)
+        // empty cart
+        commit('setCartItems', { items: [] })
+        cart.buyProducts(
+            products,
+            () => commit('setCheckoutStatus', 'successful'),
+            () => {
+                commit('setCheckoutStatus', 'failed')
+                // rollback to the cart saved before sending the request
+                commit('setCartItems', { items: savedCartItems })
+            }
+        )
+    },
+    async createOrder({ commit, state }) {
+        var a = (function () {
+            var d;
+            function c() {
+                var url = global.state.coreUrl + '/' + 'api/Cart/Create' + '/' + '1' + '/' + 'WP_Retail';
+                var ccc = $.ajax({
+                    type: 'POST',
+                    url: url,
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    headers: global.state.headers
+                });
+                return ccc;
+            }
+            return {
+                b: function () {
+                    return d = c();
+                }
+            };
+        })();
+        return await a.b();
+    },
+
 };
 
 export default {
