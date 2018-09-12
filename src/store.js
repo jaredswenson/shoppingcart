@@ -84,6 +84,7 @@ export const store = new Vuex.Store({
             Vue.set(state, payload.key, payload.value);
         },
         addItemToCart(state, payload) {
+            console.log(payload)
             payload.quantity = state.quantity;
             if (state.quantity > payload.OnHand) {
                 //alert("Max Quantity For This Item Is " + payload.OnHand);
@@ -192,12 +193,16 @@ export const store = new Vuex.Store({
         },
         setOrderFromStorage: (state, payload) => {
             var order = JSON.parse(localStorage.getItem('order'));
+            console.log(order.length);
+            if (order.length == 0){
+             Vue.set(state, "orderItems", []);
+            }else{
+              Vue.set(state, "orderItems", order);
+            }
             var total = 0;
             var costTotal = 0;
-            Vue.set(state, "orderItems", order);
             $.each(order, function (i, v) {
                 var item = _.where(state.items, { Id: v.Id })[0];
-                console.log(item);
                 item.inCart = true;
                 item.autoship = v.autoship;
                 total += v.quantity;
