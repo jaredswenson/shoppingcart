@@ -129,7 +129,7 @@
                         <b-card-header header-tag="header" class="p-1" role="tab">
                             <b-btn block href="#" v-b-toggle.accordion1 variant="info">Accordion 1</b-btn>
                         </b-card-header>
-                        <b-collapse id="accordion1" visible accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion1" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <p class="card-text">
                                     I start opened because <code>visible</code> is <code>true</code>
@@ -141,9 +141,34 @@
                         <b-card-header header-tag="header" class="p-1" role="tab">
                             <b-btn block href="#" v-b-toggle.accordion2 variant="info">Accordion 2</b-btn>
                         </b-card-header>
-                        <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion2" visible accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <p class="card-text">
+
+
+
+
+
+
+                                <div>
+                                    <b-form-group label="Inline radios (default)">
+                                        <b-form-radio-group v-model="selected"
+                                                            :options="options"
+                                                            name="radioInline">
+                                        </b-form-radio-group>
+                                    </b-form-group>
+
+                                    <b-form-group label="Stacked radios">
+                                        <b-form-radio-group v-model="selected"
+                                                            :options="options"
+                                                            stacked
+                                                            name="radiosStacked">
+                                        </b-form-radio-group>
+                                    </b-form-group>
+
+                                    <div class="mt-3">
+                                        Selected: <strong>{{ selected }}</strong>
+                                    </div>
+                                </div>
 
 
 
@@ -151,39 +176,6 @@
 
 
 
-
-                                    <b-form-radio-group v-model="value" :options="options"></b-form-radio-group>
-                                    <br>
-                                    <b-form-radio-group v-model="value" :options="options" stacked state="valid"></b-form-radio-group>
-                                    <br>
-                                    <b-form-radio-group v-model="value" :options="options" validated state="valid"></b-form-radio-group>
-                                    <br>
-                                    <b-form-radio-group v-model="value" :options="options" buttons></b-form-radio-group>
-                                    <br>
-                                    <b-form-radio-group v-model="value" :options="options" buttons stacked></b-form-radio-group>
-                                    <br>
-                                    <b-form-radio-group v-model="value" :options="options" buttons size-"sm"></b-form-radio-group>
-                                    <br>
-                                    <b-form-radio-group v-model="value">
-                                        <b-form-radio v-for="opt in options" :key="opt.value">
-                                            {{ opt.text }}
-                                        </b-form-radio>
-                                    </b-form-radio-group>
-                                    <br>
-                                    <span>Selected: </span>
-                                    <span>{{value}}</span>
-
-
-
-
-
-
-
-
-
-
-
-                                </p>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -271,7 +263,16 @@
                 accountDone: false,
                 addressDone: false,
                 shippingDone: false,
-                paymentDone: false
+                paymentDone: false,
+
+                selected: 'first',
+                options: [
+                    { text: 'First radio', value: 'first' },
+                    { text: 'Second radio', value: 'second' },
+                    { text: 'Third radio', value: 'third' }
+                ]
+
+
             }
         },
         props: {
