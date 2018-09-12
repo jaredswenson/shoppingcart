@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 //Modules
 //Various general purpose variables go into the global object.
 //Variables which control the state of the user interface go into the ui object.
@@ -9,8 +10,8 @@ import global from './modules/global'
 //import ui from './modules/ui'
 import products from './modules/products'
 import cart from './modules/cart'
+import shipping from './modules/shipping'
 
-//import myjs from './assets/js/myjs';
 
 Vue.use(Vuex)
 
@@ -18,10 +19,10 @@ export const store = new Vuex.Store({
     modules: {
         global,
         products,
-        //, items
         //, settings
         //ui,
-        cart
+        cart,
+        shipping
     },
     state: {
         asdf: null,
@@ -40,6 +41,7 @@ export const store = new Vuex.Store({
         orderItems: [],
         quantity: 1,
         category: '',
+        orderId: 0,
         orderTotal: 0,
         totalItemsInCart: 0,
         currentItem: {},
@@ -59,7 +61,9 @@ export const store = new Vuex.Store({
             {
                 items: []
             }
-        ]
+        ],
+        shippingMethods: []
+
     },
     mutations: {
         setModal(state, payload) {
@@ -81,10 +85,9 @@ export const store = new Vuex.Store({
         },
         addItemToCart(state, payload) {
             payload.quantity = state.quantity;
-            console.log(payload);
-            if(state.quantity > payload.OnHand){
-              alert("Max Quantity For This Item Is " + payload.OnHand);
-              state.quantity = payload.OnHand;
+            if (state.quantity > payload.OnHand) {
+                //alert("Max Quantity For This Item Is " + payload.OnHand);
+                state.quantity = payload.OnHand;
             }
             if (payload.autoship) {
                 payload.itemTotal = state.quantity * payload.Prices[2].Cost;
@@ -217,30 +220,29 @@ export const store = new Vuex.Store({
                 Vue.set(state, 'itemsNotAutoship', false);
             }
         },
+
+        setAccessToken: (state, payload) => {
+            Vue.set(state, 'userAccessToken', payload);
+            //console.log(state.userAccessToken)
+        },
         loadCart: (state, payload) => {
             Vue.set(state, 'items', payload);
-        }
-    
+        },
 
+        // Jared here's the API response you requested, I guessed on the name of the array.
+        setOrderId(state, payload) {
+            Vue.set(state, 'orderId', payload);
+            console.log(state.orderId)
+        },
+        setShippingMethods(state, payload) {
+            Vue.set(state, 'shippingMethods', payload);
+            console.log(state.shippingMethods)
+        },
 
 
 
     },
     actions: {
-        loadGlobalVariables({ commit, state }) {
-            console.log('-loadGlobalVariables')
-            store.commit('global/setBaseUrl', { coreUrl: 'https://dev-core.xennbox.com/' });
-            store.commit('global/setUserName', { userName: 'xennsoft' });
-            store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
-            return new Promise(resolve => {
-                var items = ['global items loaded',
-                    { 'state.global.baseUrl': state.global.baseUrl }
-                    , { 'state.global.userName': state.global.userName }
-                    , { 'state.global.userPassword': state.global.userPassword }
-                ];
-                resolve(items);
-            });
-        },
         modalAction: (context, payload) => {
             context.commit("setModal", payload)
         },
@@ -249,18 +251,6 @@ export const store = new Vuex.Store({
         },
         addItemToCart: (context, payload) => {
             context.commit("addItemToCart", payload)
-        },
-        async addItemToCart2({ commit, state }, payload) {
-            //console.clear();
-            console.log('addItemToCart2')
-            const a = await store.dispatch({ type: 'cart/asdf', asdf: 'asdf' });
-            const b = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            const d = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
-            //const e = await store.dispatch({ type: 'generateToken', url: a, username: b, password: c });
-
-            console.log(a)
-            console.log('addItemToCart2 resolved')
         },
         deleteItemFromCart: (context, payload) => {
             context.commit("deleteItemFromCart", payload)
@@ -280,9 +270,9 @@ export const store = new Vuex.Store({
         updateAutoship: (context, payload) => {
             context.commit("updateAutoship", payload)
         },
-        setOrderFromStorage: (context, payload) => {
-            context.commit("setOrderFromStorage", payload)
-        },
+        //setOrderFromStorage: (context, payload) => {
+        //    context.commit("setOrderFromStorage", payload)
+        //},
         checkForAutoship: (context) => {
             context.commit("checkForAutoship")
         },
@@ -294,18 +284,81 @@ export const store = new Vuex.Store({
         },
 
 
-        loadWarehouse: (context) => {
-            console.log('---loadWarehouse')
+
+
+
+
+        async getShippingMethods({ commit, state }) {
+            var a = (function () {
+                var d;
+                function c() {
+                    var url = state.global.coreUrl + '/' + 'api/Cart/Create' + store.orderId;
+                    var ccc = $.ajax({
+                        type: 'POST',
+                        url: url,
+                        dataType: 'json',
+                        contentType: 'application/json;charset=utf-8',
+                        headers: state.global.headers
+                    });
+                    return ccc;
+                }
+                return {
+                    b: function () {
+                        return d = c();
+                    }
+                };
+            })();
+            return await a.b();
+        },
+
+        async loadGlobalVariables({ state }, payload) {
+            console.log('-loadGlobalVariables')
+            await store.commit('global/setUserName', { userName: 'xennsoft' });
+            await store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
+            await store.commit('global/setAccessToken', { userAccessToken: payload });
+            await store.dispatch('global/setHeaders');
+            //console.log(global.state.headers)
+            console.log('-loadGlobalVariables resolved')
+        },
+
+
+
+
+
+        getStorageStatus({ commit, state }) {
+            console.log('--getStorageStatus')
             return new Promise(resolve => {
+
+                var localStorageShoppingCart;
+
+                if (state.global.access_token == null) {
+                    localStorageShoppingCart = false;
+                }
+                else {
+                    localStorageShoppingCart = true;
+                }
+                console.log('--getStorageStatus resolved');
+                resolve(localStorageShoppingCart);
+            });
+        },
+
+
+        loadWarehouse: (context) => {
+            console.log('-----loadWarehouse')
+            return new Promise(resolve => {
+                console.log('-----loadWarehouse resolved');
                 resolve(1);
             });
         },
 
 
+
+
+
         async loadCart({ commit, state }, payload) {
 
             //console.clear()
-            console.log('----loadCart')
+            console.log('------loadCart')
             //console.log('payload')
             //console.log(payload.t)
             //console.log(payload.warehouseId)
@@ -339,7 +392,21 @@ export const store = new Vuex.Store({
                     }
                 };
             })();
+            console.log('------loadCart resolved')
             await a.b();
+        },
+        async loadCheckout({ state }) {
+            const a = await store.dispatch('cart/createOrder');
+            //console.log(a.OrderId)
+
+            //Cannot get shipping methods yet for some reason.
+            //const b = await store.dispatch('shipping/getShippingMethods', a.OrderId);
+            const b = await store.dispatch('shipping/getSimulatedShippingMethods', a.OrderId);
+            //console.log(b)
+
+            if (a.OrderId > 0 && b.length > 0) {
+                return { orderId: a.OrderId, shippingMethods: b }
+            }
         },
         async loadSimulatedCart({ commit, state }, payload) {
 
@@ -375,27 +442,6 @@ export const store = new Vuex.Store({
             })();
             await a.b();
         },
-
-
-        getStorageStatus({ commit, state }) {
-            console.log('--getStorageStatus')
-            return new Promise(resolve => {
-
-                var localStorageShoppingCart;
-
-                if (state.global.access_token == null) {
-                    localStorageShoppingCart = false;
-                }
-                else {
-                    localStorageShoppingCart = true;
-                }
-
-
-                resolve(localStorageShoppingCart);
-            });
-        },
-
-
         async getBaseURL({ commit, state }) {
             var a = (function () {
                 var data;
@@ -429,10 +475,8 @@ export const store = new Vuex.Store({
             })();
             return await a.b();
         },
-
-
         async generateToken(context, payload) {
-            console.log('------generateToken')
+            console.log('-generateToken')
             try {
                 var a = (function () {
                     var token = '';
@@ -466,18 +510,19 @@ export const store = new Vuex.Store({
                         }
                     };
                 })();
+                console.log('-generateToken resolved')
                 return await a.b();
             } catch (e) {
                 return e;
             }
         },
         async createToken(context) {
-            console.log('-----createToken')
+            console.log('---createToken')
             const a = await store.dispatch({ type: 'getBaseURL' });
             const b = await store.dispatch({ type: 'getUn' });
             const c = await store.dispatch({ type: 'getPw' });
             const e = await store.dispatch({ type: 'generateToken', url: a, username: b, password: c });
-
+            console.log('---createToken resolved')
             return e.access_token;
         },
         async getToken(context) {
@@ -496,22 +541,117 @@ export const store = new Vuex.Store({
 
                 resolve(token);
             });
-        },     
-        async populateStorage({ state }, payload) {
-            //async populateStorage(context, payload) {
-            //console.clear()
-            //console.log(payload)
-            console.log('--------populateStorage')
-            return new Promise(resolve => {
-                if (1 == 1) {
-                    store.commit('global/setAccessToken', { userAccessToken: payload });
-                }
-                else {
-                    //Something went wrong try again
-                }
-                resolve(global.state.userAccessToken);
-            });
         },
+
+        //Fix this name and stuff, this must be run but it's named weird and in the wrong place!!
+        async populateStorage({ state }, payload) {
+            console.log('----populateStorage')
+            await store.commit('global/setAccessToken', { userAccessToken: payload });
+            await store.commit('setAccessToken', payload);//If I were doing it right I wouldn't need this!!!
+            await store.dispatch('global/setHeaders');
+            //console.log(global.state.headers)
+            console.log('----populateStorage resolved')
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        async template1({ commit, state }) {
+            var a = (function () {
+                var data;
+                return {
+                    b: function () {
+                        return data = global.state.coreUrl;
+                    }
+                };
+            })();
+            return await a.b();
+        },
+        async template2({ commit, state }) {
+            var a = (function () {
+                var d;
+                function c() {
+                    var url = global.state.coreUrl + '/' + 'api/asdf/asdf' + '/' + 'prop1' + '/' + 'prop2';
+                    var ccc = $.ajax({
+                        type: 'POST',
+                        url: url,
+                        dataType: 'json',
+                        contentType: 'application/json;charset=utf-8',
+                        headers: global.state.headers
+                    });
+                    return ccc;
+                }
+                return {
+                    b: function () {
+                        return d = c();
+                    }
+                };
+            })();
+            return await a.b();
+        },
+        async template3(context) {
+            console.log('---template3')
+            const a = await store.dispatch('getASDF');//This is valid
+            const b = await store.dispatch({ type: 'getASDF' });//This is also valid
+            const c = await store.dispatch({ type: 'getASDF', aaa: a, bbb: b, ccc: c });
+            console.log('---template3 resolved')
+            return c.ddd;
+        },
+        async template4({ state }, payload) {
+            console.log('-asdf')
+            const a = await store.dispatch('getASDF');
+            const b = await store.dispatch('getASDF', payload);
+            await store.dispatch('global/asdf');
+            await store.dispatch('cart/asdf', payload);
+            console.log('-asdf resolved')
+        },
+
+
     },
     getters: {
 
