@@ -16,6 +16,8 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './assets/css/page.css';
 import './assets/css/client.css';
+import './assets/css/ShoppingCart.css';
+
 
 // Import components here.
 import App from './App.vue';
