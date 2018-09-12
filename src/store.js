@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 //Modules
 //Various general purpose variables go into the global object.
 //Variables which control the state of the user interface go into the ui object.
@@ -8,9 +9,9 @@ import global from './modules/global'
 //import settings from './modules/settings'
 //import ui from './modules/ui'
 import products from './modules/products'
-//import cart from './modules/cart'
+import cart from './modules/cart'
+import shipping from './modules/shipping'
 
-//import myjs from './assets/js/myjs';
 
 Vue.use(Vuex)
 
@@ -18,10 +19,10 @@ export const store = new Vuex.Store({
     modules: {
         global,
         products,
-        //, items
         //, settings
         //ui,
-        //cart
+        cart,
+        shipping
     },
     state: {
         asdf: null,
@@ -284,33 +285,6 @@ export const store = new Vuex.Store({
 
 
 
-        async createOrder({ commit, state }) {
-            var a = (function () {
-                var d;
-                function c() {
-                    var url = state.global.coreUrl + '/' + 'api/Cart/Create' + '/' + '1' + '/' + 'WP_Retail';
-                    var ccc = $.ajax({
-                        type: 'POST',
-                        url: url,
-                        dataType: 'json',
-                        contentType: 'application/json;charset=utf-8',
-                        headers: state.global.headers
-                    });
-                    return ccc;
-                }
-                return {
-                    b: function () {
-                        return d = c();
-                    }
-                };
-            })();
-            return await a.b();
-        },
-
-
-
-
-
 
 
 
@@ -337,23 +311,20 @@ export const store = new Vuex.Store({
             return await a.b();
         },
 
-
-
-        loadGlobalVariables({ commit, state }) {
+        async loadGlobalVariables({ state }, payload) {
             console.log('-loadGlobalVariables')
-            //store.commit('global/setBaseUrl', { coreUrl: 'https://dev-core.xennbox.com/' });
-            store.commit('global/setUserName', { userName: 'xennsoft' });
-            store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
-            return new Promise(resolve => {
-                var items = ['global items loaded',
-                    //{ 'state.global.baseUrl': state.global.baseUrl }
-                    , { 'state.global.userName': state.global.userName }
-                    , { 'state.global.userPassword': state.global.userPassword }
-                ];
-                console.log('-loadGlobalVariables resolved');
-                resolve(items);
-            });
+            await store.commit('global/setUserName', { userName: 'xennsoft' });
+            await store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
+            await store.commit('global/setAccessToken', { userAccessToken: payload });
+            await store.dispatch('global/setHeaders');
+            //console.log(global.state.headers)
+            console.log('-loadGlobalVariables resolved')
         },
+
+
+
+
+
         getStorageStatus({ commit, state }) {
             console.log('--getStorageStatus')
             return new Promise(resolve => {
@@ -370,6 +341,8 @@ export const store = new Vuex.Store({
                 resolve(localStorageShoppingCart);
             });
         },
+
+
         loadWarehouse: (context) => {
             console.log('-----loadWarehouse')
             return new Promise(resolve => {
@@ -421,6 +394,19 @@ export const store = new Vuex.Store({
             })();
             console.log('------loadCart resolved')
             await a.b();
+        },
+        async loadCheckout({ state }) {
+            const a = await store.dispatch('cart/createOrder');
+            //console.log(a.OrderId)
+
+            //Cannot get shipping methods yet for some reason.
+            //const b = await store.dispatch('shipping/getShippingMethods', a.OrderId);
+            const b = await store.dispatch('shipping/getSimulatedShippingMethods', a.OrderId);
+            //console.log(b)
+
+            if (a.OrderId > 0 && b.length > 0) {
+                return { orderId: a.OrderId, shippingMethods: b }
+            }
         },
         async loadSimulatedCart({ commit, state }, payload) {
 
@@ -556,11 +542,14 @@ export const store = new Vuex.Store({
                 resolve(token);
             });
         },
+
+        //Fix this name and stuff, this must be run but it's named weird and in the wrong place!!
         async populateStorage({ state }, payload) {
             console.log('----populateStorage')
             await store.commit('global/setAccessToken', { userAccessToken: payload });
             await store.commit('setAccessToken', payload);//If I were doing it right I wouldn't need this!!!
             await store.dispatch('global/setHeaders');
+            //console.log(global.state.headers)
             console.log('----populateStorage resolved')
         },
 
@@ -617,7 +606,7 @@ export const store = new Vuex.Store({
                 var data;
                 return {
                     b: function () {
-                        return data = state.global.coreUrl;
+                        return data = global.state.coreUrl;
                     }
                 };
             })();
@@ -627,13 +616,13 @@ export const store = new Vuex.Store({
             var a = (function () {
                 var d;
                 function c() {
-                    var url = state.global.coreUrl + '/' + 'api/asdf/asdf' + '/' + 'prop1' + '/' + 'prop2';
+                    var url = global.state.coreUrl + '/' + 'api/asdf/asdf' + '/' + 'prop1' + '/' + 'prop2';
                     var ccc = $.ajax({
                         type: 'POST',
                         url: url,
                         dataType: 'json',
                         contentType: 'application/json;charset=utf-8',
-                        headers: headers
+                        headers: global.state.headers
                     });
                     return ccc;
                 }
@@ -653,11 +642,14 @@ export const store = new Vuex.Store({
             console.log('---template3 resolved')
             return c.ddd;
         },
-
-
-
-
-
+        async template4({ state }, payload) {
+            console.log('-asdf')
+            const a = await store.dispatch('getASDF');
+            const b = await store.dispatch('getASDF', payload);
+            await store.dispatch('global/asdf');
+            await store.dispatch('cart/asdf', payload);
+            console.log('-asdf resolved')
+        },
 
 
     },

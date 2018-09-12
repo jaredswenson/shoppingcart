@@ -154,6 +154,29 @@ const actions = {
             }
         )
     },
+    async createOrder({ commit, state }) {
+        var a = (function () {
+            var d;
+            function c() {
+                var url = global.state.coreUrl + '/' + 'api/Cart/Create' + '/' + '1' + '/' + 'WP_Retail';
+                var ccc = $.ajax({
+                    type: 'POST',
+                    url: url,
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    headers: global.state.headers
+                });
+                return ccc;
+            }
+            return {
+                b: function () {
+                    return d = c();
+                }
+            };
+        })();
+        return await a.b();
+    },
+
 };
 
 export default {

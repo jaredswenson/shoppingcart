@@ -37,7 +37,6 @@ const actions = {
     async setHeaders({ dispatch }) {
         console.log('-setHeaders')
         await dispatch({ type: 'setHeadersAuthorization' });
-        //console.log(state.headers)
         console.log('-setHeaders resolved')
     },
 };

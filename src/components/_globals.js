@@ -1,5 +1,4 @@
 import Vue from "vue";
-import mdb from 'mdbvue/src/index.js';
 
 // import global components here
 import VueButton from './global/VueButton'
@@ -9,7 +8,12 @@ import VueTable from './global/VueTable'
 import VueCard from './global/VueCard'
 import VuePanel from './global/VuePanel'
 import VueAccordian from './global/VueAccordian'
-import {MdInput, NumericInput, Navbar, NavbarBrand, NavbarCollapse, NavbarItem, NavbarNav, Dropdown, DropdownToggle, DropdownMenu} from 'mdbvue';
+
+import Bootstrap from 'bootstrap-vue';
+Vue.use(Bootstrap)
+
+import { MdInput, NumericInput, Navbar, NavbarBrand, NavbarCollapse, NavbarItem, NavbarNav, Dropdown, DropdownToggle, DropdownMenu } from 'mdbvue';
+import { Container, Row, Column, Card, CardImg, CardHeader, CardBody, CardTitle, CardText, ViewWrapper, MdMask, CardGroup } from 'mdbvue';
 
 //instantiate components here
 Vue.component("VueButton", VueButton)
@@ -29,6 +33,19 @@ Vue.component("NavbarNav", NavbarNav)
 Vue.component("Dropdown", Dropdown)
 Vue.component("DropdownToglge", DropdownToggle)
 Vue.component("DropdownMenu", DropdownMenu)
+Vue.component("Container", Container)
+Vue.component("Row", Row)
+Vue.component("Column", Column)
+Vue.component("Card", Card)
+Vue.component("CardImg", CardImg)
+Vue.component("CardHeader", CardHeader)
+Vue.component("CardBody", CardBody)
+Vue.component("CardTitle", CardTitle)
+Vue.component("CardText", CardText)
+//Vue.component("Btn", Btn)//This causes problems when used with bootstrap buttons.
+Vue.component("ViewWrapper", ViewWrapper)
+Vue.component("MdMask", MdMask)
+Vue.component("CardGroup", CardGroup)
 
 //import global Views here
 import About from '@/views/About.vue'
