@@ -30,8 +30,6 @@
                 <input type="radio" class="custom-control-input" :id="'oneTime' + item.Id" :name="'defaultExampleRadios' + item.Id" @change="updateAutoship($event, 'onetime')" checked>
                 <label class="custom-control-label" :for="'oneTime' + item.Id">One-Time Purchase</label>
             </div>
-
-
             <div class="custom-control custom-radio">
                 <input type="radio" class="custom-control-input" :id="'autoShip' + item.Id" :name="'defaultExampleRadios' + item.Id" @change="updateAutoship($event, 'autoship')">
                 <label class="custom-control-label" :for="'autoShip' + item.Id">Autoship</label>
@@ -143,7 +141,6 @@
             goToDetails(item) {
                 this.$store.dispatch("goToDetails", item);
                 this.$router.push('/about')
-
             },
         },
         props: {
@@ -159,7 +156,6 @@
                 type: Boolean,
                 default: false
             }
-
 
         },
     };
