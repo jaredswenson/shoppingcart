@@ -5,7 +5,7 @@
               <div  class="xen-cart-product" variantProduct="false" :inventoryId="item.Id">
 
               <!-- <div class="card xen-cart-product"> -->
-                  <!-- <form action="" id="xen-cart-form-' + index + '"  class="xen-cart-form form-horizontal">     -->
+                  <form action="" id="xen-cart-form-' + index + '"  class="xen-cart-form form-horizontal">    
                       <div class="card-body">
                           <div class="row">
                               <div class="col-12 col-md-6">
@@ -40,7 +40,7 @@
                                               <VueButton v-if="!item.inCart" color="primary" @click.native="addItemToCart(item)">Add To Cart</VueButton>
                                               <div v-if="item.inCart">
                                                   <label for="quantity25" productwidgettransval="Quantity">Quantity</label>
-                                                  <NumericInput v-for="oItem in $store.state.orderItems" :min="oItem.quantity" :max="oItem.OnHand" v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)" />
+                                                  <NumericInput v-for="oItem in $store.state.orderItems" v-if="item.Id == oItem.Id" @change.native="updateQuantity($event, oItem)" />
                                                   <VueButton color="white" size="sm" v-for="oItem in $store.state.orderItems" :block="true" v-if="item.Id == oItem.Id" @click.native="deleteItemFromCart(oItem)">
                                                       <i class="fa fa-trash fa-lg"></i>
                                                   </VueButton>
@@ -75,7 +75,7 @@
                               </div>
                           </div>
                       </div>
-                  <!-- </form> -->
+                  </form>
                   <!-- <a href="#" :inventoryId="item.Id" class="xen-overlay-container"></a> -->
               </div>
           </div>
@@ -97,7 +97,6 @@
         },
         methods: {
             addItemToCart(item) {
-              console.log(item)
                 this.$store.dispatch("addItemToCart", item);
             },
             deleteItemFromCart(item) {
@@ -105,6 +104,7 @@
                 this.$forceUpdate();
             },
             updateQuantity(event, item) {
+                console.log('update', parseInt(event.target.value))
                 this.$store.dispatch("updateQuantity", parseInt(event.target.value));
                 this.addItemToCart(item);
             },

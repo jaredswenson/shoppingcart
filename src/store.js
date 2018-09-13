@@ -85,6 +85,7 @@ export const store = new Vuex.Store({
         },
         addItemToCart(state, payload) {
             console.log(payload)
+            console.log("q", state.quantity)
             payload.quantity = state.quantity;
             if (state.quantity > payload.OnHand) {
                 //alert("Max Quantity For This Item Is " + payload.OnHand);
@@ -96,7 +97,9 @@ export const store = new Vuex.Store({
                 payload.itemTotal = state.quantity * payload.Prices[1].Cost;
             }
             var index = state.orderItems.indexOf(payload);
+            console.log("index", index);
             if (index > -1) {
+                console.log('q2',state.quantity);
                 state.orderItems[index].quantity = state.quantity;
                 if (state.quantity <= 0) {
                     this.dispatch("deleteItemFromCart", payload);
@@ -114,7 +117,7 @@ export const store = new Vuex.Store({
                 total += parseInt(v.quantity)
             });
             Vue.set(state, 'totalItemsInCart', total);
-            this.dispatch("updateQuantity", 1);
+            store.dispatch("updateQuantity", 1);
             store.dispatch("checkForAutoship");
 
             localStorage.setItem('order', JSON.stringify(state.orderItems));
@@ -151,6 +154,7 @@ export const store = new Vuex.Store({
             Vue.set(state, 'currentItem', payload)
         },
         updateQuantity: (state, payload) => {
+            console.log(payload);
             Vue.set(state, 'quantity', payload);
         },
         setCategory: (state, payload) => {
