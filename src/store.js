@@ -25,18 +25,17 @@ export const store = new Vuex.Store({
         shipping
     },
     state: {
-        asdf: null,
         items: [],
         gridView: false,
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        streetAddress: '',
-        city: '',
-        zipCode: '',
-        state: '',
-        country: '',
+        firstName: 'test',
+        lastName: 'tester',
+        email: 'a@b.com',
+        phone: '801-910-1112',
+        streetAddress: '12162 S Business Park Dr.',
+        city: 'Draper',
+        zipCode: '84020',
+        state: 'UT',
+        country: 'USA',
         shippingMethod: '',
         orderItems: [],
         quantity: 1,
@@ -57,11 +56,10 @@ export const store = new Vuex.Store({
         itemsInAutoship: false,
         itemsNotAutoship: false,
         userAccessToken: null,
-        cart: [
-            {
-                items: []
-            }
-        ],
+        a: {
+            b: 'start',
+            c: []
+        },
         shippingMethods: []
 
     },
@@ -289,6 +287,8 @@ export const store = new Vuex.Store({
 
 
         async getShippingMethods({ commit, state }) {
+            state.a.b = 'store.js - getShippingMethods';
+            //alert('stop - getShippingMethods')
             var a = (function () {
                 var d;
                 function c() {
@@ -311,21 +311,14 @@ export const store = new Vuex.Store({
             return await a.b();
         },
 
-        async loadGlobalVariables({ state }, payload) {
-            console.log('-loadGlobalVariables')
-            await store.commit('global/setUserName', { userName: 'xennsoft' });
-            await store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
-            await store.commit('global/setAccessToken', { userAccessToken: payload });
-            await store.dispatch('global/setHeaders');
-            //console.log(global.state.headers)
-            console.log('-loadGlobalVariables resolved')
-        },
 
 
 
 
-
+        //This needs to be changed to an async/await
         getStorageStatus({ commit, state }) {
+            state.a.b = 'store.js - getStorageStatus';
+            //alert('stop - store.js - getStorageStatus')
             console.log('--getStorageStatus')
             return new Promise(resolve => {
 
@@ -343,7 +336,10 @@ export const store = new Vuex.Store({
         },
 
 
-        loadWarehouse: (context) => {
+        //This needs to be changed to an async/await
+        loadWarehouse: ({ state }) => {
+            state.a.b = 'store.js - loadWarehouse';
+            //alert('stop - store.js - loadWarehouse')
             console.log('-----loadWarehouse')
             return new Promise(resolve => {
                 console.log('-----loadWarehouse resolved');
@@ -355,8 +351,20 @@ export const store = new Vuex.Store({
 
 
 
+        async loadGlobalVariables({ state }, payload) {
+            state.a.b = 'store.js - loadGlobalVariables';
+            //alert('stop - store.js - loadGlobalVariables')
+            console.log('-loadGlobalVariables')
+            await store.commit('global/setUserName', { userName: 'xennsoft' });
+            await store.commit('global/setUserPassword', { userPassword: 'Pa$$word123' });
+            await store.commit('global/setAccessToken', { userAccessToken: payload });
+            const c = await store.dispatch('global/setHeaders');
+            state.a.b = c;
+            console.log('-loadGlobalVariables resolved')
+        },
         async loadCart({ commit, state }, payload) {
-
+            state.a.b = 'store.js - loadCart';
+            //alert('stop - loadCart')
             //console.clear()
             console.log('------loadCart')
             //console.log('payload')
@@ -396,6 +404,9 @@ export const store = new Vuex.Store({
             await a.b();
         },
         async loadCheckout({ state }) {
+            state.a.b = 'store.js - loadCheckout';
+            alert('stop - loadCheckout')
+
             const a = await store.dispatch('cart/createOrder');
             //console.log(a.OrderId)
 
@@ -408,7 +419,7 @@ export const store = new Vuex.Store({
                 return { orderId: a.OrderId, shippingMethods: b }
             }
         },
-        async loadSimulatedCart({ commit, state }, payload) {
+        async loadSimulatedCart({ state }, payload) {
 
             //console.clear()
             console.log('----loadSimulatedCart')
@@ -442,7 +453,8 @@ export const store = new Vuex.Store({
             })();
             await a.b();
         },
-        async getBaseURL({ commit, state }) {
+        async getBaseURL({ state }) {
+            state.a.b = 'store.js - getBaseURL';
             var a = (function () {
                 var data;
                 return {
@@ -453,7 +465,8 @@ export const store = new Vuex.Store({
             })();
             return await a.b();
         },
-        async getUn({ commit, state }) {
+        async getUn({ state }) {
+            state.a.b = 'store.js - getUn';
             var a = (function () {
                 var data;
                 return {
@@ -464,7 +477,8 @@ export const store = new Vuex.Store({
             })();
             return await a.b();
         },
-        async getPw({ commit, state }) {
+        async getPw({ state }) {
+            state.a.b = 'store.js - getPw';
             var a = (function () {
                 var data;
                 return {
@@ -475,26 +489,29 @@ export const store = new Vuex.Store({
             })();
             return await a.b();
         },
-        async generateToken(context, payload) {
+        async generateToken({ state }, payload) {
+            state.a.b = 'store.js - generateToken';
+            //alert('stop - generateToken')
+            //console.clear()
+            //console.log(payload)
             console.log('-generateToken')
             try {
                 var a = (function () {
-                    var token = '';
                     var login_data = {
                         grant_type: 'password',
                         username: payload.username,
                         password: payload.password
                     };
-                    var token_url = payload.url + '/token';
+                    var getTokenUrl = payload.url + '/token';
                     var d;
 
                     function c() {
-                        var token_promise = $.ajax({
+                        var ccc = $.ajax({
                             type: 'POST',
-                            url: token_url,
+                            url: getTokenUrl,
                             data: login_data
                         });
-                        return token_promise;
+                        return ccc;
                     }
 
                     return {
@@ -516,16 +533,23 @@ export const store = new Vuex.Store({
                 return e;
             }
         },
-        async createToken(context) {
+        async createToken({ state }) {
+            state.a.b = 'store.js - createToken';
+            //alert('stop - createToken')
             console.log('---createToken')
             const a = await store.dispatch({ type: 'getBaseURL' });
+            //console.log(a)
             const b = await store.dispatch({ type: 'getUn' });
+            //console.log(b)
             const c = await store.dispatch({ type: 'getPw' });
+            //console.log(c)
             const e = await store.dispatch({ type: 'generateToken', url: a, username: b, password: c });
             console.log('---createToken resolved')
             return e.access_token;
         },
         async getToken(context) {
+            state.a.b = 'store.js - getToken';
+            //alert('stop - getToken')
             console.log('------getToken')
             return new Promise(resolve => {
 
@@ -545,6 +569,8 @@ export const store = new Vuex.Store({
 
         //Fix this name and stuff, this must be run but it's named weird and in the wrong place!!
         async populateStorage({ state }, payload) {
+            state.a.b = 'store.js - populateStorage';
+            //alert('stop - store.js - populateStorage')
             console.log('----populateStorage')
             await store.commit('global/setAccessToken', { userAccessToken: payload });
             await store.commit('setAccessToken', payload);//If I were doing it right I wouldn't need this!!!

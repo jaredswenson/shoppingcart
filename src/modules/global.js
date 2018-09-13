@@ -34,10 +34,12 @@ const actions = {
             resolve(e);
         });
     },
-    async setHeaders({ dispatch }) {
+    async setHeaders({ dispatch, state }) {
+        //alert('stop - setHeaders')
         console.log('-setHeaders')
         await dispatch({ type: 'setHeadersAuthorization' });
         console.log('-setHeaders resolved')
+        return 'global.js - setHeaders'
     },
 };
 

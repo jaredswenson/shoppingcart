@@ -107,6 +107,8 @@
     export default {
         name: "VuePanel",
         mounted() {
+            this.$store.state.a.b = 'VuePanel.vue - start';
+
             $.each(this.$store.state.orderItems, function (i, v) {
                 if (v.autoship) {
                     $('#oneTime' + v.Id).prop('checked', false);
@@ -116,6 +118,7 @@
         },
         methods: {
             addItemToCart(item) {
+                this.$store.state.a.b = 'VuePanel.vue - addItemToCart';
                 this.$store.dispatch("addItemToCart", item);
             },
             deleteItemFromCart(item) {
@@ -123,6 +126,7 @@
                 this.$forceUpdate();
             },
             updateQuantity(event, item) {
+                this.$store.state.a.b = 'VuePanel.vue - updateQuantity';
                 this.$store.dispatch("updateQuantity", parseInt(event.target.value));
                 this.addItemToCart(item);
             },

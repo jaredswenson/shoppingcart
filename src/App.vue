@@ -34,6 +34,7 @@
                 </dropdown>
             </navbar-collapse>
         </navbar>
+        <div style="text-align:center;">{{this.$store.state.a.b}}</div>
         <router-view />
 
         <VueModal v-if="this.$store.state.showModal" id="VueModal" :title="this.$store.state.modalTitle" :myclass="this.$store.state.modalSize" :headeron="this.$store.state.modalHeader" :footeron="this.$store.state.modalFooter" :content="this.$store.state.modalContent">

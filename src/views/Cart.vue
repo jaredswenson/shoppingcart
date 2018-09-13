@@ -131,20 +131,25 @@
         },
         methods: {
             addItemToCart(item) {
+                this.$store.state.a.b = 'Cart.vue - addItemToCart';
                 this.$store.dispatch("addItemToCart", item);
             },
             deleteItemFromCart(item) {
                 this.$store.dispatch("deleteItemFromCart", item);
             },
             updateQuantity(event, item) {
+                this.$store.state.a.b = 'Cart.vue - updateQuantity';
                 this.$store.dispatch("updateQuantity", parseInt(event.target.value));
                 this.addItemToCart(item);
             },
             cancelOrder() {
+                this.$store.state.a.b = 'Cart.vue - cancelOrder';
                 this.$store.dispatch("cancelOrder");
                 this.$router.push('/')
             },
-            async goToCheckout() { 
+            async goToCheckout() {
+                this.$store.state.a.b = 'Cart.vue - goToCheckout';
+                //alert('stop - Cart.vue - goToCheckout')
                 console.clear()
                 console.log('-loadCheckout')
                 const a = await this.$store.dispatch('loadCheckout');
@@ -177,6 +182,9 @@
                 return total
             }
         },
+        mounted() {
+            this.$store.state.a.b = 'start - Cart.vue';
+        }
     }
 </script>
 
