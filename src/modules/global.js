@@ -14,8 +14,6 @@ const mutations = {
     , setUserPassword(store, { userPassword }) { store.userPassword = userPassword; }
     , setAccessToken(store, { userAccessToken }) { store.userAccessToken = userAccessToken; }
 
-
-
 };
 
 const actions = {
@@ -28,9 +26,24 @@ const actions = {
             }, waitTime);
         });
     },
-    setHeadersAuthorization: (e) => {
+    async setHeadersAuthorization({ state }) {
+        var e;
         return new Promise(resolve => {
-            e = state.headers.Authorization = 'Bearer' + ' ' + state.userAccessToken;
+            if (state.userAccessToken != null) {
+                e = state.headers.Authorization = 'Bearer' + ' ' + state.userAccessToken;
+            }
+            else {
+                //fix it
+                if (localStorage.getItem('token').length > 0) {
+                    state.userAccessToken = localStorage.getItem('token')
+                    //store.commit("setUserAccessToken", localStorage.getItem('token'))
+                    e = state.headers.Authorization = 'Bearer' + ' ' + state.userAccessToken;
+                }
+                else {
+                    //fix it
+
+                }
+            }
             resolve(e);
         });
     },
@@ -39,8 +52,8 @@ const actions = {
         console.log('-setHeaders')
         await dispatch({ type: 'setHeadersAuthorization' });
         console.log('-setHeaders resolved')
-        return 'global.js - setHeaders'
-    },
+        return true;
+    }
 };
 
 export default {

@@ -11,6 +11,7 @@ import global from './modules/global'
 import products from './modules/products'
 import cart from './modules/cart'
 import shipping from './modules/shipping'
+import payment from './modules/payment'
 
 
 Vue.use(Vuex)
@@ -22,7 +23,8 @@ export const store = new Vuex.Store({
         //, settings
         //ui,
         cart,
-        shipping
+        shipping,
+        payment
     },
     state: {
         items: [],
@@ -82,6 +84,7 @@ export const store = new Vuex.Store({
             Vue.set(state, payload.key, payload.value);
         },
         addItemToCart(state, payload) {
+            alert()
             payload.quantity = state.quantity;
             if (state.quantity > payload.OnHand) {
                 //alert("Max Quantity For This Item Is " + payload.OnHand);
@@ -248,7 +251,64 @@ export const store = new Vuex.Store({
             context.commit("setText", payload)
         },
         addItemToCart: (context, payload) => {
+            //alert('stop - store.js - loadPayment')
+            console.clear()
+            console.log('addItemToCart');
+
+            const a = localStorage.getItem('token');
+            console.log(a)
+            const b = null;
+            const c = null;
+            if (a.length > 0) {
+                console.log(a.length)
+                context.commit("addItemToCart", payload)
+                console.log('addItemToCart resolved');
+
+            }
+            else {
+                a = store.dispatch('global/setHeaders')
+                if (a) {
+                    context.commit("addItemToCart", payload)
+                    console.log('addItemToCart resolved');
+
+                } else alert('no headers');
+            }
+        },
+        async addItemToCart2({ context, state }, payload) {
+            state.a.b = 'store.js - addItemToCart';
+            //alert('stop - store.js - loadPayment')
+            console.clear()
+            console.log('addItemToCart');
+
+            const a = await localStorage.getItem('token');
+            console.log(a)
+            const b = null;
+            const c = null;
+            if (a.length > 0) {
+                console.log(a.length)
+                console.log('addItemToCart resolved');
+
+            }
+            else {
+                a = await store.dispatch('global/setHeaders')
+                if (a) {
+                    context.commit("addItemToCart", payload)
+                    console.log('addItemToCart resolved');
+
+                } else alert('no headers');
+            }
+
+
+
+            alert('1')
             context.commit("addItemToCart", payload)
+
+            alert('2')
+
+
+
+
+
         },
         deleteItemFromCart: (context, payload) => {
             context.commit("deleteItemFromCart", payload)
@@ -286,30 +346,279 @@ export const store = new Vuex.Store({
 
 
 
+
+
+
+
+        async setGlobalHeaders({ state }) {
+            try {
+                var c = await store.dispatch('global/setHeaders');
+                var a = (function () {
+                    return {
+                        b: function () {
+                            var d = c;
+                            return new Promise(resolve => {
+                                //console.log('state.global.headers', state.global.headers)
+                                if (c) {
+                                    d = true;
+                                }
+                                resolve(d);
+                            });
+                        }
+                    };
+                })();
+                return await a.b();
+            } catch (e) {
+                console.error(e)
+            }
+        },
+        async localTokenExists() {
+            try {
+                var a = (function () {
+                    return {
+                        b: function () {
+                            //localStorage.removeItem('token')
+                            var c = localStorage.getItem('token').length > 0;
+                            var d = false;
+                            return new Promise(resolve => {
+                                if (c) {
+                                    d = true;
+                                }
+                                resolve(d);
+                            });
+                        }
+                    };
+                })();
+                return await a.b();
+            } catch (e) {
+                alert('error')
+            }
+        },
+        async headersAreValid({ state }) {
+            try {
+                var a = (function () {
+                    function c() {
+                        var isValid = false;
+                        //If the headers.Authorization has not been set yet it will return undefined.
+                        var response = state.global.headers.Authorization;
+                        if (typeof (response) !== 'undefined') {
+                            isValid = true;
+                        }
+                        return isValid;
+                    }
+                    return {
+                        b: function () {
+                            var d = false;
+                            if (c()) {
+                                d = true;
+                            }
+                            else {
+                                //fix it
+                                store.dispatch('setGlobalHeaders');
+                                if (state.global.headers.Authorization.length > 0) {
+                                    //console.log('state.global.headers.Authorization', state.global.headers.Authorization)
+                                    d = true;
+                                }
+                            }
+                            return d;
+                        }
+                    };
+                })();
+                return await a.b();
+            } catch (e) {
+                console.error(e)
+            }
+        },
+        async headersOk({ dispatch, context, state }, payload) {
+            const localTokenExists = await store.dispatch({ type: 'localTokenExists' });
+            const headersAreValid = await store.dispatch({ type: 'headersAreValid' });
+            var isValid = false;
+            if (localTokenExists && headersAreValid) {
+                console.log('localTokenExists:', localTokenExists)
+                console.log('headersAreValid:', headersAreValid)
+                isValid = true;
+            }
+            return isValid;
+        },
+
         async getShippingMethods({ commit, state }) {
             state.a.b = 'store.js - getShippingMethods';
-            //alert('stop - getShippingMethods')
-            var a = (function () {
-                var d;
-                function c() {
-                    var url = state.global.coreUrl + '/' + 'api/Cart/Create' + store.orderId;
-                    var ccc = $.ajax({
-                        type: 'POST',
-                        url: url,
-                        dataType: 'json',
-                        contentType: 'application/json;charset=utf-8',
-                        headers: state.global.headers
-                    });
-                    return ccc;
-                }
-                return {
-                    b: function () {
-                        return d = c();
+
+            ///*------- This double checks for valid headers and should be on every api call -------*/
+            var headersOk = await store.dispatch('headersOk');
+            ///*------------------------------------------------------------------------------------*/
+            if (headersOk) {
+                var a = (function () {
+                    var d;
+                    function c() {
+                        //var url = state.global.coreUrl + '/' + 'api/Cart/Create' + store.orderId;
+                        //var ccc = $.ajax({
+                        //    type: 'POST',
+                        //    url: url,
+                        //    dataType: 'json',
+                        //    contentType: 'application/json;charset=utf-8',
+                        //    headers: state.global.headers
+                        //});
+                        var ccc = 'blah'
+                        return ccc;
                     }
-                };
-            })();
-            return await a.b();
+                    return {
+                        b: function () {
+                            return d = c();
+                        }
+                    };
+                })();
+                console.log('getShippingMethods resolved');
+                return await a.b();
+            }
         },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        async loadPayment({ state }) {
+            state.a.b = 'store.js - loadPayment';
+            //alert('stop - store.js - loadPayment')
+            console.clear()
+            console.log('loadPayment');
+
+            ///*------- This double checks for valid headers and should be on every api call -------*/
+            var headersOk = await store.dispatch('headersOk');
+            ///*------------------------------------------------------------------------------------*/
+            if (headersOk) {
+                const b = await store.dispatch('payment/getTokenExIframeInformation');
+                console.log(b)
+                const c = await store.dispatch({ type: 'global/fakeAJAXcall', seconds: 2 });
+                console.log('loadPayment resolved');
+
+            }
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -406,7 +715,7 @@ export const store = new Vuex.Store({
         async loadCheckout({ state }) {
             state.a.b = 'store.js - loadCheckout';
             alert('stop - loadCheckout')
-
+            console.log(global.state.headers)
             const a = await store.dispatch('cart/createOrder');
             //console.log(a.OrderId)
 
@@ -572,10 +881,11 @@ export const store = new Vuex.Store({
             state.a.b = 'store.js - populateStorage';
             //alert('stop - store.js - populateStorage')
             console.log('----populateStorage')
+            localStorage.setItem('token', payload);
             await store.commit('global/setAccessToken', { userAccessToken: payload });
             await store.commit('setAccessToken', payload);//If I were doing it right I wouldn't need this!!!
             await store.dispatch('global/setHeaders');
-            //console.log(global.state.headers)
+            //console.log(localStorage.getItem('token'))
             console.log('----populateStorage resolved')
         },
 

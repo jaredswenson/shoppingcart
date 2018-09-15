@@ -166,31 +166,44 @@
 
 
 
-                    <br />top
 
 
                     <div id="xen-cart-payment-info" class="panel panel-default">
-                        <br />top 111
                         <div class="panel-heading" role="tab" id="heading4">
-                        <br />top 222
-
                             <div>
                                 <div>
                                     <h4 class="m-b-0" data-fontsize="24" data-lineheight="26" style="font-size: 21px; line-height: 22.75px;">
+                        
+
                                         <span class="xen-header-bullet xen-header-bullet-solid d-inline-block text-xs-center m-r-1"></span>
                                         <span class="xen-accordion-header-text" accordionwidgettransval="Payment Info">Payment Info</span>
                                     </h4>
-                                    <span class="xen-accordion-header-summary xen-accordion-header-text text-muted font-weight-bold"> </span>
+                                    <span class="xen-accordion-header-summary xen-accordion-header-text text-muted font-weight-bold"></span>
                                     <span class="xen-accordion-header-summary-gradient"></span>
                                 </div>
                             </div>
                             <button type="button" data="collapse4" class="btn btn-primary  hidden xen-btn-edit" accordionwidgettransval="Edit">Edit</button>
                         </div>
-                        <div id="collapse4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading4" section="Payment Info" style="height: auto;">
+                        <div id="collapse4" style="height: auto;">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-12 p-y-3 p-x-6">
-                                        <div id="PaymentInfo">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <div id="BillingAddressInfo">
                                             <div id="xen-cart-billing-address" class="card xen-address w-100">
                                                 <div class="card-block">
                                                     <div class="checkbox">
@@ -214,6 +227,13 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
+
+
+
                                         <div id="PaymentInfo1">
                                             <div id="xen-cart-payment-type" class="card m-b-0 w-100">
                                                 <div class="card-block xen-b-border">
@@ -239,7 +259,7 @@
 
 
                                                                         <br />above iframe
-                                                                        <iframe id="iframe" name="iframe" src="https://htp.tokenex.com/iframe/v1/9e2901c2ff3e4526a21c11521a0f398b" style="height:42px; border:none;"></iframe>
+                                                                        <!--<iframe id="iframe" name="iframe" src="https://htp.tokenex.com/iframe/v1/9e2901c2ff3e4526a21c11521a0f398b" style="height:42px; border:none;"></iframe>-->
                                                                         <br />below iframe
 
                                                                     </div>
@@ -396,6 +416,20 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -405,7 +439,6 @@
 
 
 
-                    <br />bottom
 
 
 
@@ -738,18 +771,22 @@
                 this.$store.state.a.b = 'VueAccordian.vue - setAddressDone';
                 console.clear()
                 console.log('setAddressDone')
-                this.addressDone = true;
 
-                //this.$store.dispatch('getShippingMethods').then((response) => {
-                //    console.log('getShippingMethods');
-                //    console.log(response);
-                //    console.log('getShippingMethods resolved');
-                //})
+                this.$store.dispatch('getShippingMethods').then((response) => {
+                    console.log(response);
+                    this.addressDone = true;
+                })
             },
             setShippingDone() {
                 this.$store.state.a.b = 'VueAccordian.vue - setShippingDone';
-                alert(this.$store.state.shippingMethod)
-                this.shippingDone = true;
+
+
+                this.$store.dispatch('loadPayment').then((response) => {
+                    console.log(response);
+                    this.shippingDone = true;
+                })
+
+
             },
             setPaymentDone() {
                 this.$store.state.a.b = 'VueAccordian.vue - setPaymentDone';
