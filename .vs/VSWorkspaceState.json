@@ -4,8 +4,8 @@
     "\\src",
     "\\src\\components",
     "\\src\\components\\global",
-    "\\src\\modules",
     "\\src\\views"
   ],
+  "SelectedNode": "\\src\\main.js",
   "PreviewInSolutionExplorer": false
 }
