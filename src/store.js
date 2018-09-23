@@ -341,8 +341,20 @@ export const store = new Vuex.Store({
             context.commit("setCurrentParty", payload)
         },
 
+        async waitForHeads ({ dispatch }) {
+            try {
+                await dispatch('waitForHeads')
+            } catch (e) {
 
+            }
+        },
+        async checkConnection ({ dispatch }) {
+            try {
+                await dispatch('waitForHeads')
+            } catch (e) {
 
+            }
+        }
 
 
 

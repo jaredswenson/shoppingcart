@@ -25,6 +25,18 @@
             }
         },
         mounted() {
+
+            //1st
+            this.$store.state.a.b = '1st';
+            this.$store.dispatch({
+                type: 'checkConnection'
+            }).then((response) => {
+            })
+
+
+
+
+
             //1st
             this.$store.state.a.b = '1st';
             this.$store.dispatch({
