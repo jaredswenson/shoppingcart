@@ -244,6 +244,26 @@ export const store = new Vuex.Store({
 
     },
     actions: {
+
+
+        async waitForHeads({ dispatch }) {
+            try {
+                await dispatch('waitForHeads')
+            } catch (e) {
+
+            }
+        },
+        async checkConnection({ dispatch }) {
+            try {
+                await dispatch('waitForHeads')
+            } catch (e) {
+
+            }
+        }
+
+
+
+
         modalAction: (context, payload) => {
             context.commit("setModal", payload)
         },
@@ -341,20 +361,6 @@ export const store = new Vuex.Store({
             context.commit("setCurrentParty", payload)
         },
 
-        async waitForHeads ({ dispatch }) {
-            try {
-                await dispatch('waitForHeads')
-            } catch (e) {
-
-            }
-        },
-        async checkConnection ({ dispatch }) {
-            try {
-                await dispatch('waitForHeads')
-            } catch (e) {
-
-            }
-        }
 
 
 
